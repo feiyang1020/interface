@@ -10,7 +10,7 @@ import HomePage7 from "@/components/HomePage7";
 import HomePage8 from "@/components/HomePage8";
 export default function App() {
   return (
-    <div className="indexPage">
+    <div className="indexPage animation-slide-bottom">
       <HomePage1 />
       <HomePage2 />
       <HomePage3 />

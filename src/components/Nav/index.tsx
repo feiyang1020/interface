@@ -2,6 +2,7 @@ import servicesIcon from "@/assets/servicesIcon.png";
 import modelsIcon from "@/assets/models.png";
 import { Button, Dropdown, Popover } from "antd";
 import { ArrowRightOutlined, DownOutlined } from "@ant-design/icons";
+import { history } from "umi";
 import "./index.less";
 const data = [
   {
@@ -12,7 +13,7 @@ const data = [
     children: [
       {
         title: "Models",
-        link: "/models",
+        link: "/services",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: false,
@@ -41,7 +42,7 @@ const data = [
     children: [
       {
         title: "Models",
-        link: "/models",
+        link: "/services",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: false,
@@ -106,7 +107,8 @@ export default () => {
                 <div className="title">{item.title}</div>
                 <div className="subtitle">{item.desc}</div>
                 <div className="link">
-                  <a href={item.link}>Learn More</a> <ArrowRightOutlined className="arrow"/>
+                  <a href={item.link}>Learn More</a>{" "}
+                  <ArrowRightOutlined className="arrow" />
                 </div>
                 <div className="nav">
                   <img src={item.icon} alt="" className="navIcon" />
@@ -114,7 +116,13 @@ export default () => {
               </div>
               <div className="navs">
                 {item.children.map((nav) => (
-                  <div className="btnWrap" key={nav.title}>
+                  <div
+                    className={`btnWrap ${nav.disabled ? "disabaled" : ""}`}
+                    key={nav.title}
+                    onClick={() => {
+                      history.push(nav.link);
+                    }}
+                  >
                     <img src={nav.icon} alt="" className="icon" />
                     <div className="navText">
                       <div className="name">{item.title}</div>
