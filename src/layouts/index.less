@@ -28,6 +28,37 @@
         display: flex;
       }
     }
+    .menus {
+      
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      
+      &.ant-dropdown-open {
+        .line1 {
+          transform: translateY(4.5px) rotate(-45deg);
+        }
+        .line2 {
+          transform: translateY(-4.5px) rotate(45deg);
+        }
+      }
+      gap: 8px;
+      .line1 {
+        height: 1px;
+        width: 20px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        transform: translateY(0px) rotate(0deg);
+      }
+      .line2 {
+        height: 1px;
+        width: 20px;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        transform: translateY(0px) rotate(0deg);
+      }
+    }
   }
   .content {
     flex-grow: 1;
@@ -61,6 +92,7 @@
     height: 26px;
     cursor: pointer;
   }
+ 
   @media screen and (max-width: 768px) {
     .header {
       height: 50px;
@@ -76,6 +108,9 @@
         }
         .signup {
           display: none;
+        }
+        .menus{
+          display: flex;
         }
       }
     }
@@ -128,5 +163,52 @@
 
     font-size: 14px;
     font-weight: 500;
+  }
+}
+
+.menuWrap{
+  box-sizing: border-box;
+  width: 100vw;
+  background: rgba(5, 0, 28, 1);
+  padding: 40px 20px;
+  .ant-collapse-item >.ant-collapse-header{
+    flex-direction:row-reverse
+  }
+  .navs {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 15px 24px 10px;
+    .btnWrap {
+      box-sizing: border-box;
+      // width: 293px;
+      height: 79px;
+      padding: 19px 16px;
+      display: flex;
+      align-items: center;
+      .icon {
+        width: 29px;
+        height: 29px;
+        margin-right: 18px;
+      }
+      cursor: pointer;
+      border-radius: 17px;
+      &:hover {
+        background-color: rgba(133, 101, 242, 1);
+      }
+      &.disabaled {
+        cursor: not-allowed;
+        &:hover {
+          border-radius: 17px;
+          background-color: transparent;
+        }
+      }
+      .navText {
+        .sub {
+          color: #ffffff;
+          font-size: 10px;
+          opacity: 0.3;
+        }
+      }
+    }
   }
 }

@@ -4,7 +4,7 @@ import { Button, Dropdown, Popover } from "antd";
 import { ArrowRightOutlined, DownOutlined } from "@ant-design/icons";
 import { history } from "umi";
 import "./index.less";
-const data = [
+export const MenuData = [
   {
     title: "Services ",
     desc: "BitModel   Valuing Every Contribution to AGl",
@@ -97,7 +97,7 @@ const data = [
 export default () => {
   return (
     <div className="navWrap">
-      {data.map((item) => (
+      {MenuData.map((item) => (
         <Dropdown
           key={item.title}
           placement="bottom"
