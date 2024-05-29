@@ -1,0 +1,1 @@
+export const BITMODEL_USER_KEY = 'bitmodel_user'

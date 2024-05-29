@@ -1,7 +1,15 @@
 import { ArrowRightOutlined } from "@ant-design/icons";
-import { Button, ConfigProvider } from "antd";
+import { Button, ConfigProvider, message } from "antd";
+import { useModel } from "umi";
 
 export default () => {
+  const { connect } = useModel("global");
+  const handleLogin = async () => {
+    try {
+      await connect();
+      message.success("Login success");
+    } catch (err) {}
+  };
   return (
     <ConfigProvider
       theme={{
@@ -20,6 +28,7 @@ export default () => {
         shape="round"
         icon={<ArrowRightOutlined />}
         iconPosition="end"
+        onClick={handleLogin}
       >
         Sign up
       </Button>

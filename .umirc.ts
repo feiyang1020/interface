@@ -6,5 +6,8 @@ export default defineConfig({
     { path: "/services", component: "services" },
   ],
   npmClient: "pnpm",
+  plugins: ["@umijs/plugins/dist/model", "@umijs/plugins/dist/request"],
+  model: {},
+  request: {},
   
 });
