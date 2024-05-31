@@ -3,6 +3,17 @@ declare namespace API {
     nonce: string;
     template: string;
   };
+
+  type ModelItem = {
+    id: number;
+    name: string;
+    description: string;
+    author_id: number;
+    author_nickname: string;
+    tags: string[];
+    cover: string;
+    file_path: string;
+  };
   type UserInfo = {
     id: number;
     nickname: string;
@@ -18,5 +29,17 @@ declare namespace API {
     code: number;
     message: string;
     data: T;
+  }
+
+  interface ListRet<T> {
+    code: number;
+    message: string;
+    data: {
+      list: T[];
+      page: number;
+      page_size: number;
+      page_count: number;
+      total: number;
+    };
   }
 }

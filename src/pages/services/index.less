@@ -1,3 +1,54 @@
 .servicesPage {
   min-height: 50vh;
+  margin: 0 50px;
+  display: flex;
+  flex-direction: column;
+
+  .pageTitle {
+    margin: 0 auto;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+    font-family: Adieu;
+    font-weight: 400;
+    font-size: 34px;
+    color: #ffffff;
+
+    max-width: 96vw;
+    background: linear-gradient(270deg, #b193cb 0%, #60e4de 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .my-masonry-grid {
+    display: flex;
+    width: auto;
+    .my-masonry-grid_column {
+      background-clip: padding-box;
+      padding: 10px;
+      .item {
+        background: white;
+        margin-bottom: 30px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        img {
+          width: 100%;
+          display: block;
+        }
+        .item-info {
+          padding: 10px;
+          display: flex;
+        }
+        .item-info h3 {
+          margin: 0;
+          font-size: 1.2em;
+        }
+        .item-info p {
+          margin: 5px 0;
+          font-size: 0.9em;
+          color: #666;
+        }
+      }
+    }
+  }
 }

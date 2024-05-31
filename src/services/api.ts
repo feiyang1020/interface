@@ -43,3 +43,19 @@ export async function refreshToken(
     ...(options || {}),
   });
 }
+
+export async function getModelList(
+  params: {
+    page: number;
+    page_size: number;
+    tag?:string;
+    author_id?:string
+  },
+  options?: { [key: string]: any }
+) {
+  return request<API.ListRet<API.ModelItem>>(`${ApiHost}/api/model/list`, {
+    method: "GET",
+    params,
+    ...(options || {}),
+  });
+}
