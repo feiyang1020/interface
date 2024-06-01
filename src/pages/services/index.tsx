@@ -7,6 +7,7 @@ import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";
 import { Button, ConfigProvider } from "antd";
 import { CloudUploadOutlined } from "@ant-design/icons";
+import PublishModal from "@/components/PublishModal";
 const breakpointColumnsObj = {
   default: 6,
   1100: 4,
@@ -126,6 +127,7 @@ const items: API.ModelItem[] = [
   },
 ];
 export default () => {
+  const [uploadVisiable,setUploadVisiable]=useState<boolean>(false)
   const [tag, setTag] = useState<string>();
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(20);
@@ -169,7 +171,7 @@ export default () => {
             shape="round"
             icon={<CloudUploadOutlined />}
             iconPosition="start"
-            onClick={() => {}}
+            onClick={()=>{setUploadVisiable(true)}}
           >
             Upload
           </Button>
@@ -200,6 +202,7 @@ export default () => {
           onMore={() => setPage((prev) => prev + 1)}
         />
       </div>
+      <PublishModal open={uploadVisiable} onClose={()=>{setUploadVisiable(false)}}/>
     </div>
   );
 };

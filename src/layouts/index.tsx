@@ -28,6 +28,12 @@ const _themes = {
     fontFamily: "Montserrat",
   },
   components: {
+    Button: {
+      colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+      colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+      colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+      lineWidth: 0,
+    },
     Segmented: {
       trackBg: "rgba(110, 102, 250, 0.32)",
       itemSelectedBg: "rgb(110, 102, 250)",
@@ -37,8 +43,11 @@ const _themes = {
       colorBgContainer: "#1A185F",
     },
     Modal: {
-      contentBg: "#1b185d",
-      headerBg: "#1b185d",
+      contentBg: "rgba(255, 255, 255, 0)",
+      headerBg: "rgba(255, 255, 255, 0)",
+      colorBgMask: "rgba(0, 0, 0, 0)",
+      titleColor: "rgba(0, 0, 0, 0)",
+      boxShadow: "      none",
     },
     Input: {
       activeBorderColor: "rgb(110, 102, 250)",
