@@ -5,6 +5,8 @@ import type { ItemData, ItemExtraNodeProps } from "react-silky-waterfall";
 import { getModelList } from "@/services/api";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";
+import { Button, ConfigProvider } from "antd";
+import { CloudUploadOutlined } from "@ant-design/icons";
 const breakpointColumnsObj = {
   default: 6,
   1100: 4,
@@ -148,9 +150,31 @@ export default () => {
   }, [fetchList]);
   return (
     <div className="servicesPage animation-slide-bottom">
-    
       <div className="pageTitle">Services</div>
-      <div className="uploadBtn"></div>
+      <div className="uploadBtn">
+        <ConfigProvider
+          theme={{
+            components: {
+              Button: {
+                colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+                colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+                colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+                lineWidth: 0,
+              },
+            },
+          }}
+        >
+          <Button
+            type="primary"
+            shape="round"
+            icon={<CloudUploadOutlined />}
+            iconPosition="start"
+            onClick={() => {}}
+          >
+            Upload
+          </Button>
+        </ConfigProvider>
+      </div>
       <div className="ListWraper">
         <Masonry
           breakpointCols={breakpointColumnsObj}
