@@ -175,5 +175,6 @@ export default () => {
     loginModalShow,
     disConnect,
     updateToken,
+    userInfo
   };
 };
