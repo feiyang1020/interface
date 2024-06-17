@@ -2,137 +2,39 @@ import { useCallback, useEffect, useState } from "react";
 import "./index.less";
 import Waterfall from "react-silky-waterfall";
 import type { ItemData, ItemExtraNodeProps } from "react-silky-waterfall";
-import { getModelList } from "@/services/api";
+import { cancleLikeModel, checkLikeAndDownload, getModelList, getTagList, likeModel } from "@/services/api";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";
-import { Button, ConfigProvider } from "antd";
+import { Button, ConfigProvider, message } from "antd";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import PublishModal from "@/components/PublishModal";
+import { buyModel } from "@/utils/order";
+import ModelCard from "@/components/ModelCard";
+import { useModel } from "umi";
+import ModelModal from "@/components/ModelModal";
 const breakpointColumnsObj = {
   default: 6,
+  1500: 5,
   1100: 4,
   700: 2,
   500: 1,
 };
-const items: API.ModelItem[] = [
-  {
-    id: 0,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/85/80/b0/8580b0f7f5096726cb2d58b9858de18e.jpg",
-    file_path: "string",
-  },
-  {
-    id: 2,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/e9/f8/81/e9f881a60efafacbd4180151516d2519.jpg",
-    file_path: "string",
-  },
-  {
-    id: 3,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/ca/97/f2/ca97f2a09e10ffdfe973f5f299ab611d.jpg",
-    file_path: "string",
-  },
-  {
-    id: 777,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/e9/1f/dc/e91fdcd2b46e8ae923ff86c9ed0dec25.jpg",
-    file_path: "string",
-  },
-  {
-    id: 398,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/3a/e3/10/3ae310dfc4a4e5f78fd7b986e47737a8.jpg",
-    file_path: "string",
-  },
-  {
-    id: 3787,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/736x/41/f5/ca/41f5ca1be5c8affacb6a9b452461174f.jpg",
-    file_path: "string",
-  },
-  {
-    id: 3678,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/09/b8/0b/09b80bb73d15210c33b1ad6c37d2d1c9.jpg",
-    file_path: "string",
-  },
-  {
-    id: 356,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/26/78/7b/26787be4447c4a7d24c6b74320d1409d.jpg",
-    file_path: "string",
-  },
-  {
-    id: 333,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/2e/32/d5/2e32d578ec8f7551e3027aee631441be.jpg",
-    file_path: "string",
-  },
-  {
-    id: 13,
-    name: "string",
-    description: "string",
-    author_id: 2,
-    author_nickname: "author_nickname",
-    tags: [],
-    cover:
-      "https://i.pinimg.com/564x/50/4d/f4/504df4bbda6e1c2d7e21bc9b38be6684.jpg",
-    file_path: "string",
-  },
-];
 export default () => {
-  const [uploadVisiable,setUploadVisiable]=useState<boolean>(false)
+  const { connected, mvcAddress } = useModel('global')
+  const [uploadVisiable, setUploadVisiable] = useState<boolean>(false)
+  const [detailVisiable, setDetailVisiable] = useState<boolean>(false);
+  const [curModel, setCurModel] = useState<API.ModelItem>();
   const [tag, setTag] = useState<string>();
+  const [tags, setTags] = useState<API.Tag[]>([]);
+  const [isEnd, setIsEnd] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(20);
   const [loading, setLoading] = useState<boolean>(false);
   const [list, setList] = useState<API.ModelItem[]>([]);
+  const getTags = useCallback(async () => {
+    const { data } = await getTagList()
+    setTags(data.list)
+  }, [])
   const fetchList = useCallback(async () => {
     setLoading(true);
     const { code, data } = await getModelList({
@@ -141,15 +43,68 @@ export default () => {
       tag: tag,
     });
     setLoading(false);
-    if (code !== 0) return;
+    if (code !== 0 || !data.list) {
+      setIsEnd(true);
+      return;
+    }
+    console.log(connected, 'connected');
+    let _list: API.ModelItem[] = data.list;
+    if (connected) {
+      const { data: { list } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
+      _list = _list.map((model: API.ModelItem) => {
+        const _item = list.find((i) => i.model_id === model.id);
+        if (_item) {
+          return { ...model, ..._item };
+        }
+        return model;
+      });
+    }
     setList((prev) => {
-      return [...prev, ...items];
+      if (page === 1) { return [..._list]; }
+      return [...prev, ..._list];
     });
-  }, [page, size, tag]);
+  }, [page, size, tag, connected]);
 
   useEffect(() => {
     fetchList();
+
   }, [fetchList]);
+  useEffect(() => { getTags() }, [getTags]);
+
+  const handleBuy = async (id: number) => {
+    try{
+     
+      await buyModel(id);
+      setPage(1);
+      fetchList();
+    }catch(e:any){
+      console.log(e);
+      message.error(e.message);
+    }
+  };
+  const handleLike = async (id: number) => {
+    try{
+      await likeModel({  id });
+      setPage(1);
+      fetchList();
+      message.success('success');
+    }catch(e:any){
+      console.log(e);
+      message.error(e.message);
+    }
+  }
+
+  const handleCanelLike = async (id: number) => {
+    try{
+      await cancleLikeModel({  id });
+      setPage(1);
+      fetchList();
+      message.success('cancel success');
+    }catch(e:any){
+      console.log(e);
+      message.error(e.message);
+    }
+  }
   return (
     <div className="servicesPage animation-slide-bottom">
       <div className="pageTitle">Services</div>
@@ -171,7 +126,7 @@ export default () => {
             shape="round"
             icon={<CloudUploadOutlined />}
             iconPosition="start"
-            onClick={()=>{setUploadVisiable(true)}}
+            onClick={() => { setUploadVisiable(true) }}
           >
             Upload
           </Button>
@@ -184,25 +139,40 @@ export default () => {
           columnClassName="my-masonry-grid_column"
         >
           {list.map((item) => (
-            <div key={item.id} className="item">
-              <img src={item.cover} alt={item.name} />
-              <div className="item-info">
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                <p>Likes: {item.likes}</p>
-                <p>Views: {item.views}</p>
-                <p>Comments: {item.comments}</p>
-                <p>Shares: {item.shares}</p>
-              </div>
-            </div>
+            <ModelCard
+              key={item.id}
+              model={item}
+              onLike={(id) => {
+                handleLike(id);
+              }}
+              onDislike={(id) => {
+                handleCanelLike(id);
+              }}
+              onBuy={(id) => {
+                handleBuy(id);
+              }}
+              onPreview={(model) => { setCurModel(model); setDetailVisiable(true) }}
+            />
           ))}
         </Masonry>
         <InfiniteScroll
           id="mason_grid"
-          onMore={() => setPage((prev) => prev + 1)}
+          onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
         />
+        {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
       </div>
-      <PublishModal open={uploadVisiable} onClose={()=>{setUploadVisiable(false)}}/>
+      <PublishModal open={uploadVisiable} onClose={() => { setUploadVisiable(false) }} onSuccess={() => { setPage(1) }} tags={tags} />
+      <ModelModal model={curModel} open={detailVisiable} onLike={(id) => {
+        handleLike(id);
+      }}
+        onDislike={(id) => {
+          handleCanelLike(id);
+        }}
+        onBuy={(id) => {
+          handleBuy(id);
+        }}
+        onClose={() => { setDetailVisiable(false) }}
+        ></ModelModal>
     </div>
   );
 };

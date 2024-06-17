@@ -1,6 +1,6 @@
 import { BITMODEL_USER_KEY } from "@/config";
 import useIntervalAsync from "@/hooks/useIntervalAsync";
-import { getNonce, login, refreshToken } from "@/services/api";
+import { getNonce, getUserInfo, login, refreshToken } from "@/services/api";
 import { getJsonItem, setJsonItem } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";
 import { useModel } from "umi";
@@ -80,7 +80,8 @@ export default () => {
       throw new Error(loginMessage);
     }
     setJsonItem(BITMODEL_USER_KEY, data);
-    setUserInfo(data);
+    const { data: user } = await getUserInfo();
+    setUserInfo(user);
     await init();
   };
 
@@ -104,10 +105,13 @@ export default () => {
         const _mvc = await window.metaidwallet.getAddress();
         const { network } = await window.metaidwallet.getNetwork();
         const btcAddress = await window.metaidwallet.btc.getAddress();
+        const { data: user } = await getUserInfo();
+        setUserInfo(user);
         setConnected(true);
         setMVCAddress(_mvc);
         setNetwork(network);
         setBTCAddress(btcAddress);
+       
       }
     }
   }, [walletName]);
@@ -152,13 +156,13 @@ export default () => {
           ...user,
           jwt_token: data.jwt_token,
         });
-        setUserInfo((prev) => {
-          if (!prev) return prev;
-          return {
-            ...prev,
-            jwt_token: data.jwt_token,
-          };
-        });
+        // setUserInfo((prev) => {
+        //   if (!prev) return prev;
+        //   return {
+        //     ...prev,
+        //     jwt_token: data.jwt_token,
+        //   };
+        // });
       }
     }
   }, [connected]);
@@ -175,6 +179,7 @@ export default () => {
     loginModalShow,
     disConnect,
     updateToken,
-    userInfo
+    userInfo,
+    init
   };
 };

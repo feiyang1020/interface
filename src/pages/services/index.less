@@ -5,7 +5,7 @@
   flex-direction: column;
 
   .pageTitle {
-    margin: 0 auto;
+    display: flex;
     z-index: 2;
     position: relative;
     text-align: center;
@@ -14,10 +14,11 @@
     font-size: 34px;
     color: #ffffff;
 
-    max-width: 96vw;
+    
     background: linear-gradient(270deg, #b193cb 0%, #60e4de 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin: 48px auto 28px;
   }
   .uploadBtn{
     display: flex;
@@ -31,30 +32,7 @@
       background-clip: padding-box;
       padding: 10px;
       box-sizing: border-box;
-      .item {
-        background: white;
-        margin-bottom: 30px;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        img {
-          width: 100%;
-          display: block;
-        }
-        .item-info {
-          padding: 10px;
-          display: flex;
-        }
-        .item-info h3 {
-          margin: 0;
-          font-size: 1.2em;
-        }
-        .item-info p {
-          margin: 5px 0;
-          font-size: 0.9em;
-          color: #666;
-        }
-      }
+      
     }
   }
 }

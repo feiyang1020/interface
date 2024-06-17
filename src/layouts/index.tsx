@@ -19,7 +19,7 @@ const _themes = {
   token: {
     wireframe: false,
     colorText: "rgba(255, 255, 255, 1)",
-    colorPrimary: "#6e66fa",
+    colorPrimary: "rgb(133, 101, 242)",
     colorInfo: "rgba(110, 102, 250, 0.32)",
     colorSuccess: "#6e66fa",
     colorWarning: "#f7931a",

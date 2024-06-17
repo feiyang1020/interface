@@ -1,6 +1,6 @@
-import { ArrowRightOutlined } from "@ant-design/icons";
-import { Avatar, Button, ConfigProvider, message } from "antd";
-import { useModel } from "umi";
+import { ArrowRightOutlined, DownOutlined, LoginOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
+import { Avatar, Button, ConfigProvider, Dropdown, Space, message } from "antd";
+import { useModel,history } from "umi";
 
 export default () => {
   const { connect, connected, userInfo, disConnect } = useModel("global");
@@ -8,12 +8,48 @@ export default () => {
     try {
       await connect();
       message.success("Login success");
-    } catch (err) {}
+    } catch (err) { }
   };
   return (
     <>
       {connected ? (
-        <Avatar onClick={disConnect}>{userInfo.id}</Avatar>
+
+        <Dropdown
+          arrow
+          dropdownRender={() => (
+            <div className="walletInfo">
+
+              <div className="links">
+                <div
+                  className="item forsale"
+                  onClick={() => {
+                    history.push("/profile");
+                  }}
+                >
+                  <UserOutlined />
+                  <div className="path">Your profile</div>
+
+                </div>
+                <div
+                  className="item forsale"
+                  onClick={disConnect}
+                >
+                  <LoginOutlined />
+                  <div className="path">Log Out</div>
+
+                </div>
+              </div>
+
+            </div>
+          )}
+          placement="bottomRight"
+        >
+          <Space style={{ cursor: 'pointer' }}>
+            <Avatar src={userInfo.avatar?<img src={userInfo.avatar}></img>:null}>{userInfo.nickname||'Unnamed'}</Avatar>
+            <DownOutlined />
+          </Space>
+        </Dropdown>
+
       ) : (
         <ConfigProvider
           theme={{
