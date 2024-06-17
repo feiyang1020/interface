@@ -4,6 +4,7 @@ import QueueAnim from "rc-queue-anim";
 import logo from "@/assets/logo@2x.png";
 import footerBg from "@/assets/footerbg.png";
 import "./index.less";
+import bgfooter from '@/assets/bg_foooter.png'
 import SignUp from "../SignUp";
 const data = [
   {
@@ -46,8 +47,12 @@ const data = [
 export default () => {
   return (
     <div className="footerWrap">
+      <div className="bg-footer-wrap">
+        <img className="bg-footer" src={bgfooter} alt="" />
+      </div>
+
       <Row className="row navlink">
-        <Col {...{xs: 24, sm: 24, md: 24, lg: 9, xl: 9, xxl: 8}} className="infoWrap">
+        <Col {...{ xs: 24, sm: 24, md: 24, lg: 9, xl: 9, xxl: 8 }} className="infoWrap">
           <img src={logo} alt="" className="logo" />
           <div className="info">
             April 10-11, 2024 <br />

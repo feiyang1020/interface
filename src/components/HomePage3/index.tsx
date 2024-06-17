@@ -1,6 +1,8 @@
+import onchain from "@/assets/onchain.png";
+import "./index.less";
 export default () => {
   return (
-    <div className="homePage2">
+    <div className="homePage3">
       <div className="pageTitle">BitModel Protocol</div>
       <div className="pageSubTitle">
         We have opened BitModel's core functions of solving AI problems based on
@@ -8,6 +10,10 @@ export default () => {
         develop various AI applications based on Bitcoin principles based on the
         BitModel protocol.
       </div>
+      <div className="imgWrap">
+        <img src={onchain} alt="" />
+      </div>
+
     </div>
   );
 };

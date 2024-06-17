@@ -1,11 +1,13 @@
 import "./index.less";
 import { Button, ConfigProvider } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import bgCard from '@/assets/bg_card.png'
 
 export default () => {
   return (
     <div className="homePage8">
       <div className="actions">
+        <img className='bgCard' src={bgCard} alt="" />
         <div className="info">
           It's time to join the thousands of creators, artists, and developers
           using Solana.
