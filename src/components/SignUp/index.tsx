@@ -1,15 +1,11 @@
 import { ArrowRightOutlined, DownOutlined, LoginOutlined, RightOutlined, UserOutlined } from "@ant-design/icons";
 import { Avatar, Button, ConfigProvider, Dropdown, Space, message } from "antd";
-import { useModel,history } from "umi";
+import { useModel, history } from "umi";
+import coin from '@/assets/coin.png'
 
 export default () => {
-  const { connect, connected, userInfo, disConnect } = useModel("global");
-  const handleLogin = async () => {
-    try {
-      await connect();
-      message.success("Login success");
-    } catch (err) { }
-  };
+  const { connect, connected, userInfo, disConnect, userBal } = useModel("global");
+
   return (
     <>
       {connected ? (
@@ -18,7 +14,14 @@ export default () => {
           arrow
           dropdownRender={() => (
             <div className="walletInfo">
+              <div className="bal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center',gap:20 }}>
+                  <img src={coin} alt="" style={{width:'18px',height:'18px'}}/>
+                  <div className="value" style={{color:'#FFAE00'}}>{userBal['ade0bbadd7e8bfb56e52610f218253938ecf8bf5'] || 0}</div>
+                </div>
 
+                <Button style={{background:'#FFAE00',color:'#fff'}} shape='round' onClick={()=>{window.open('https://mvcswap.com/#/swap/testnet-dexr')}}>Buy</Button>
+              </div>
               <div className="links">
                 <div
                   className="item forsale"
@@ -45,7 +48,7 @@ export default () => {
           placement="bottomRight"
         >
           <Space style={{ cursor: 'pointer' }}>
-            <Avatar src={userInfo.avatar?<img src={userInfo.avatar}></img>:null}>{userInfo.nickname||'Unnamed'}</Avatar>
+            <Avatar src={userInfo.avatar ? <img src={userInfo.avatar}></img> : null}>{userInfo.nickname || 'Unnamed'}</Avatar>
             <DownOutlined />
           </Space>
         </Dropdown>
@@ -68,7 +71,7 @@ export default () => {
             shape="round"
             icon={<ArrowRightOutlined />}
             iconPosition="end"
-            onClick={handleLogin}
+            onClick={connect}
           >
             Sign up
           </Button>

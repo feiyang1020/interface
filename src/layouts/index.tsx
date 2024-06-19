@@ -1,4 +1,4 @@
-import { Link, Outlet, history, useLocation } from "umi";
+import { Link, Outlet, history, useLocation, useModel } from "umi";
 import "./index.less";
 import logo from "@/assets/logo@2x.png";
 
@@ -14,6 +14,7 @@ import Footer from "@/components/Footer";
 import SignUp from "@/components/SignUp";
 import Nav, { MenuData } from "@/components/Nav";
 import { useMemo, useState } from "react";
+import LoginModal from "@/components/LoginModal";
 
 const _themes = {
   token: {
@@ -60,6 +61,7 @@ const _themes = {
 };
 export default function Layout() {
   const location = useLocation();
+  const { loginModalShow, setLoginModalShow } = useModel('global')
   const [showMenus, setShowMenus] = useState<boolean>(false);
   const onChange = (key: string | string[]) => {
     console.log(key);
@@ -141,6 +143,10 @@ export default function Layout() {
         </div>
 
         <Footer />
+        <LoginModal
+          show={loginModalShow}
+          onClose={() => setLoginModalShow(false)}
+        />
       </div>
     </ConfigProvider>
   );

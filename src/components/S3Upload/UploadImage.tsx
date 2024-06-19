@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { S3Client, PutObjectCommand, UploadPartCommand, CompleteMultipartUploadCommand, CreateMultipartUploadCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { fromTemporaryCredentials } from "@aws-sdk/credential-providers";
-import { Form, Input, Upload, Button, message } from "antd";
+import { Form, Input, Upload, Button, message, Avatar } from "antd";
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { createTag, s3STSForImage, s3STSForModel } from "@/services/api";
 
@@ -61,8 +61,8 @@ const UploadImage = (props: any) => {
     return (
         <Upload customRequest={handleUpload} name="avatar"
             listType="picture-card"
-            className="avatar-uploader" showUploadList={false}>
-            {props.value ? <img src={props.value} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+            className="avatar-uploader" showUploadList={false} style={{overflow:'hidden'}}>
+            {props.value ? <Avatar shape="square" style={{width:96,height:96}} src={<img src={props.value}></img>}></Avatar> : uploadButton}
 
         </Upload>
     );

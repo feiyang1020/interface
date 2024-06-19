@@ -4,6 +4,7 @@ import { createModel } from "@/services/api";
 import { useState } from "react";
 import S3UploadForm from "../S3Upload";
 import UploadImage from "../S3Upload/UploadImage";
+import { useModel } from "umi";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -23,27 +24,37 @@ export type PublishProps = {
 };
 export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   const [form] = Form.useForm();
+  const { connected, connect } = useModel('global')
   const [submiting, setSubmitLoading] = useState<boolean>(false)
   const handleSubmit = async () => {
     const { name, describe, model, cover, type, tags, price } = form.getFieldsValue();
     console.log(name, describe, model);
+    await form.validateFields();
+    try {
 
-    setSubmitLoading(true)
-    const ret = await createModel({
-      name,
-      description: describe,
-      tags: tags,
-      cover: cover,
-      file_path: model,
-      price: price,
-      type: type
-    });
-    if (ret.code === 0) {
-      message.success('success');
-      onSuccess && onSuccess()
-      onClose()
+      setSubmitLoading(true)
+      const ret = await createModel({
+        name,
+        description: describe,
+        tags: tags,
+        cover: cover,
+        file_path: model,
+        price: price,
+        type: type
+      });
+      if (ret.code === 0) {
+        message.success('success');
+        onSuccess && onSuccess()
+        onClose()
+      } else {
+        throw new Error(ret.msg)
+      }
+    } catch (e) {
+      console.error(e)
+      message.error(e.message)
     }
-    setSubmitLoading(true)
+
+    setSubmitLoading(false)
   };
   return (
     <Modal
@@ -56,10 +67,14 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       confirmLoading={submiting}
       styles={{ mask: { 'backdropFilter': 'blur(20px)' } }}
       footer={[
-
-        <Button key="submit" type="primary" size='large' loading={submiting} shape="round" onClick={handleSubmit}>
-          Submit
-        </Button>,
+        <>
+          {
+            connected ?
+              <Button key="submit" type="primary" size='large' loading={submiting} shape="round" onClick={handleSubmit}> Submit</Button>
+              : <Button key="submit" type="primary" size='large' loading={submiting} shape="round" onClick={connect}>Connect</Button>
+          }
+        </>
+        ,
         <ConfigProvider
           theme={{
             components: {
@@ -80,7 +95,8 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           >
             Cancel
           </Button> </ConfigProvider>,
-      ]}
+      ]
+      }
 
     >
       <div className="FormWrap">
@@ -90,7 +106,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           style={{ maxWidth: 600 }}
           form={form}
         >
-          <Form.Item label="Name" name="name">
+          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}>
             <Input size="large" />
           </Form.Item>
 
@@ -154,6 +170,6 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           </Form.Item> */}
         </Form>
       </div>
-    </Modal>
+    </Modal >
   );
 };

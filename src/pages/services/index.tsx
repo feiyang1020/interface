@@ -12,6 +12,7 @@ import { buyModel } from "@/utils/order";
 import ModelCard from "@/components/ModelCard";
 import { useModel } from "umi";
 import ModelModal from "@/components/ModelModal";
+import { downloadFile } from "@/utils/dowmload";
 const breakpointColumnsObj = {
   default: 6,
   1500: 5,
@@ -72,35 +73,50 @@ export default () => {
   useEffect(() => { getTags() }, [getTags]);
 
   const handleBuy = async (id: number) => {
-    try{
-     
-      await buyModel(id);
+    try {
+      const { data: { list:checkList } } = await checkLikeAndDownload({ model_ids: String(id) });
+      if(!checkList[0].is_download) {
+        await buyModel(id);
+      }
+      const find  = list.find((item) => item.id === id);
+      if(find){
+        const file = new URL(find.file_path) ;
+        console.log(file.pathname);
+        await downloadFile(id,decodeURIComponent(file.pathname.slice(1)));
+      }
+      
       setPage(1);
       fetchList();
-    }catch(e:any){
+    } catch (e: any) {
       console.log(e);
       message.error(e.message);
     }
   };
   const handleLike = async (id: number) => {
-    try{
-      await likeModel({  id });
+    try {
+      await likeModel({ id });
       setPage(1);
-      fetchList();
+      await fetchList();
+      if(curModel&&curModel.id===id){
+        setCurModel({...curModel,is_like:1,like:curModel.like+1})
+      }
       message.success('success');
-    }catch(e:any){
+    } catch (e: any) {
       console.log(e);
       message.error(e.message);
     }
   }
 
   const handleCanelLike = async (id: number) => {
-    try{
-      await cancleLikeModel({  id });
+    try {
+      await cancleLikeModel({ id });
       setPage(1);
       fetchList();
+      if(curModel&&curModel.id===id){
+        setCurModel({...curModel,is_like:0,like:curModel.like-1})
+      }
       message.success('cancel success');
-    }catch(e:any){
+    } catch (e: any) {
       console.log(e);
       message.error(e.message);
     }
@@ -172,7 +188,7 @@ export default () => {
           handleBuy(id);
         }}
         onClose={() => { setDetailVisiable(false) }}
-        ></ModelModal>
+      ></ModelModal>
     </div>
   );
 };

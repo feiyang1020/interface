@@ -1,7 +1,7 @@
 import { BITMODEL_USER_KEY } from "@/config";
 import useIntervalAsync from "@/hooks/useIntervalAsync";
 import { getNonce, getUserInfo, login, refreshToken } from "@/services/api";
-import { getJsonItem, setJsonItem } from "@/utils/utils";
+import { formatSat, getJsonItem, setJsonItem } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";
 import { useModel } from "umi";
 export type Network = "mainnet" | "testnet";
@@ -36,7 +36,7 @@ export default () => {
     getJsonItem(BITMODEL_USER_KEY) || initUser
   );
 
-  const connect = async () => {
+  const handleLogin = async () => {
     if (!checkExtension()) return;
     const isConnected = await window.metaidwallet.isConnected();
     console.log(isConnected, "isConnected");
@@ -84,6 +84,9 @@ export default () => {
     setUserInfo(user);
     await init();
   };
+  const connect = ()=>{
+    setLoginModalShow(true);
+  }
 
   const disConnect = async () => {
     if (!checkExtension()) return;
@@ -94,6 +97,28 @@ export default () => {
     setBTCAddress("");
     setUserBal({});
   };
+
+  const getBal = useCallback(async () => {
+    if (network && connected) {
+      //btc
+     
+      const tokens = await window.metaidwallet.token.getBalance();
+      const _bals: Record<string, any> = {
+        
+      };
+      console.log(tokens, "tokens")
+      tokens.forEach((item: any) => {
+        const balance =
+          BigInt(item.confirmedString) + BigInt(item.unconfirmedString);
+        _bals[item.genesis as string] = formatSat(
+          balance.toString(),
+          item.decimal
+        );
+      });
+      setUserBal(_bals);
+    }
+  }, [network, connected]);
+  
 
   const init = useCallback(async () => {
     console.log("init", walletName, window.metaidwallet);
@@ -106,6 +131,7 @@ export default () => {
         const { network } = await window.metaidwallet.getNetwork();
         const btcAddress = await window.metaidwallet.btc.getAddress();
         const { data: user } = await getUserInfo();
+        await getBal();
         setUserInfo(user);
         setConnected(true);
         setMVCAddress(_mvc);
@@ -121,6 +147,10 @@ export default () => {
       init();
     }, 500);
   }, [init]);
+
+  useEffect(()=>{
+    getBal();
+  },[getBal])
 
   useEffect(() => {
     const handleAccountChange = (newAccount: any) => {
@@ -180,6 +210,7 @@ export default () => {
     disConnect,
     updateToken,
     userInfo,
-    init
+    init,
+    handleLogin
   };
 };

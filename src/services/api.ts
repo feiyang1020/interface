@@ -2,7 +2,7 @@ import { BITMODEL_USER_KEY } from "@/config";
 import { getJsonItem } from "@/utils/utils";
 import { request } from "umi";
 
-const ApiHost = "http://18.162.167.14";
+const ApiHost = "https://www.bitmodel.ai";
 
 export async function getNonce(
   params: {
@@ -168,6 +168,30 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
     }>
   >(`${ApiHost}/api/file/model/token`, {
     method: "GET",
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+
+export async function downloadToken(id:number,options?: { [key: string]: any }) {
+  return request<
+    API.Ret<{
+      sts: {
+        access_key_id: "string";
+        access_secret: "string";
+        security_token: "string";
+        expire_time: 0;
+      };
+      prefix_path: "string";
+      session_name: "string";
+      bucket_name: "string";
+    }>
+  >(`${ApiHost}/api/model/download`, {
+    method: "POST",
+    data:{id},
     ...(options || {
       headers: {
         Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,

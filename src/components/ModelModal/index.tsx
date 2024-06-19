@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 import './index.less'
 import coin from '@/assets/coin.png'
+import { useModel } from "umi";
 type Props = {
     open: boolean,
     onClose: () => void,
@@ -17,6 +18,7 @@ type Props = {
     onDislike: (modelId: number) => void,
 }
 export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
+    const { connected, connect } = useModel('global')
     if (!model || !open) return <></>
     return <Modal
         open={open}
@@ -48,7 +50,12 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
                                 },
                             },
                         }}
-                    > <Button type="primary" shape="round" size='large' block style={{marginBottom:40}} onClick={() => { onBuy(model.id) }}>Buy</Button></ConfigProvider>
+                    >
+                        {
+                            connected ? <Button type="primary" shape="round" size='large' block style={{ marginBottom: 40 }} onClick={() => { onBuy(model.id) }}>Download</Button> : <Button type="primary" shape="round" size='large' block style={{ marginBottom: 40 }} onClick={connect}>Connect</Button>
+                        }
+
+                    </ConfigProvider>
 
 
                     <div className="footerInfo">
@@ -63,7 +70,7 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
                                 <CloudDownloadOutlined /> {model.download}
                             </div>
                             <div className="itemText">
-                            <img src={coin} alt="" /> {model.price}
+                                <img src={coin} alt="" /> {model.price}
                             </div>
                         </div>
                     </div>
