@@ -2,9 +2,19 @@ import { ArrowRightOutlined, DownOutlined, LoginOutlined, RightOutlined, UserOut
 import { Avatar, Button, ConfigProvider, Dropdown, Space, message } from "antd";
 import { useModel, history } from "umi";
 import coin from '@/assets/coin.png'
+import { isMobile } from "@/utils/utils";
 
 export default () => {
   const { connect, connected, userInfo, disConnect, userBal } = useModel("global");
+
+  const handleConnect = async () => {
+    try {
+     
+      await connect();
+    } catch (e) {
+      message.error(e.message);
+    }
+  }
 
   return (
     <>
@@ -71,7 +81,7 @@ export default () => {
             shape="round"
             icon={<ArrowRightOutlined />}
             iconPosition="end"
-            onClick={connect}
+            onClick={handleConnect}
           >
             Sign up
           </Button>
