@@ -106,16 +106,16 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           style={{ maxWidth: 600 }}
           form={form}
         >
-          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}>
+          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
             <Input size="large" />
           </Form.Item>
 
-          <Form.Item label="Describe" name="describe">
+          <Form.Item label="Describe" name="describe" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
             <Input.TextArea size="large" />
           </Form.Item>
           <Row>
             <Col span={12}>
-              <Form.Item label="Type" name="type" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }}>
+              <Form.Item label="Type" name="type" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !',  }]} >
                 <Select
                   placeholder="Select Type"
                   allowClear
@@ -127,7 +127,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Tags" name="tags" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} >
+              <Form.Item label="Tags" name="tags" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !',  }]}>
                 <Select
                   placeholder="Select Tags"
                   mode="multiple"
@@ -146,17 +146,17 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
 
 
-          <Form.Item label="Price" name="price">
+          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please input !', }]}>
             <InputNumber size="large" style={{ width: '100%' }} />
           </Form.Item>
           <Row>
             <Col span={12}>
-              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }}>
+              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !',  }]}>
                 <S3UploadForm />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="cover" name="cover" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }}>
+              <Form.Item label="cover" name="cover" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
                 <UploadImage />
               </Form.Item>
             </Col>

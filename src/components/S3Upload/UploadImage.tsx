@@ -15,6 +15,11 @@ const UploadImage = (props: any) => {
         setPrecent(0)
         setImageUrl(undefined);
         try {
+            const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+            if (!isJpgOrPng) {
+              message.error('You can only upload JPG/PNG file!');
+              return
+            }
             const response = await s3STSForImage();
             const { access_key_id, access_secret, security_token, expire_time } =
                 response.data.sts;
