@@ -2,6 +2,7 @@ import { Button, ConfigProvider } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import bg1 from "@/assets/bg.png";
 import "./index.less";
+import { history } from "umi";
 export default () => {
   return (
     <div className="homePage1">
@@ -35,6 +36,7 @@ export default () => {
             shape="round"
             icon={<ArrowRightOutlined />}
             iconPosition="end"
+            onClick={()=>{history.push('/services')}}
           >
             Model library
           </Button>
