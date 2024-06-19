@@ -43,7 +43,7 @@ export default function App() {
             page,
             page_size: size,
             tag: tag,
-            author_id: String(userInfo.id)
+            uploader_id: String(userInfo.id)
         });
         setLoading(false);
         if (code !== 0 || !data.list) {
