@@ -14,13 +14,12 @@
     font-size: 34px;
     color: #ffffff;
 
-    
     background: linear-gradient(270deg, #b193cb 0%, #60e4de 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     margin: 48px auto 28px;
   }
-  .uploadBtn{
+  .uploadBtn {
     display: flex;
     flex-direction: row-reverse;
     padding: 20px 0;
@@ -32,7 +31,17 @@
       background-clip: padding-box;
       padding: 10px;
       box-sizing: border-box;
-      
+    }
+  }
+  @media screen and (max-width: 767px) {
+    .servicesPage {
+      margin: 0 20px;
     }
   }
 }
+@media screen and (max-width: 767px) {
+  .servicesPage {
+    margin: 0 16px;
+  }
+}
+
