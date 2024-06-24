@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 import './index.less'
 import coin from '@/assets/coin.png'
+import LikeAction from "../LikeAction";
 type Props = {
     model: API.ModelItem,
     onBuy: (modelId: number) => void,
@@ -15,8 +16,8 @@ type Props = {
     onLike: (modelId: number) => void,
     onDislike: (modelId: number) => void,
 }
-export default ({ model, onLike, onBuy,onDislike,onPreview }: Props) => {
-    return <div className="modelCard" onClick={()=>onPreview(model)}><img src={model.cover} alt={model.name} />
+export default ({ model, onLike, onBuy, onDislike, onPreview }: Props) => {
+    return <div className="modelCard" onClick={() => onPreview(model)}><img src={model.cover} alt={model.name} />
         <div className="info">
             <div>
                 <Space>
@@ -26,15 +27,12 @@ export default ({ model, onLike, onBuy,onDislike,onPreview }: Props) => {
                 <div className="date">{model.create_at}</div>
             </div>
             <div className="footerInfo">
-                <div className="item">
-                    {model.is_like ? <LikeFilled onClick={(e) => {e.stopPropagation(); onDislike(model.id) }} /> : <LikeOutlined onClick={(e) => {e.stopPropagation(); onLike(model.id) }} />} {model.like}
-
-                </div>
+                <LikeAction model={model} />
                 <div className="item right">
                     <div className="itemText">
                         <EyeOutlined /> {model.click}
                     </div>
-                    <div className="itemText" onClick={(e) => { e.stopPropagation();onBuy(model.id) }}>
+                    <div className="itemText" onClick={(e) => { e.stopPropagation(); onBuy(model.id) }}>
                         <CloudDownloadOutlined /> {model.download}
                     </div>
                     <div className="itemText">

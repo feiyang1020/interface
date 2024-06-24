@@ -1,4 +1,4 @@
-import { Avatar, Button, ConfigProvider, Modal, Space } from "antd"
+import { Avatar, Button, Col, ConfigProvider, Modal, Row, Space } from "antd"
 import {
     LikeOutlined,
     LikeFilled,
@@ -9,6 +9,7 @@ import {
 import './index.less'
 import coin from '@/assets/coin.png'
 import { useModel } from "umi";
+import LikeAction from "../LikeAction";
 type Props = {
     open: boolean,
     onClose: () => void,
@@ -27,8 +28,12 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
         closable={false}
         styles={{ mask: { 'backdropFilter': 'blur(20px)' } }}
         footer={null}
-    > <div className="modelModal"><img src={model.cover} alt={model.name} />
-            <div className="info">
+    > <Row className="modelModal">
+            <Col md={12} span={24}>
+                <img src={model.cover} alt={model.name} />
+            </Col>
+
+            <Col className="info">
                 <div>
                     <Space>
                         <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar> {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{5})/, "$1...$2")}
@@ -37,7 +42,7 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
                     <div className="modelDes">{model.description}</div>
                     <div className="date">{model.create_at}</div>
                 </div>
-                <div>
+                <div className="bottom">
                     <ConfigProvider
                         theme={{
                             components: {
@@ -59,9 +64,7 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
 
 
                     <div className="footerInfo">
-                        <div className="item">
-                            {model.is_like ? <LikeFilled onClick={() => { onDislike(model.id) }} /> : <LikeOutlined onClick={() => { onLike(model.id) }} />} {model.like}
-                        </div>
+                        <LikeAction model={model} />
                         <div className="item right">
                             <div className="itemText">
                                 <EyeOutlined /> {model.click}
@@ -76,6 +79,6 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
                     </div>
                 </div>
 
-            </div></div>
+            </Col></Row>
     </Modal>
 }
