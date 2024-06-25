@@ -153,7 +153,7 @@ export default () => {
           </Button>
         </ConfigProvider>
       </div>
-      <Spin spinning={loading} tip="Loading...">
+      <Spin spinning={loading || initializing} tip="Loading...">
         <div className="ListWraper">
           <Masonry
             breakpointCols={breakpointColumnsObj}
