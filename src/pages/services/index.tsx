@@ -21,7 +21,7 @@ const breakpointColumnsObj = {
   500: 1,
 };
 export default () => {
-  const { connected, mvcAddress } = useModel('global')
+  const { connected, mvcAddress, initializing } = useModel('global')
   const [uploadVisiable, setUploadVisiable] = useState<boolean>(false)
   const [detailVisiable, setDetailVisiable] = useState<boolean>(false);
   const [curModel, setCurModel] = useState<API.ModelItem>();
@@ -37,19 +37,17 @@ export default () => {
     setTags(data.list)
   }, [])
   const fetchList = useCallback(async () => {
+    if (initializing) return;
     setLoading(true);
     const { code, data } = await getModelList({
       page,
       page_size: size,
       tag: tag,
     });
-    setLoading(false);
-    if (code !== 0 || !data.list) {
-      setIsEnd(true);
-      return;
-    }
+
+
     console.log(connected, 'connected');
-    let _list: API.ModelItem[] = data.list;
+    let _list: API.ModelItem[] = data.list || [];
     if (connected) {
       const { data: { list } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
       _list = _list.map((model: API.ModelItem) => {
@@ -60,11 +58,15 @@ export default () => {
         return model;
       });
     }
+    if (code !== 0 || data.total <= page * size) {
+      setIsEnd(true);
+    }
     setList((prev) => {
       if (page === 1) { return [..._list]; }
       return [...prev, ..._list];
     });
-  }, [page, size, tag, connected]);
+    setLoading(false);
+  }, [page, size, tag, connected, initializing]);
 
   useEffect(() => {
     fetchList();
@@ -177,7 +179,12 @@ export default () => {
           </Masonry>
           <InfiniteScroll
             id="mason_grid"
-            onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
+            onMore={() => {
+              if (!isEnd && !loading && !initializing) {
+                console.log('onMore', isEnd, loading, initializing);
+                setPage((prev) => prev + 1)
+              }
+            }}
           />
           {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
         </div>

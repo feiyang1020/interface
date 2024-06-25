@@ -31,6 +31,7 @@ export default () => {
   const [loginModalShow, setLoginModalShow] = useState<boolean>(false);
   const [network, setNetwork] = useState<Network>("testnet");
   const [connected, setConnected] = useState<boolean>(false);
+  const [initializing, setInitializing] = useState<boolean>(true);
   const [userBal, setUserBal] = useState<Record<string, any>>({});
   const [userInfo, setUserInfo] = useState<API.UserInfo>(
     getJsonItem(BITMODEL_USER_KEY) || initUser
@@ -121,7 +122,7 @@ export default () => {
   
 
   const init = useCallback(async () => {
-    console.log("init", walletName, window.metaidwallet);
+    
     if (walletName === "metalet" && window.metaidwallet) {
       const isConnected = await window.metaidwallet.isConnected();
       console.log("init", isConnected);
@@ -140,6 +141,7 @@ export default () => {
        
       }
     }
+    setInitializing(false);
   }, [walletName]);
   useEffect(() => {
     //
@@ -211,6 +213,7 @@ export default () => {
     updateToken,
     userInfo,
     init,
-    handleLogin
+    handleLogin,
+    initializing
   };
 };
