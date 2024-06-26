@@ -44,7 +44,7 @@ export default () => {
       <div className="pageSubTitle">
         BitModel, Cherishing Every Contribution to AGl
       </div>
-      <div className="warp">
+      {/* <div className="warp">
         <HorizontalTimeline
           index={currentIndex}
           indexClick={(index:number) => setCurrentIndex(index)}
@@ -67,7 +67,7 @@ export default () => {
             <p>{EVENTS[currentIndex].description}</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
