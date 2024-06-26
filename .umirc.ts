@@ -24,6 +24,6 @@ export default defineConfig({
     
   // },
   favicons: ["/favicon.ico"],
-  title: "bitModel",
+  title: "BitModel",
   
 });
