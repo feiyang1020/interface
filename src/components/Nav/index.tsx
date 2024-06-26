@@ -26,7 +26,7 @@ export const MenuData = [
         disabled: true,
       },
       {
-        title: "Models",
+        title: "API",
         link: "/models",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
@@ -41,21 +41,21 @@ export const MenuData = [
     icon: servicesIcon,
     children: [
       {
-        title: "Models",
+        title: "Link Wallet & Identity Verification",
         link: "/services",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
-        disabled: false,
+        disabled: true,
       },
       {
-        title: "Dataset",
+        title: "Manage",
         link: "/models",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: true,
       },
       {
-        title: "Models",
+        title: "Develop",
         link: "/models",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
@@ -69,27 +69,15 @@ export const MenuData = [
     link: "/",
     icon: servicesIcon,
     children: [
+     
       {
-        title: "Models",
-        link: "/models",
-        desc: "BitModel   Valuing Every Contribution to AGl",
-        icon: modelsIcon,
-        disabled: false,
-      },
-      {
-        title: "Dataset",
+        title: "Roadmap",
         link: "/models",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: true,
       },
-      {
-        title: "Models",
-        link: "/models",
-        desc: "BitModel   Valuing Every Contribution to AGl",
-        icon: modelsIcon,
-        disabled: true,
-      },
+      
     ],
   },
 ];
@@ -120,13 +108,13 @@ export default () => {
                     className={`btnWrap ${nav.disabled ? "disabaled" : ""}`}
                     key={nav.title}
                     onClick={() => {
-                      history.push(nav.link);
+                      !nav.disabled&&history.push(nav.link);
                     }}
                   >
                     <img src={nav.icon} alt="" className="icon" />
                     <div className="navText">
-                      <div className="name">{item.title}</div>
-                      <div className="sub">{item.desc}</div>
+                      <div className="name">{nav.title}</div>
+                      <div className="sub">{nav.desc}</div>
                     </div>
                   </div>
                 ))}
