@@ -23,7 +23,7 @@ export default defineConfig({
 
     
   // },
-  favicons: ["/favicon.png"],
+  favicons: ["/favicon.ico"],
   title: "bitModel",
   
 });
