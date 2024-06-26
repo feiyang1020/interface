@@ -128,16 +128,21 @@ export default () => {
       console.log("init", isConnected);
 
       if (isConnected === true) {
-        const _mvc = await window.metaidwallet.getAddress();
-        const { network } = await window.metaidwallet.getNetwork();
-        const btcAddress = await window.metaidwallet.btc.getAddress();
-        const { data: user } = await getUserInfo();
-        await getBal();
-        setUserInfo(user);
-        setConnected(true);
-        setMVCAddress(_mvc);
-        setNetwork(network);
-        setBTCAddress(btcAddress);
+        try{
+          const _mvc = await window.metaidwallet.getAddress();
+          const { network } = await window.metaidwallet.getNetwork();
+          const btcAddress = await window.metaidwallet.btc.getAddress();
+          const { data: user } = await getUserInfo();
+          await getBal();
+          setUserInfo(user);
+          setConnected(true);
+          setMVCAddress(_mvc);
+          setNetwork(network);
+          setBTCAddress(btcAddress);
+        }catch(e){
+          console.error(e);
+        } 
+        
        
       }
     }
