@@ -115,7 +115,9 @@ export default function Layout() {
               <SignUp />
             </div>
             <Dropdown
+              overlayClassName="menuOverlay"
               placement="bottom"
+              overlayStyle={{top:50,left:0,right:0,bottom:0}}
               dropdownRender={() => (
                 <div className="menuWrap">
                   <Collapse
