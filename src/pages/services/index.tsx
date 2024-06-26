@@ -30,7 +30,7 @@ export default () => {
   const [isEnd, setIsEnd] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(20);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [list, setList] = useState<API.ModelItem[]>([]);
   const getTags = useCallback(async () => {
     const { data } = await getTagList()
@@ -38,7 +38,7 @@ export default () => {
   }, [])
   const fetchList = useCallback(async () => {
     if (initializing) return;
-    setLoading(true);
+    // setLoading(true);
     const { code, data } = await getModelList({
       page,
       page_size: size,
@@ -98,32 +98,45 @@ export default () => {
   const handleLike = async (id: number) => {
     if (!connected) return;
     try {
-      await likeModel({ id });
-      setPage(1);
-      await fetchList();
+      // await likeModel({ id });
+      // setPage(1);
+      //  fetchList();
+
+      setList(list.map((item) => {
+        if(item.id === id){
+          return {...item,is_like:1,like:item.like+1}
+        }
+        return item
+      }))
       if (curModel && curModel.id === id) {
         setCurModel({ ...curModel, is_like: 1, like: curModel.like + 1 })
       }
-      message.success('success');
+      // message.success('success');
     } catch (e: any) {
       console.log(e);
-      message.error(e.message);
+      // message.error(e.message);
     }
   }
 
   const handleCanelLike = async (id: number) => {
     if (!connected) return;
     try {
-      await cancleLikeModel({ id });
-      setPage(1);
-      fetchList();
+      // await cancleLikeModel({ id });
+      // setPage(1);
+      // fetchList();
+      setList(list.map((item) => {
+        if(item.id === id){
+          return {...item,is_like:0,like:item.like-1}
+        }
+        return item
+      }))
       if (curModel && curModel.id === id) {
         setCurModel({ ...curModel, is_like: 0, like: curModel.like - 1 })
       }
-      message.success('cancel success');
+      // message.success('cancel success');
     } catch (e: any) {
       console.log(e);
-      message.error(e.message);
+      // message.error(e.message);
     }
   }
   return (

@@ -64,7 +64,7 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
 
 
                     <div className="footerInfo">
-                        <LikeAction model={model} />
+                        <LikeAction model={model}  handleLike={onLike} handleDislike={onDislike}/>
                         <div className="item right">
                             <div className="itemText">
                                 <EyeOutlined /> {model.click}

@@ -4,18 +4,19 @@ import { useState } from "react";
 import { useModel } from "umi";
 import { cancleLikeModel, likeModel } from "@/services/api";
 import { message } from "antd";
-type Props = { model: API.ModelItem }
-export default ({ model }: Props) => {
+type Props = { model: API.ModelItem,handleLike:(id:number)=>void;handleDislike:(id:number)=>void; }
+export default ({ model,handleLike,handleDislike }: Props) => {
     const { connected } = useModel('global')
     const [isLike, setIsLike] = useState<boolean>(Boolean(model.is_like));
     const [likeCount, setLikeCount] = useState<number>(model.like);
     const onLike = async (id: number) => {
         if (!connected) return;
-        setIsLike(true)
-        setLikeCount(likeCount + 1)
+        // setIsLike(true)
+        // setLikeCount(likeCount + 1)
         try {
+            handleLike&&handleLike(id)
             await likeModel({ id });
-
+           
         } catch (e: any) {
             console.log(e);
             message.error(e.message);
@@ -26,10 +27,12 @@ export default ({ model }: Props) => {
     };
     const onDislike = async (id: number) => {
         if (!connected) return;
-        setIsLike(false)
-        setLikeCount(likeCount - 1)
+        // setIsLike(false)
+        // setLikeCount(likeCount - 1)
         try {
+            handleDislike&&handleDislike(id)
             await cancleLikeModel({ id });
+            
         } catch (e: any) {
             console.log(e);
             message.error(e.message);
@@ -37,7 +40,8 @@ export default ({ model }: Props) => {
             setLikeCount(likeCount + 1)
         }
     };
-    return <div className="likeWrap" onClick={(e) => { e.stopPropagation(); isLike ? onDislike(model.id) : onLike(model.id) }}>
-        <LikeFilled className={`${isLike ? 'likeIcon isLike' : 'likeIcon disLike'}`} style={{ color: isLike ? '#fb9a33' : '#fff' }} /> {likeCount}
+    
+    return <div className="likeWrap" onClick={(e) => { e.stopPropagation(); model.is_like ? onDislike(model.id) : onLike(model.id) }}>
+        <LikeFilled className={`${model.is_like ? 'likeIcon isLike' : 'likeIcon disLike'}`} style={{ color: model.is_like ? '#fb9a33' : '#fff' }} /> {model.like}
     </div>
 }
