@@ -50,15 +50,29 @@
     width: 253px;
     height: 343px;
     overflow: hidden;
-    background: linear-gradient(-30deg, #030430, #030430);
+    background-image: linear-gradient(-30deg, #030430, #030430);
     border-radius: 39px;
     display: flex;
     flex-direction: column;
     padding: 34px 28px;
+    position: relative;
     cursor: pointer;
     transition: all 8s ease-in-out;
+    z-index: 0;
+    overflow: hidden;    
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background: linear-gradient(-30deg, #3FBBFE, #A541FF);
+      opacity: 0;    
+      transition: opacity .5s;
+      z-index: -1;
+  }
     &:hover {
-      background: linear-gradient(-30deg, #3fbbfe, #a541ff);
+      &::before{
+        opacity: 1;
+      }
     }
 
     justify-content: space-between;
