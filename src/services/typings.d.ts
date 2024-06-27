@@ -49,7 +49,7 @@ declare namespace API {
   };
   interface Ret<T> {
     code: number;
-    message: string;
+    msg: string;
     data: T;
   }
 

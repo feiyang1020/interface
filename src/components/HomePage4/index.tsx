@@ -64,11 +64,10 @@ export default () => {
     if (screens.xs) return map.xs;
     return 5;
   }, [screens]);
-  const swiperRef = useRef(null);
+  const swiperRef = useRef<any>(null);
   useEffect(() => {
     if (swiperRef.current && swiperRef.current.swiper) {
-      // 这里设置初始滑动到第三个滑块（索引为 2）
-      swiperRef.current.swiper.slideTo(1, 0); // 第一个参数是滑块索引，第二个参数是滑动动画持续时间（毫秒）
+      swiperRef.current.swiper.slideTo(1, 0);
     }
   }, []);
   return (

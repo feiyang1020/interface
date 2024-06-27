@@ -116,6 +116,8 @@ export async function createModel(
     tags: string[];
     cover: string;
     file_path: string;
+    price: number;
+    type: number;
   },
   options?: { [key: string]: any }
 ) {

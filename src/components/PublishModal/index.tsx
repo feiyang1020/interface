@@ -49,7 +49,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       } else {
         throw new Error(ret.msg)
       }
-    } catch (e) {
+    } catch (e:any) {
       console.error(e)
       message.error(e.message)
     }

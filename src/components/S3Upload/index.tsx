@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { S3Client, PutObjectCommand, UploadPartCommand, CompleteMultipartUploadCommand, CreateMultipartUploadCommand, GetObjectCommand } from "@aws-sdk/client-s3";
-import { fromTemporaryCredentials } from "@aws-sdk/credential-providers";
 import { Form, Input, Upload, Button, message } from "antd";
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { createTag, s3STSForImage, s3STSForModel } from "@/services/api";
@@ -10,7 +9,7 @@ const S3UploadForm = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [precent, setPrecent] = useState(0);
   const [imageUrl, setImageUrl] = useState<string>();
-  const handleUpload = async ({ file, onSuccess, onError }) => {
+  const handleUpload = async ({ file, onSuccess, onError }:any) => {
     setLoading(true);
     setPrecent(0)
     setImageUrl(undefined);
@@ -78,7 +77,7 @@ const S3UploadForm = (props: any) => {
       setImageUrl(file.name);
       setLoading(false);
       console.log("Upload successful. File location:", Location);
-      const streamToBlob = async (stream) => {
+      const streamToBlob = async (stream:any) => {
         const reader = stream.getReader();
         const chunks = [];
         let done, value;
@@ -87,7 +86,7 @@ const S3UploadForm = (props: any) => {
         }
         return new Blob(chunks);
       };
-      // 下载刚刚上传的文件
+      // 
       const downloadFile = async () => {
         try {
           const command = new GetObjectCommand({
@@ -123,10 +122,7 @@ const S3UploadForm = (props: any) => {
     }
   };
 
-  const onFinish = (values) => {
-    console.log("Form values:", values);
-    message.success("Form submitted successfully");
-  };
+ 
   const uploadButton = (
     <button style={{ border: 0, background: 'none', color: '#fff' }} >
       {loading ? <LoadingOutlined /> : <PlusOutlined />}

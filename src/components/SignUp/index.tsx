@@ -9,9 +9,9 @@ export default () => {
 
   const handleConnect = async () => {
     try {
-     
+
       await connect();
-    } catch (e) {
+    } catch (e: any) {
       message.error(e.message);
     }
   }
@@ -25,12 +25,12 @@ export default () => {
           dropdownRender={() => (
             <div className="walletInfo">
               <div className="bal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center',gap:20 }}>
-                  <img src={coin} alt="" style={{width:'18px',height:'18px'}}/>
-                  <div className="value" style={{color:'#FFAE00'}}>{userBal['ade0bbadd7e8bfb56e52610f218253938ecf8bf5'] || 0}</div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+                  <img src={coin} alt="" style={{ width: '18px', height: '18px' }} />
+                  <div className="value" style={{ color: '#FFAE00' }}>{userBal['ade0bbadd7e8bfb56e52610f218253938ecf8bf5'] || 0}</div>
                 </div>
 
-                <Button style={{background:'#FFAE00',color:'#fff'}} shape='round' onClick={()=>{window.open('https://mvcswap.com/#/swap/testnet-dexr')}}>Buy</Button>
+                <Button style={{ background: '#FFAE00', color: '#fff' }} shape='round' onClick={() => { window.open('https://mvcswap.com/#/swap/testnet-dexr') }}>Buy</Button>
               </div>
               <div className="links">
                 <div

@@ -75,7 +75,7 @@ export default () => {
   const swiperMain = useRef<any>(null);
   const pagination = {
     clickable: true,
-    renderBullet: function (index, className) {
+    renderBullet: function (index:number, className:string) {
       return '<span class="' + className + '">' + (index + 1) + "</span>";
     },
   };
@@ -133,7 +133,7 @@ export default () => {
       on: {
         setTranslate(s) {
           const slides = s.slides;
-          slides.forEach((slideEl) => {
+          slides.forEach((slideEl:any) => {
             const progress = slideEl.progress;
             const shadowEl = slideEl.querySelector(".header-swiper-shadow");
             const isM = isMobile.current;
@@ -149,7 +149,7 @@ export default () => {
         },
         setTransition(s, duration) {
           const slides = s.slides;
-          slides.forEach((slideEl) => {
+          slides.forEach((slideEl:any) => {
             const shadowEl = slideEl.querySelector(".header-swiper-shadow");
             shadowEl.style.transitionDuration = `${duration}ms`;
           });

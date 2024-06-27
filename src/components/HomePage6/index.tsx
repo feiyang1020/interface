@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import "./index.less";
-import HorizontalTimeline from 'react-horizontal-timeline';
+
 const VALUES = ['2023-04-15', '2023-12-28', '2024-02-16', '2024-04-25', '2024-04-30'];
 const EVENTS = [
   {
