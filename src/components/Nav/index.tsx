@@ -43,21 +43,21 @@ export const MenuData = [
     children: [
       {
         title: "Link Wallet & Identity Verification",
-        link: "/",
+        link: "/Link",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "Manage",
-        link: "/",
+        link: "/Manage",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "Develop",
-        link: "/",
+        link: "/Develop",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: true,
@@ -73,7 +73,7 @@ export const MenuData = [
 
       {
         title: "Roadmap",
-        link: "/",
+        link: "/Roadmap",
         desc: "BitModel   Valuing Every Contribution to AGl",
         icon: modelsIcon,
         disabled: true,
