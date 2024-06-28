@@ -3,7 +3,7 @@ import './index.less'
 import QueueAnim from 'rc-queue-anim';
 export default () => {
   return (
-    <OverPack className="homePage2" replay style={{height:'calc(100vh - 64px)'}}>
+    <OverPack className="homePage2" replay style={{height:'20vh'}}>
       <QueueAnim
         className="home2Case"
         type="bottom"
