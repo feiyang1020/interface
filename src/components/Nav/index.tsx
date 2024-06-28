@@ -8,28 +8,28 @@ import { useState } from "react";
 export const MenuData = [
   {
     title: "Services ",
-    desc: "BitModel   Valuing Every Contribution to AGl",
+    desc: "BitModel   Valuing Every Contribution to AI",
     link: "/",
     icon: servicesIcon,
     children: [
       {
         title: "Models",
         link: "/services",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: false,
       },
       {
         title: "Dataset",
         link: "/models",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "API",
         link: "/models",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: true,
       },
@@ -37,28 +37,28 @@ export const MenuData = [
   },
   {
     title: "Contributors  ",
-    desc: "BitModel   Valuing Every Contribution to AGl",
+    desc: "BitModel   Valuing Every Contribution to AI",
     link: "/",
     icon: servicesIcon,
     children: [
       {
         title: "Link Wallet & Identity Verification",
         link: "/Link",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "Manage",
         link: "/Manage",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "Develop",
         link: "/Develop",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: true,
       },
@@ -66,7 +66,7 @@ export const MenuData = [
   },
   {
     title: "Resources ",
-    desc: "BitModel   Valuing Every Contribution to AGl",
+    desc: "BitModel   Valuing Every Contribution to AI",
     link: "/",
     icon: servicesIcon,
     children: [
@@ -74,7 +74,7 @@ export const MenuData = [
       {
         title: "Roadmap",
         link: "/Roadmap",
-        desc: "BitModel   Valuing Every Contribution to AGl",
+        desc: "BitModel   Valuing Every Contribution to AI",
         icon: modelsIcon,
         disabled: true,
       },

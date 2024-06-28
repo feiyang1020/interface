@@ -18,10 +18,10 @@ export default () => {
         </div>
         <div className="title" key='title3'>
 
-          bution to <span>AGl</span>
+          bution to <span>AI</span>
         </div>
         <div className="subTitle" key='subTitle'>
-          BitModel, Valuing Every Contribution to AGI
+          BitModel, Valuing Every Contribution to AI
         </div>
 
         <div className="buttons" key='btns'>

@@ -12,25 +12,25 @@ const data = [
     bg: bg,
     title: "High performance and high concurrent processing capability",
     subTitle:
-      " MVC adopts an optimized UTXO model and high-performance super nodes, which can handle millions of TPS (transactions per second), which is crucial for the data management of AI models and the execution of smart contracts. BitModel can take advantage of this feature of MVC to ensure that the calculation process of the AGI model is carried out efficiently and quickly, thereby improving the response speed and processing capability of the entire AI system.",
+      " MVC adopts an optimized UTXO model and high-performance super nodes, which can handle millions of TPS (transactions per second), which is crucial for the data management of AI models and the execution of smart contracts. BitModel can take advantage of this feature of MVC to ensure that the calculation process of the AI model is carried out efficiently and quickly, thereby improving the response speed and processing capability of the entire AI system.",
   },
   {
     bg: bg,
     title: "Layer-1 smart contract (MetaContract)",
     subTitle:
-      "MVC innovatively realizes the Layer-1 smart contract on the UTXO model, which means that BitModel can directly deploy and execute the smart contract at the basic infrastructure of MVC without additional solutions. This provides strong support for the automation, validation, and execution of the AGI model, while also reducing transaction costs and complexity.）",
+      "MVC innovatively realizes the Layer-1 smart contract on the UTXO model, which means that BitModel can directly deploy and execute the smart contract at the basic infrastructure of MVC without additional solutions. This provides strong support for the automation, validation, and execution of the AI model, while also reducing transaction costs and complexity.）",
   },
   {
     bg: bg,
     title: "MetaID",
     subTitle:
-      "MVC has built-in MetaID, which is a distributed identity protocol that allows users to use across applications under a unified identity. BitModel can use MetaID to ensure the identity authentication and data privacy of users and contributors of the AGI model, while promoting the interconnection and interoperability of data.",
+      "MVC has built-in MetaID, which is a distributed identity protocol that allows users to use across applications under a unified identity. BitModel can use MetaID to ensure the identity authentication and data privacy of users and contributors of the AI model, while promoting the interconnection and interoperability of data.",
   },
   {
     bg: bg,
     title: "Decentralization and security",
     subTitle:
-      "MVC adopts the same POW consensus mechanism and SHA-256 mining algorithm as Bitcoin, ensuring the decentralization and security of the network. BitModel can rely on this feature of MVC to protect the security and non-tamperability of the AGI model, ensuring that the contribution and use records of the model are transparent and verifiable",
+      "MVC adopts the same POW consensus mechanism and SHA-256 mining algorithm as Bitcoin, ensuring the decentralization and security of the network. BitModel can rely on this feature of MVC to protect the security and non-tamperability of the AI model, ensuring that the contribution and use records of the model are transparent and verifiable",
   },
   {
     bg: bg,
@@ -74,7 +74,7 @@ export default () => {
     <div className="homePage4">
       <div className="pageTitle">BitModel Blockchain</div>
       <div className="pageSubTitle">
-        BitModel, Cherishing Every Contribution to AGl
+        BitModel, Cherishing Every Contribution to AI
       </div>
       <div className="swiperWrap">
         <Swiper

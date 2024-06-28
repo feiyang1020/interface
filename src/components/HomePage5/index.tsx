@@ -5,7 +5,7 @@ export default () => {
     <div className="homePage5">
       <div className="pageTitle">BitModel core value</div>
       <div className="pageSubTitle">
-        BitModel, Cherishing Every Contribution to AGl
+        BitModel, Cherishing Every Contribution to AI
       </div>
       <div className="swiperWrap">
         <SwiperCardStack />

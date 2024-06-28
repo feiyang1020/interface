@@ -42,7 +42,7 @@ export default () => {
     <div className="homePage6">
       <div className="pageTitle">RoadMap</div>
       <div className="pageSubTitle">
-        BitModel, Cherishing Every Contribution to AGl
+        BitModel, Cherishing Every Contribution to AI
       </div>
       {/* <div className="warp">
         <HorizontalTimeline

@@ -10,7 +10,7 @@ export default () => {
         <img className='bgCard' src={bgCard} alt="" />
         <div className="info">
           It's time to join the thousands of creators, artists, and developers
-          using Solana.
+          using MVC.
         </div>
         <ConfigProvider
           theme={{
