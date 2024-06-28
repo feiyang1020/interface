@@ -126,12 +126,12 @@ const S3UploadForm = (props: any) => {
   const uploadButton = (
     <button style={{ border: 0, background: 'none', color: '#fff' }} >
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload {precent && `${precent}%`}</div>
+      <div style={{ marginTop: 8 }}>Upload {precent ?`${precent}%`:''}</div>
     </button>
   );
 
   return (
-    <Upload customRequest={handleUpload} name="avatar"
+    <Upload customRequest={handleUpload} name="avatar" style={{border:'none'}}
       listType="picture-card"
       className="avatar-uploader" showUploadList={false}>
       {imageUrl ? imageUrl.replace(/(\w{5})\w+(\w{4})/, "$1...$2") : uploadButton}

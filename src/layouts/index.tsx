@@ -58,6 +58,11 @@ const _themes = {
     Collapse: {
       colorBorder: "rgba(255, 255, 255, 0.2)",
     },
+    "Upload": {
+      "colorPrimary": "rgba(110, 102, 250, 0)",
+      "colorPrimaryHover": "rgba(154, 145, 255, 0)",
+      "colorPrimaryBorder": "rgba(231, 227, 255, 0)"
+    }
   },
 };
 export default function Layout() {
@@ -118,7 +123,7 @@ export default function Layout() {
             <Dropdown
               overlayClassName="menuOverlay"
               placement="bottom"
-              overlayStyle={{top:50,left:0,right:0,bottom:0}}
+              overlayStyle={{ top: 50, left: 0, right: 0, bottom: 0 }}
               dropdownRender={() => (
                 <div className="menuWrap">
                   <Collapse
