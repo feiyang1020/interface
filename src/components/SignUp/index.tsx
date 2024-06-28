@@ -4,7 +4,7 @@ import { useModel, history } from "umi";
 import coin from '@/assets/coin.png'
 import { isMobile } from "@/utils/utils";
 
-export default () => {
+export default ({ showLogined = true }: { showLogined?: boolean }) => {
   const { connect, connected, userInfo, disConnect, userBal } = useModel("global");
 
   const handleConnect = async () => {
@@ -18,9 +18,8 @@ export default () => {
 
   return (
     <>
-      {connected ? (
-
-        <Dropdown
+      {connected ? (<>
+        {showLogined && <Dropdown
           arrow
           dropdownRender={() => (
             <div className="walletInfo">
@@ -61,7 +60,9 @@ export default () => {
             <Avatar src={userInfo.avatar ? <img src={userInfo.avatar}></img> : null}>{userInfo.nickname || 'Unnamed'}</Avatar>
             <DownOutlined />
           </Space>
-        </Dropdown>
+        </Dropdown>}
+      </>
+
 
       ) : (
         <ConfigProvider

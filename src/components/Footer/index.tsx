@@ -6,6 +6,7 @@ import footerBg from "@/assets/footerbg.png";
 import "./index.less";
 import bgfooter from '@/assets/bg_foooter.png'
 import SignUp from "../SignUp";
+import { MenuData } from "../Nav";
 const data = [
   {
     title: "Services",
@@ -52,18 +53,31 @@ export default () => {
       </div>
 
       <Row className="row navlink">
-        <Col span={24} className="infoWrap">
+        <Col xs={24} md={6} className="infoWrap">
           <img src={logo} alt="" className="logo" />
           <div className="info">
             April 10-11, 2024 <br />
             Paris, France
           </div>
         </Col>
-        
+        {MenuData.map((item) => {
+          return <Col xs={24} md={6} className="navWrap" key={item.title}>
+            <div className="navTitle">{item.title}</div>
+            <div className="navs">
+              {item.children.map((nav) => {
+                return <div className="navItem">
+                  <a href={nav.link}>{nav.title}</a>
+                </div>
+              })
+              }
+            </div>
+          </Col>
+        })}
+
       </Row>
       <Row justify="center" className="row">
         <div className="SignButton">
-          <SignUp />
+          <SignUp showLogined={false} />
         </div>
       </Row>
       <Row className="bgWrap">
