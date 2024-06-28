@@ -2,6 +2,7 @@ import onchain from "@/assets/onchain.png";
 import "./index.less";
 import { OverPack } from "rc-scroll-anim";
 import QueueAnim from "rc-queue-anim";
+
 export default () => {
   return (
     <OverPack className="homePage3" replay style={{height:'calc(100vh - 64px)'}} >
@@ -22,7 +23,9 @@ export default () => {
         <div className="imgWrap" key='t3'>
           <img src={onchain} alt="" />
         </div>
+       
       </QueueAnim>
+      
     </OverPack>
   );
 };
