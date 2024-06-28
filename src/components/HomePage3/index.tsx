@@ -4,7 +4,7 @@ import { OverPack } from "rc-scroll-anim";
 import QueueAnim from "rc-queue-anim";
 export default () => {
   return (
-    <OverPack className="homePage3" replay playScale="50vh">
+    <OverPack className="homePage3" replay style={{height:'calc(100vh - 64px)'}} >
       <QueueAnim
         className="homePage3"
         type="bottom"

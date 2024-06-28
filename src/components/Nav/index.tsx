@@ -2,8 +2,9 @@ import servicesIcon from "@/assets/servicesIcon.png";
 import modelsIcon from "@/assets/models.png";
 import { Button, Dropdown, Popover } from "antd";
 import { ArrowRightOutlined, DownOutlined } from "@ant-design/icons";
-import { history } from "umi";
+import { history,useLocation } from "umi";
 import "./index.less";
+import { useState } from "react";
 export const MenuData = [
   {
     title: "Services ",
@@ -69,7 +70,7 @@ export const MenuData = [
     link: "/",
     icon: servicesIcon,
     children: [
-     
+
       {
         title: "Roadmap",
         link: "/models",
@@ -77,17 +78,21 @@ export const MenuData = [
         icon: modelsIcon,
         disabled: true,
       },
-      
+
     ],
   },
 ];
 
 export default () => {
+  const location = useLocation();
+  const path = location.pathname;
+  const [curMenu, setCurMenu] = useState<string>();
   return (
     <div className="navWrap">
       {MenuData.map((item) => (
         <Dropdown
           key={item.title}
+          open={curMenu === item.title}
           placement="bottom"
           dropdownRender={() => (
             <div className="navDetail">
@@ -105,10 +110,13 @@ export default () => {
               <div className="navs">
                 {item.children.map((nav) => (
                   <div
-                    className={`btnWrap ${nav.disabled ? "disabaled" : ""}`}
+                    className={`btnWrap ${nav.disabled ? "disabaled" : ""} ${path === nav.link? "active" : ""}`}
                     key={nav.title}
                     onClick={() => {
-                      !nav.disabled&&history.push(nav.link);
+                      if (!nav.disabled) {
+                        setCurMenu(undefined)
+                        history.push(nav.link)
+                      }
                     }}
                   >
                     <img src={nav.icon} alt="" className="icon" />
@@ -122,7 +130,14 @@ export default () => {
             </div>
           )}
         >
-          <div className="nav">
+          <div className="nav" onClick={() => {
+            if (curMenu !== item.title) {
+              setCurMenu(item.title)
+            } else {
+              setCurMenu(undefined)
+
+            }
+          }}>
             {item.title}
             <DownOutlined className="icon" />
           </div>
