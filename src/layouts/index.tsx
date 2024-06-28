@@ -30,6 +30,7 @@ const _themes = {
   },
   components: {
     Button: {
+      primaryShadow: "0 0px 0 rgba(0, 0, 0, 0)",
       colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
       colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
       colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
