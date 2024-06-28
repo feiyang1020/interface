@@ -52,27 +52,16 @@ export default () => {
       </div>
 
       <Row className="row navlink">
-        <Col {...{ xs: 24, sm: 24, md: 24, lg: 9, xl: 9, xxl: 8 }} className="infoWrap">
+        <Col span={24} className="infoWrap">
           <img src={logo} alt="" className="logo" />
           <div className="info">
             April 10-11, 2024 <br />
             Paris, France
           </div>
         </Col>
-        {data.map((item, index) => (
-          <Col span={4} className="block" key={item.title}>
-            <div className="blockTitle">{item.title}</div>
-            {item.children.map((child) => (
-              <div key={child.name} className="link">
-                <a href={child.href} target="_blank">
-                  {child.name}
-                </a>
-              </div>
-            ))}
-          </Col>
-        ))}
+        
       </Row>
-      <Row justify="end" className="row">
+      <Row justify="center" className="row">
         <div className="SignButton">
           <SignUp />
         </div>
