@@ -87,13 +87,16 @@ export default () => {
           {data.map((item) => (
             <SwiperSlide key={item.title}>
               <div className="card">
-                <Tooltip title={item.title}>
-                  <div className="cardTitle">{item.title}</div>
-                </Tooltip>
+
+                <div className="cardTitle">{item.title}</div>
+
                 <img src={item.bg} alt="" className="cardIcon" />
-                <Tooltip title={item.subTitle}>
-                  <div className="cardInfo">{item.subTitle}</div>
-                </Tooltip>
+
+                <div className="cardInfo">{item.subTitle}</div>
+                <div className="detail-wrapper">
+                  <div className="detailTitle">{item.title}</div>
+                  <div className="detailInfo">{item.subTitle}</div>
+                </div>
               </div>
             </SwiperSlide>
           ))}

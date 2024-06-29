@@ -9,7 +9,7 @@ export default () => {
       <QueueAnim
         className="homePage3"
         type="bottom"
-        key="home2Case"
+        key="home3Case"
         ease="easeOutQuart"
         leaveReverse
       >

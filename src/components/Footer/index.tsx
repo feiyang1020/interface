@@ -65,7 +65,7 @@ export default () => {
             <div className="navTitle">{item.title}</div>
             <div className="navs">
               {item.children.map((nav) => {
-                return <div className="navItem">
+                return <div className="navItem" key={nav.title}>
                   <a href={nav.link}>{nav.title}</a>
                 </div>
               })
