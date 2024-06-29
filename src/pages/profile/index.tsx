@@ -1,6 +1,6 @@
 import { useModel } from 'umi';
 import './index.less'
-import { Avatar, Button, Col, Row, message } from 'antd';
+import { Avatar, Button, Col, Empty, Row, message } from 'antd';
 import { EditFilled } from '@ant-design/icons';
 import EditProfileModal from '@/components/EditProfileModal';
 import { useCallback, useEffect, useState } from 'react';
@@ -169,7 +169,8 @@ export default function App() {
                             id="mason_grid"
                             onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
                         />
-                        {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
+                        {isEnd &&list.length>0&&  <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
+                        {isEnd &&list.length===0&& <Empty></Empty>}
                     </div>
                     
 
