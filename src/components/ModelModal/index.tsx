@@ -35,9 +35,12 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
 
             <Col className="info">
                 <div>
-                    <Space>
-                        <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar> {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{5})/, "$1...$2")}
-                    </Space>
+                <Space size={10}>
+                    <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>
+                    <span className="nickname">
+                        {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{5})/, "$1...$2")}
+                    </span>
+                </Space>
                     <div className="modelName">{model.name}</div>
                     <div className="modelDes">{model.description}</div>
                     <div className="date">{model.create_at}</div>
