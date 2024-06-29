@@ -26,8 +26,9 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
         width={620}
         onCancel={onClose}
         closable={false}
-        styles={{ mask: { 'backdropFilter': 'blur(20px)' } }}
+        styles={{ mask: { 'backdropFilter': 'blur(20px)' }, content: { padding: 0 } }}
         footer={null}
+        style={{ padding: 0 }}
     > <Row className="modelModal">
             <Col md={12} span={24}>
                 <img src={model.cover} alt={model.name} />
@@ -35,12 +36,12 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
 
             <Col className="info">
                 <div>
-                <Space size={10}>
-                    <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>
-                    <span className="nickname">
-                        {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{5})/, "$1...$2")}
-                    </span>
-                </Space>
+                    <Space size={10}>
+                        <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>
+                        <span className="nickname">
+                            {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{5})/, "$1...$2")}
+                        </span>
+                    </Space>
                     <div className="modelName">{model.name}</div>
                     <div className="modelDes">{model.description}</div>
                     <div className="date">{model.create_at}</div>
@@ -67,7 +68,7 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
 
 
                     <div className="footerInfo">
-                        <LikeAction model={model}  handleLike={onLike} handleDislike={onDislike}/>
+                        <LikeAction model={model} handleLike={onLike} handleDislike={onDislike} />
                         <div className="item right">
                             <div className="itemText">
                                 <EyeOutlined /> {model.click}
