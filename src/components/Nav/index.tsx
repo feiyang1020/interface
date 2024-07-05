@@ -8,28 +8,28 @@ import { useState } from "react";
 export const MenuData = [
   {
     title: "Services ",
-    desc: "BitModel   Valuing Every Contribution to AI",
+    desc: "Inspire BitModel community to share AI ecosystem resources.",
     link: "/",
     icon: servicesIcon,
     children: [
       {
         title: "Models",
         link: "/services",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Find any popular model here",
         icon: modelsIcon,
         disabled: false,
       },
       {
         title: "Dataset",
         link: "/models",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Share training data or selected digital content",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "API",
         link: "/models",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Experience interesting AI studios",
         icon: modelsIcon,
         disabled: true,
       },
@@ -37,28 +37,28 @@ export const MenuData = [
   },
   {
     title: "Contributors  ",
-    desc: "BitModel   Valuing Every Contribution to AI",
+    desc: "Build, share, and benefit from BitModel AI ecosystem",
     link: "/",
     icon: servicesIcon,
     children: [
       {
         title: "Link Wallet & Identity Verification",
         link: "/Link",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Pay or receive benefit from BitModel contribution flow",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "Manage",
         link: "/Manage",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Check income by your AI assets ",
         icon: modelsIcon,
         disabled: true,
       },
       {
         title: "Develop",
         link: "/Develop",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Share your model, data or computing resource",
         icon: modelsIcon,
         disabled: true,
       },
@@ -66,15 +66,22 @@ export const MenuData = [
   },
   {
     title: "Resources ",
-    desc: "BitModel   Valuing Every Contribution to AI",
+    desc: "Find rich information about BitModel",
     link: "/",
     icon: servicesIcon,
     children: [
+      {
+        title: "White Paper",
+        link: "/WhitePaper",
+        desc: "Learn more about the value of BitModel ",
+        icon: modelsIcon,
+        disabled: true,
+      },
 
       {
         title: "Roadmap",
         link: "/Roadmap",
-        desc: "BitModel   Valuing Every Contribution to AI",
+        desc: "Follow and join us!",
         icon: modelsIcon,
         disabled: true,
       },
@@ -99,10 +106,10 @@ export default () => {
               <div className="desc">
                 <div className="title">{item.title}</div>
                 <div className="subtitle">{item.desc}</div>
-                <div className="link">
+                {/* <div className="link">
                   <a href={item.link}>Learn More</a>{" "}
                   <ArrowRightOutlined className="arrow" />
-                </div>
+                </div> */}
                 <div className="nav">
                   <img src={item.icon} alt="" className="navIcon" />
                 </div>
