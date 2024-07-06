@@ -29,11 +29,14 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   const { connected, connect } = useModel('global')
   const [submiting, setSubmitLoading] = useState<boolean>(false)
   const handleSubmit = async () => {
-    const { name, describe, model, cover, type, tags, price } = form.getFieldsValue();
+    const { name, describe, model, cover, type, tags, price,modelDependencyAndRevenueSharing} = form.getFieldsValue();
     console.log(name, describe, model);
     await form.validateFields();
     try {
-
+      const sums = modelDependencyAndRevenueSharing.reduce((a, b) => { return a + b.revenue }, 0);
+      if (sums !== 100) {
+         throw new Error('The sum of revenue sharing must be 100%');
+      }
       setSubmitLoading(true)
       const ret = await createModel({
         name,
@@ -69,13 +72,13 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       confirmLoading={submiting}
       styles={{ mask: { 'backdropFilter': 'blur(20px)', background: 'rgba(8, 8, 44, 0.5)', } }}
       footer={[
-        <>
-          {
-            connected ?
-              <Button key="submit" type="primary" size='large' loading={submiting} shape="round" onClick={handleSubmit}> Submit</Button>
-              : <Button key="submit" type="primary" size='large' loading={submiting} shape="round" onClick={connect}>Connect</Button>
-          }
-        </>
+
+
+        connected ?
+          <Button key="submit1" type="primary" size='large' loading={submiting} shape="round" onClick={handleSubmit}> Submit</Button>
+          : <Button key="submit2" type="primary" size='large' loading={submiting} shape="round" onClick={connect}>Connect</Button>
+
+
         ,
         <ConfigProvider
           theme={{
@@ -88,12 +91,14 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               },
             },
           }}
+          key='cancel1'
         >
           <Button
             size='large'
             onClick={onClose}
             shape="round"
             type="primary"
+            key='cancel'
           >
             Cancel
           </Button> </ConfigProvider>,
@@ -181,6 +186,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                         {...restField}
                         name={[name, 'url']}
 
+
                         rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
                           async validator(_, value) {
                             if (!value) {
@@ -188,14 +194,14 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                             }
                             const values = getFieldValue('modelDependencyAndRevenueSharing');
                             const find = values.filter((item: any) => item.url === value);
-                            if(find.length > 1){
+                            if (find.length > 1) {
                               return Promise.reject(new Error('Hugging Face URL is duplicated'));
                             }
                             const { isPass, name } = await checkHfUrl(value);
                             if (!isPass) {
                               return Promise.reject(new Error('Hugging Face URL is not valid'));
                             }
-                            
+
                             Object.assign(values[key], { name })
                             setFieldValue('modelDependencyAndRevenueSharing', values)
 
@@ -210,9 +216,25 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                         noStyle
                         {...restField}
                         name={[name, 'revenue']}
+                      // dependencies={[fields.filter(_item => _item.name !== name).map(_item => ['modelDependencyAndRevenueSharing', _item.name, 'revenue'])]}
+                      // rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
+                      //   async validator(_, value) {
+                      //     if (!value) {
+                      //       return Promise.resolve();
+                      //     }
+                      //     // console.log('getFieldValue', value, getFieldValue('modelDependencyAndRevenueSharing'))
+                      //     const values = getFieldValue('modelDependencyAndRevenueSharing');
+                      //     const sums = values.reduce((a, b) => { return a + b.revenue }, 0);
+                      //     if (sums !== 100) {
+                      //       return Promise.reject(new Error('The sum of revenue sharing must be 100%'));
+                      //     }
+                      //     return Promise.resolve();
+                      //   },
+                      // })]}
+
 
                       >
-                        <InputNumber style={{ width: "100%" }} placeholder="revenue sharing" suffix='%' />
+                        <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' />
                       </Form.Item>
                       <Form.Item
                         noStyle
