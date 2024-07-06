@@ -1,10 +1,12 @@
-import { Button, Col, ConfigProvider, Form, Input, InputNumber, Modal, Row, Select, message } from "antd";
+import { Button, Col, ConfigProvider, Form, Input, InputNumber, Modal, Row, Select, Space, message } from "antd";
 import "./index.less";
 import { createModel } from "@/services/api";
 import { useState } from "react";
 import S3UploadForm from "../S3Upload";
 import UploadImage from "../S3Upload/UploadImage";
 import { useModel } from "umi";
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { checkHfUrl } from "@/utils/utils";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -49,7 +51,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       } else {
         throw new Error(ret.msg)
       }
-    } catch (e:any) {
+    } catch (e: any) {
       console.error(e)
       message.error(e.message)
     }
@@ -65,7 +67,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       className="publishPage"
       onOk={handleSubmit}
       confirmLoading={submiting}
-      styles={{ mask: { 'backdropFilter': 'blur(20px)' } }}
+      styles={{ mask: { 'backdropFilter': 'blur(20px)', background: 'rgba(8, 8, 44, 0.5)', } }}
       footer={[
         <>
           {
@@ -115,7 +117,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           </Form.Item>
           <Row>
             <Col span={12}>
-              <Form.Item label="Type" name="type" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !',  }]} >
+              <Form.Item label="Type" name="type" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !', }]} >
                 <Select
                   placeholder="Select Type"
                   allowClear
@@ -127,7 +129,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Tags" name="tags" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !',  }]}>
+              <Form.Item label="Tags" name="tags" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !', }]}>
                 <Select
                   placeholder="Select Tags"
                   mode="multiple"
@@ -151,7 +153,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           </Form.Item>
           <Row>
             <Col span={12}>
-              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !',  }]}>
+              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
                 <S3UploadForm />
               </Form.Item>
             </Col>
@@ -168,6 +170,71 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           <Form.Item label="model" name="model" labelCol={{span:12}}>
             <S3UploadForm />
           </Form.Item> */}
+          <Form.Item label="Revenue Sharing">
+            <Form.List name="modelDependencyAndRevenueSharing" >
+              {(fields, { add, remove, }) => (
+                <div style={{ display: 'flex', flexDirection: 'column', rowGap: 16 }}>
+                  {fields.map(({ key, name, ...restField }) => (
+                    <Space key={key} >
+                      <Form.Item
+                        noStyle
+                        {...restField}
+                        name={[name, 'url']}
+
+                        rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
+                          async validator(_, value) {
+                            if (!value) {
+                              return Promise.resolve();
+                            }
+                            const values = getFieldValue('modelDependencyAndRevenueSharing');
+                            const find = values.filter((item: any) => item.url === value);
+                            if(find.length > 1){
+                              return Promise.reject(new Error('Hugging Face URL is duplicated'));
+                            }
+                            const { isPass, name } = await checkHfUrl(value);
+                            if (!isPass) {
+                              return Promise.reject(new Error('Hugging Face URL is not valid'));
+                            }
+                            
+                            Object.assign(values[key], { name })
+                            setFieldValue('modelDependencyAndRevenueSharing', values)
+
+                            return Promise.resolve();
+                          },
+                        })]}
+                        validateTrigger="onBlur"
+                      >
+                        <Input placeholder="Hugging Face URL" />
+                      </Form.Item>
+                      <Form.Item
+                        noStyle
+                        {...restField}
+                        name={[name, 'revenue']}
+
+                      >
+                        <InputNumber style={{ width: "100%" }} placeholder="revenue sharing" suffix='%' />
+                      </Form.Item>
+                      <Form.Item
+                        noStyle
+                        {...restField}
+                        name={[name, 'name']}
+
+                      >
+                        <Input placeholder="Model Name" disabled />
+                      </Form.Item>
+
+                      <MinusCircleOutlined onClick={() => remove(name)} />
+                    </Space>
+                  ))}
+                  <Form.Item>
+                    <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                      Add field
+                    </Button>
+                  </Form.Item>
+                </div>
+              )}
+            </Form.List>
+          </Form.Item>
         </Form>
       </div>
     </Modal >
