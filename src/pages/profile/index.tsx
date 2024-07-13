@@ -1,7 +1,7 @@
 import { useModel } from 'umi';
 import './index.less'
 import { Avatar, Button, Col, Empty, Row, message } from 'antd';
-import { EditFilled } from '@ant-design/icons';
+import { DatabaseOutlined, EditFilled, LineChartOutlined } from '@ant-design/icons';
 import EditProfileModal from '@/components/EditProfileModal';
 import { useCallback, useEffect, useState } from 'react';
 import { cancleLikeModel, checkLikeAndDownload, getModelList, getTagList, likeModel } from '@/services/api';
@@ -11,19 +11,21 @@ import ModelModal from '@/components/ModelModal';
 import InfiniteScroll from '@/components/InfiniteScroll';
 import Masonry from 'react-masonry-css';
 import ModelCard from '@/components/ModelCard';
+import IncomeAnalysis from './components/IncomeAnalysis';
 const breakpointColumnsObj = {
     default: 5,
     1500: 4,
     1100: 3,
     700: 2,
     500: 1,
-  };
+};
 export default function App() {
     const { connected, userInfo, init } = useModel('global');
     const [editVisiable, setEditVisiable] = useState<boolean>(false);
     const [detailVisiable, setDetailVisiable] = useState<boolean>(false);
     const [curModel, setCurModel] = useState<API.ModelItem>();
     const [tag, setTag] = useState<string>();
+    const [tab, setTab] = useState<string>('models');
     const [tags, setTags] = useState<API.Tag[]>([]);
     const [isEnd, setIsEnd] = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
@@ -36,8 +38,8 @@ export default function App() {
         setTags(data.list)
     }, [])
     const fetchList = useCallback(async () => {
-        if(!connected) return;
-        if(!userInfo.id) return;
+        if (!connected) return;
+        if (!userInfo.id) return;
         setLoading(true);
         const { code, data } = await getModelList({
             page,
@@ -67,7 +69,7 @@ export default function App() {
             if (page === 1) { return [..._list]; }
             return [...prev, ..._list];
         });
-    }, [page, size, tag, connected,userInfo]);
+    }, [page, size, tag, connected, userInfo]);
 
     useEffect(() => {
         fetchList();
@@ -139,10 +141,16 @@ export default function App() {
                     <Button type="primary" shape="round" size='large' block icon={<EditFilled />} onClick={() => setEditVisiable(true)}> Edit Profile</Button>
                 </div>
                 <div className="card">
-                    <div className="tabs">
-                        Models <span className='num'>{total}</span>
+                    <div className="tabs" >
+                        <Button size='large' type={tab === 'models' ? 'primary' : 'text'} className='tab' onClick={() => { setTab('models') }}>
+                            <DatabaseOutlined /> Models <span className='num'>{total}</span>
+                        </Button>
+                        <Button size='large' type={tab === 'inc&Exp' ? 'primary' : 'text'} className='tab' onClick={() => { setTab('inc&Exp') }}>
+                            <LineChartOutlined /> Income & Expense
+                        </Button>
+
                     </div>
-                    <div className="ListWraper">
+                    {tab === 'models' && <div className="ListWraper">
                         <Masonry
                             breakpointCols={breakpointColumnsObj}
                             className="my-masonry-grid"
@@ -169,10 +177,12 @@ export default function App() {
                             id="mason_grid"
                             onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
                         />
-                        {isEnd &&list.length>0&&  <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
-                        {isEnd &&list.length===0&& <Empty></Empty>}
-                    </div>
-                    
+                        {isEnd && list.length > 0 && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
+                        {isEnd && list.length === 0 && <Empty></Empty>}
+                    </div>}
+                    {tab === 'inc&Exp' && <IncomeAnalysis />}
+
+
 
                 </div>
             </div>

@@ -62,6 +62,10 @@ const _themes = {
       "colorPrimary": "rgba(110, 102, 250, 0)",
       "colorPrimaryHover": "rgba(154, 145, 255, 0)",
       "colorPrimaryBorder": "rgba(231, 227, 255, 0)"
+    },
+    "Table": {
+      "borderColor": "rgba(240, 240, 240, 0)",
+      "colorBgContainer": "rgba(8, 7, 49, 0)"
     }
   },
 };
@@ -129,7 +133,7 @@ export default function Layout() {
                   <Collapse
                     bordered={false}
                     onChange={onChange}
-                    // items={items}
+                  // items={items}
                   ></Collapse>
                 </div>
               )}

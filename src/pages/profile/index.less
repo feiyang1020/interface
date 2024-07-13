@@ -24,17 +24,24 @@
     }
   }
   .tabs {
-    display: inline-flex;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 12px;
-    gap: 8px;
-    .num{
-        color: #FFB20D;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .tab {
+      display: inline-flex;
+     
+      border-radius: 20px;
+      padding: 12px;
+      gap: 8px;
+      cursor: pointer;
+      .num {
+        color: #ffb20d;
         font-size: 14px;
+      }
+      margin-bottom: 20px;
     }
-    margin-bottom: 20px;
   }
+
   .my-masonry-grid {
     display: flex;
     width: auto;
