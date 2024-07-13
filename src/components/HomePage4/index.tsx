@@ -12,37 +12,37 @@ const data = [
     bg: bg,
     title: "High performance and high concurrent processing capability",
     subTitle:
-      " MVC adopts an optimized UTXO model and high-performance super nodes, which can handle millions of TPS (transactions per second), which is crucial for the data management of AI models and the execution of smart contracts. BitModel can take advantage of this feature of MVC to ensure that the calculation process of the AI model is carried out efficiently and quickly, thereby improving the response speed and processing capability of the entire AI system.",
+      "High performance on concurrent processing: Using an optimized UTXO model, MVC is capable of processing millions of transactions per second (TPS), which is critical for running AI models and smart contracts. Thanks to such an advantage, BitModel well matches the computing efficiency of AI systems and ensures fast response of Blockchain-based AI services.",
   },
   {
     bg: bg,
     title: "Layer-1 smart contract (MetaContract)",
     subTitle:
-      "MVC innovatively realizes the Layer-1 smart contract on the UTXO model, which means that BitModel can directly deploy and execute the smart contract at the basic infrastructure of MVC without additional solutions. This provides strong support for the automation, validation, and execution of the AI model, while also reducing transaction costs and complexity.）",
+      "Layer-1 smart contract with MetaContract: MVC enjoys a neat implementation of Layer-1 smart contract, which naturally supports automation, validation, and execution of AI models without involving additional efforts. Such an advantage simplifies the transcation process and thereby saves the cost.",
   },
   {
     bg: bg,
     title: "MetaID",
     subTitle:
-      "MVC has built-in MetaID, which is a distributed identity protocol that allows users to use across applications under a unified identity. BitModel can use MetaID to ensure the identity authentication and data privacy of users and contributors of the AI model, while promoting the interconnection and interoperability of data.",
+      "Distributed identity using MetaID: As a built-in function of MVC, MetaID allows users to share a unified identity across various applications. Such a feature facilitates the identity authentication and the privacy protection on BitModel.",
   },
   {
     bg: bg,
     title: "Decentralization and security",
     subTitle:
-      "MVC adopts the same POW consensus mechanism and SHA-256 mining algorithm as Bitcoin, ensuring the decentralization and security of the network. BitModel can rely on this feature of MVC to protect the security and non-tamperability of the AI model, ensuring that the contribution and use records of the model are transparent and verifiable",
+      "Decentralization and security: MVC adopts the POW consensus mechanism and SHA-256 mining algorithm, same as Bitcoin, ensuring the decentralization and security of the network. Benefiting from such a design, BitModel well protects the security and non-tamperability of AI models, and hence guarantees the transparency and the verifiability of user contributions and serving history.",
   },
   {
     bg: bg,
     title: "Low transaction fees and dynamic expansion",
     subTitle:
-      "One of the design goals of MVC is to reduce transaction fees as the number of users increases, while having the ability to expand without limits. BitModel can take advantage of this advantage to reduce transaction costs, attract more users and developers to participate in the contribution and use of AI models, and at the same time ensure that as the scale of the application expands, the system can still maintain high performance.",
+      "Low transaction fee and dynamic expansion: One of the goals of MVC is to keep low transaction fee along with the number of users increaseing, or even realize unlimiated expansion. Leveraging such a design, BitModel aims to maintain a low-cost yet high-permance AI ecosystem, encouraging the entire community to contribute to and take advantage of open-sourced AI.",
   },
   {
     bg: bg,
     title: "Support complex AI applications",
     subTitle:
-      "The high performance and smart contract capabilities of MVC make it an ideal platform for building complex AI applications. BitModel can rely on these features of MVC to develop and deploy complex AI models, such as deep learning, natural language processing, etc., while ensuring the efficient operation and interoperability of these models.）",
+      "Support of complex AI applications: The serving efficiency and the smart contract design of MVC make BitModel a practical platform to build complex AI applications, which may incorporate models from various domains, including natural language processing, computer vision, multi-modality, etc.",
   },
 ];
 export default () => {
@@ -74,7 +74,7 @@ export default () => {
     <div className="homePage4">
       <div className="pageTitle">BitModel Blockchain</div>
       <div className="pageSubTitle">
-        BitModel, Cherishing Every Contribution to AI
+      Built upon blockchain techniques, BitModel serves as a general solution to tracing the contributions to AI. We select MicrovisionChain (MVC) as the foundation of Web3, considering its advantages of xxx and xxx.
       </div>
       <div className="swiperWrap">
         <Swiper
