@@ -74,7 +74,7 @@ export default () => {
     <div className="homePage4">
       <div className="pageTitle">BitModel Blockchain</div>
       <div className="pageSubTitle">
-      Built upon blockchain techniques, BitModel serves as a general solution to tracing the contributions to AI. We select MicrovisionChain (MVC) as the foundation of Web3, considering its advantages of xxx and xxx.
+        Built upon blockchain techniques, BitModel serves as a general solution to tracing the contributions to AI. We select MicrovisionChain (MVC) as the foundation of Web3, considering its advantages of xxx and xxx.
       </div>
       <div className="swiperWrap">
         <Swiper

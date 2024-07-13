@@ -2,7 +2,7 @@ import { BITMODEL_USER_KEY } from "@/config";
 import { getJsonItem } from "@/utils/utils";
 import { request } from "umi";
 
-const ApiHost = "https://www.bitmodel.ai";
+const ApiHost = "https://api-dev.bitmodel.ai";
 
 export async function getNonce(
   params: {
