@@ -2,9 +2,17 @@ import servicesIcon from "@/assets/servicesIcon.png";
 import modelsIcon from "@/assets/models.png";
 import { Button, Dropdown, Popover } from "antd";
 import { ArrowRightOutlined, DownOutlined } from "@ant-design/icons";
-import { history,useLocation } from "umi";
+import { history, useLocation } from "umi";
 import "./index.less";
 import { useState } from "react";
+import _model from "@/assets/route_slices/Models@2x.png";
+import _dataset from '@/assets/route_slices/Dataset@2x.png'
+import _api from '@/assets/route_slices/API@2x.png'
+import _linkWallet from '@/assets/route_slices/Link Wallet & ldentity Verification@2x.png'
+import _manage from "@/assets/route_slices/Manage@2x.png";
+import _Develop from '@/assets/route_slices/Develop@2x.png'
+import _whitePaper from '@/assets/route_slices/White Paper@2x.png'
+import _Roadmap from '@/assets/route_slices/Roadmap@2x.png'
 export const MenuData = [
   {
     title: "Services ",
@@ -16,21 +24,21 @@ export const MenuData = [
         title: "Models",
         link: "/services",
         desc: "Find any popular model here",
-        icon: modelsIcon,
+        icon: _model,
         disabled: false,
       },
       {
         title: "Dataset",
         link: "/models",
         desc: "Share training data or selected digital content",
-        icon: modelsIcon,
+        icon: _dataset,
         disabled: true,
       },
       {
         title: "API",
         link: "/models",
         desc: "Experience interesting AI studios",
-        icon: modelsIcon,
+        icon: _api,
         disabled: true,
       },
     ],
@@ -45,21 +53,21 @@ export const MenuData = [
         title: "Link Wallet & Identity Verification",
         link: "/Link",
         desc: "Pay or receive benefit from BitModel contribution flow",
-        icon: modelsIcon,
+        icon: _linkWallet,
         disabled: true,
       },
       {
         title: "Manage",
         link: "/Manage",
         desc: "Check income by your AI assets ",
-        icon: modelsIcon,
+        icon: _manage,
         disabled: true,
       },
       {
         title: "Develop",
         link: "/Develop",
         desc: "Share your model, data or computing resource",
-        icon: modelsIcon,
+        icon: _Develop,
         disabled: true,
       },
     ],
@@ -74,7 +82,7 @@ export const MenuData = [
         title: "White Paper",
         link: "/WhitePaper",
         desc: "Learn more about the value of BitModel ",
-        icon: modelsIcon,
+        icon: _whitePaper,
         disabled: true,
       },
 
@@ -82,7 +90,7 @@ export const MenuData = [
         title: "Roadmap",
         link: "/Roadmap",
         desc: "Follow and join us!",
-        icon: modelsIcon,
+        icon: _Roadmap,
         disabled: true,
       },
 
@@ -117,7 +125,7 @@ export default () => {
               <div className="navs">
                 {item.children.map((nav) => (
                   <div
-                    className={`btnWrap ${nav.disabled ? "disabaled" : ""} ${path === nav.link? "active" : ""}`}
+                    className={`btnWrap ${nav.disabled ? "disabaled" : ""} ${path === nav.link ? "active" : ""}`}
                     key={nav.title}
                     onClick={() => {
                       if (!nav.disabled) {

@@ -88,8 +88,11 @@ export default function Layout() {
                 className={`btnWrap ${nav.disabled ? "disabaled" : ""}`}
                 key={index}
                 onClick={() => {
-                  setShowMenus(false);
-                  history.push(nav.link);
+                  if (!nav.disabled) {
+                    setShowMenus(false);
+                    history.push(nav.link);
+                  }
+
                 }}
               >
                 <img src={nav.icon} alt="" className="icon" />
@@ -133,7 +136,7 @@ export default function Layout() {
                   <Collapse
                     bordered={false}
                     onChange={onChange}
-                  // items={items}
+                    items={items}
                   ></Collapse>
                 </div>
               )}
