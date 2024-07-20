@@ -1,0 +1,82 @@
+.roadMapWrap {
+  overflow-x: scroll;
+  max-width: 100vw;
+//   position: relative;
+  .roadMap {
+    // min-width: 100vw;
+    padding: 300px 200px;
+    box-sizing: border-box;
+    z-index: 200;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: max-content;
+    min-width: 100vw;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 312px;
+      left: -0;
+      right: -0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #3fbbfe, #a541ff);
+      z-index: -1;
+    }
+    .timeline-item {
+      min-width: 24px;
+      min-height: 24px;
+      background-color: #b193cb;
+      border-radius: 50%;
+      position: relative;
+      & + .timeline-item {
+        margin-left: 240px;
+      }
+      .item-card {
+        position: absolute;
+        background: #8565f2;
+        height: 183px;
+        min-width: 200px;
+        max-width: 400px;
+        overflow: hidden;
+
+        display: flex;
+        align-items: center;
+
+        box-sizing: border-box;
+        padding: 20px;
+
+        //   display: inline-flex;
+        //   align-items: center;
+        .content {
+          // display: inline-flex;
+          // flex-direction: column;
+          .title {
+            display: flex;
+          }
+          .description {
+            display: flex;
+          }
+        }
+      }
+      &.timeline-item-top {
+        .item-card {
+          top: -40px;
+          left: 12px;
+          transform: translateY(-100%);
+          border-radius: 34px 34px 34px 0;
+        }
+      }
+      &.timeline-item-bottom {
+        .item-card {
+          top: 52px;
+          left: 12px;
+          border-radius: 0px 34px 34px 34px;
+        }
+      }
+    }
+  }
+}
