@@ -6,40 +6,46 @@ import "swiper/css/pagination";
 import "./index.less";
 import { Tooltip, Grid } from "antd";
 import { useEffect, useMemo, useRef } from "react";
+import _H from '@/assets/chain/高性能高并发处理能力 1.png'
+import _L from '@/assets/chain/低手续费动态扩容 1.png'
+import _J from '@/assets/chain/LAYER_智能合约 1.png'
+import _K from '@/assets/chain/结构多维立体 1.png'
+import _M from '@/assets/chain/分布式身份 1.png'
+import _N from '@/assets/chain/去中心化和安全性.png'
 const { useBreakpoint } = Grid;
 const data = [
   {
-    bg: bg,
+    bg: _H,
     title: "High performance and high concurrent processing capability",
     subTitle:
       "High performance on concurrent processing: Using an optimized UTXO model, MVC is capable of processing millions of transactions per second (TPS), which is critical for running AI models and smart contracts. Thanks to such an advantage, BitModel well matches the computing efficiency of AI systems and ensures fast response of Blockchain-based AI services.",
   },
   {
-    bg: bg,
+    bg: _J,
     title: "Layer-1 smart contract (MetaContract)",
     subTitle:
       "Layer-1 smart contract with MetaContract: MVC enjoys a neat implementation of Layer-1 smart contract, which naturally supports automation, validation, and execution of AI models without involving additional efforts. Such an advantage simplifies the transcation process and thereby saves the cost.",
   },
   {
-    bg: bg,
+    bg: _M,
     title: "MetaID",
     subTitle:
       "Distributed identity using MetaID: As a built-in function of MVC, MetaID allows users to share a unified identity across various applications. Such a feature facilitates the identity authentication and the privacy protection on BitModel.",
   },
   {
-    bg: bg,
+    bg: _N,
     title: "Decentralization and security",
     subTitle:
       "Decentralization and security: MVC adopts the POW consensus mechanism and SHA-256 mining algorithm, same as Bitcoin, ensuring the decentralization and security of the network. Benefiting from such a design, BitModel well protects the security and non-tamperability of AI models, and hence guarantees the transparency and the verifiability of user contributions and serving history.",
   },
   {
-    bg: bg,
+    bg: _L,
     title: "Low transaction fees and dynamic expansion",
     subTitle:
       "Low transaction fee and dynamic expansion: One of the goals of MVC is to keep low transaction fee along with the number of users increaseing, or even realize unlimiated expansion. Leveraging such a design, BitModel aims to maintain a low-cost yet high-permance AI ecosystem, encouraging the entire community to contribute to and take advantage of open-sourced AI.",
   },
   {
-    bg: bg,
+    bg: _K,
     title: "Support complex AI applications",
     subTitle:
       "Support of complex AI applications: The serving efficiency and the smart contract design of MVC make BitModel a practical platform to build complex AI applications, which may incorporate models from various domains, including natural language processing, computer vision, multi-modality, etc.",

@@ -13,12 +13,15 @@ import _manage from "@/assets/route_slices/Manage@2x.png";
 import _Develop from '@/assets/route_slices/Develop@2x.png'
 import _whitePaper from '@/assets/route_slices/White Paper@2x.png'
 import _Roadmap from '@/assets/route_slices/Roadmap@2x.png'
+import _Services from '@/assets/route_slices/services.png'
+import _Contributors from '@/assets/route_slices/contributors.png'
+import _Resources from '@/assets/route_slices/resources 1.png'
 export const MenuData = [
   {
-    title: "Services ",
+    title: "Services",
     desc: "Inspire BitModel community to share AI ecosystem resources.",
     link: "/",
-    icon: servicesIcon,
+    icon: _Services,
     children: [
       {
         title: "Models",
@@ -44,10 +47,10 @@ export const MenuData = [
     ],
   },
   {
-    title: "Contributors  ",
+    title: "Contributors",
     desc: "Build, share, and benefit from BitModel AI ecosystem",
     link: "/",
-    icon: servicesIcon,
+    icon: _Contributors,
     children: [
       {
         title: "Link Wallet & Identity Verification",
@@ -73,10 +76,10 @@ export const MenuData = [
     ],
   },
   {
-    title: "Resources ",
+    title: "Resources",
     desc: "Find rich information about BitModel",
     link: "/",
-    icon: servicesIcon,
+    icon: _Resources,
     children: [
       {
         title: "White Paper",

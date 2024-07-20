@@ -33,7 +33,7 @@ export default () => {
               icon={<ArrowRightOutlined />}
               iconPosition="end"
             >
-              Data set
+              Become a contributor
             </Button>
 
             <Button
@@ -43,7 +43,7 @@ export default () => {
               icon={<ArrowRightOutlined />}
               iconPosition="end"
             >
-              Data set
+              Model library
             </Button>
 
             <Button
