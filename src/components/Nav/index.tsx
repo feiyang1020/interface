@@ -94,7 +94,7 @@ export const MenuData = [
         link: "/Roadmap",
         desc: "Follow and join us!",
         icon: _Roadmap,
-        disabled: true,
+        disabled: false,
       },
 
     ],

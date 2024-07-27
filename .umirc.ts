@@ -6,6 +6,7 @@ export default defineConfig({
     { path: "/", component: "index" },
     { path: "/services", component: "services" },
     { path: "/profile", component: "profile" },
+    { path: "/roadMap", component: "roadMap" },
   ],
   npmClient: "pnpm",
   plugins: ["@umijs/plugins/dist/model", "@umijs/plugins/dist/request"],

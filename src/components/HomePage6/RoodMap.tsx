@@ -4,7 +4,7 @@ import { ClockCircleOutlined, UpOutlined } from '@ant-design/icons'
 import v1 from '@/assets/Mask group.png'
 import v2 from '@/assets/Mask group (1).png'
 import v5 from '@/assets/a7ea21d220ae1a87c300eda27ba338af.jpg'
-const EVENTS = [
+export const ROADMAP_EVENTS = [
     {
         date: '2023-04-15',
         title: '1.0',
@@ -46,7 +46,7 @@ export default () => {
 
         <div className="roadMap">
 
-            {EVENTS.map((item, index) => {
+            {ROADMAP_EVENTS.map((item, index) => {
                 return <div className={`timeline-item ${index % 2 === 0 ? 'timeline-item-bottom' : 'timeline-item-top'}`} >
                     <div className="line">
                         <div className="arrow"></div>

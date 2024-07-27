@@ -19,17 +19,12 @@ export default () => {
             dataIndex: 'amount',
             key: 'amount',
         },
-        {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-        }]
+       ]
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
     const [loading, setLoading] = useState<boolean>(false);
     const [list, setList] = useState<API.PayItem[]>([]);
     const [total, setTotal] = useState<number>(0);
-
     const fetchList = useCallback(async () => {
         setLoading(true);
         const { code, data } = await getPayList({
