@@ -83,15 +83,15 @@ export const MenuData = [
     children: [
       {
         title: "White Paper",
-        link: "/WhitePaper",
+        link: "/whitePaper",
         desc: "Learn more about the value of BitModel ",
         icon: _whitePaper,
-        disabled: true,
+        disabled: false,
       },
 
       {
         title: "Roadmap",
-        link: "/Roadmap",
+        link: "/roadmap",
         desc: "Follow and join us!",
         icon: _Roadmap,
         disabled: false,

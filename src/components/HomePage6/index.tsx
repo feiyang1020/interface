@@ -8,7 +8,7 @@ export default () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   return (
     <div className="homePage6">
-      <div className="pageTitle">RoadMap</div>
+      <div className="pageTitle">Roadmap</div>
       <div className="pageSubTitle">
         BitModel, Cherishing Every Contribution to AI
       </div>

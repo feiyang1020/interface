@@ -1,28 +1,30 @@
 import { ROADMAP_EVENTS } from "@/components/HomePage6/RoodMap"
 import { Timeline } from "antd"
-import _Roadmap from '@/assets/route_slices/Roadmap@2x.png'
+import _Roadmap from '@/assets/slider.png'
 import bgCard from '@/assets/bg_card.png'
 import bg4 from "@/assets/bg4.png";
+import bg2 from "@/assets/bg-2@2x (1).png";
 import "./index.less"
 
 
 export default () => {
     return <div className="roadMapPage">
-         <img className='bgCard' src={bgCard} alt="" />
-         <img src={bg4} alt="" className="bg4" />
+        <img className='bgCard' src={bgCard} alt="" />
+        <img src={bg4} alt="" className="bg4" />
         <div className="headerWrap">
 
 
             <div className="titleWrap">
                 <div className="title">
-                    RoadMap
+                    Roadmap
                 </div>
                 <div className="subTitle">
-                    Follow and join us!
+                    BitModel, Cherishing Every Contribution to AI
                 </div>
             </div>
-            <div className="icon">
-                <img src={_Roadmap} alt="" />
+            <div className="iconWrap">
+                <img src={bg2} alt="" className="mask"/>
+                <img src={_Roadmap} alt="" className="icon" />
             </div>
         </div>
 
