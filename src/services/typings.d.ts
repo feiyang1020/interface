@@ -95,4 +95,20 @@ declare namespace API {
     name: "string";
     description: "string";
   };
+  type IncomeItem = {
+    id: number;
+    time_str: string;
+    model_id: number;
+    model_name: string;
+    status: number;
+  };
+  type PayItem = {
+    id: number;
+    model_id: number;
+    model_name: string;
+    amount: string;
+    deletedAt: string;
+    createAt: string;
+    updateAt: string;
+  };
 }

@@ -1,34 +1,16 @@
 import { Empty, Segmented, Table, TableProps } from "antd";
-const columns: TableProps['columns'] = [
-    {
-        title: 'Time',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Model',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Amount',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Status',
-        dataIndex: 'age',
-        key: 'age',
-    },]
+import { useState } from "react";
+import Income from "./Income";
+import Pay from "./Pay";
+
 export default () => {
+    const [value, setValue] = useState<string>('Income');
     return <div>
         <Segmented<string>
             options={['Income', 'Expenses']}
-            onChange={(value) => {
-                console.log(value); // string
-            }}
+            value={value}
+            onChange={setValue}
         />
-        <Table style={{ marginTop: 20 }} columns={columns} dataSource={[]} locale={{ emptyText: <Empty />}}  />
+        {value === 'Income' ? <Income /> : <Pay />}
     </div>
 }

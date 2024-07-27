@@ -135,21 +135,23 @@ export async function createModel(
 export async function createModelDepend(
   data: {
     url: string;
-   
+
     name: string;
-   
   },
   options?: { [key: string]: any }
 ) {
-  return request<API.Ret<{ id: number }>>(`${ApiHost}/api/model/depend/create`, {
-    method: "POST",
-    data,
-    ...(options || {
-      headers: {
-        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
-      },
-    }),
-  });
+  return request<API.Ret<{ id: number }>>(
+    `${ApiHost}/api/model/depend/create`,
+    {
+      method: "POST",
+      data,
+      ...(options || {
+        headers: {
+          Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+        },
+      }),
+    }
+  );
 }
 
 export async function s3STSForImage(options?: { [key: string]: any }) {
@@ -349,6 +351,36 @@ export async function editProfile(
   return request<API.Ret<{ id: number }>>(`${ApiHost}/api/user/edit`, {
     method: "POST",
     data,
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+
+export async function getIncomeList(
+  params: { page: number; page_size: number },
+  options?: { [key: string]: any }
+) {
+  return request<API.ListRet<API.IncomeItem>>(`${ApiHost}/api/finance/income/list`, {
+    method: "GET",
+    params,
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+
+export async function getPayList(
+  params: { page: number; page_size: number },
+  options?: { [key: string]: any }
+) {
+  return request<API.ListRet<API.PayItem>>(`${ApiHost}/api/finance/pay/list`, {
+    method: "GET",
+    params,
     ...(options || {
       headers: {
         Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
