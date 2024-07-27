@@ -13,7 +13,7 @@ import {
 import Footer from "@/components/Footer";
 import SignUp from "@/components/SignUp";
 import Nav, { MenuData } from "@/components/Nav";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import LoginModal from "@/components/LoginModal";
 
 const _themes = {
@@ -73,9 +73,27 @@ export default function Layout() {
   const location = useLocation();
   const { loginModalShow, setLoginModalShow } = useModel('global')
   const [showMenus, setShowMenus] = useState<boolean>(false);
+  
   const onChange = (key: string | string[]) => {
     console.log(key);
   };
+  const [isShow, setIsShow] = useState(false)
+  useEffect(() => {
+    // 监听
+    window.addEventListener('scroll', handleScroll)
+    // 销毁
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setIsShow(true)
+    } else {
+      setIsShow(false)
+    }
+  }
+
+
+
   const items: CollapseProps["items"] = useMemo(() => {
     return MenuData.map((item) => {
       return {
@@ -115,7 +133,7 @@ export default function Layout() {
       }}
     >
       <div className="page">
-        <div className="header">
+        <div className="header" style={{background:isShow?'#08082a':'transparent'}}>
           <div className="headerwrap">
             <img
               src={logo}
