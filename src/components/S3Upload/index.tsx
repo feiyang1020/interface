@@ -2,19 +2,41 @@ import React, { useState } from "react";
 import { S3Client, PutObjectCommand, UploadPartCommand, CompleteMultipartUploadCommand, CreateMultipartUploadCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { Form, Input, Upload, Button, message } from "antd";
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { createTag, s3STSForImage, s3STSForModel } from "@/services/api";
-
+import { createTag, s3STSForImage, s3STSForModel, s3STSForModelRefresh } from "@/services/api";
+type FileType = /*unresolved*/ any
 const S3UploadForm = (props: any) => {
   console.log("S3UploadForm props:", props);
   const [loading, setLoading] = useState(false);
   const [precent, setPrecent] = useState(0);
   const [imageUrl, setImageUrl] = useState<string>();
-  const handleUpload = async ({ file, onSuccess, onError }:any) => {
+  const getS3ClientParams = async (prefix_path?: string) => {
+    if (!prefix_path) {
+      const response = await s3STSForModel();
+      return response;
+    } else {
+      const response = await s3STSForModelRefresh({ prefix_path });
+      return response;
+    }
+  };
+
+  const beforeUpload = (file: FileType) => {
+    console.log("beforeUpload file:", file);
+    const isZip = file.type === 'application/zip';
+    if (!isZip) {
+      message.error('You can only upload zip file!');
+    }
+    const isLt10G = file.size / 1024 / 1024 / 1024 < 10;
+    if (!isLt10G) {
+      message.error("file must smaller than 10GB!");
+    }
+    return isZip && isLt10G;
+  };
+  const handleUpload = async ({ file, onSuccess, onError }: any) => {
     setLoading(true);
     setPrecent(0)
     setImageUrl(undefined);
     try {
-      const response = await s3STSForModel();
+      const response = await getS3ClientParams();
       const { access_key_id, access_secret, security_token, expire_time } =
         response.data.sts;
       const { prefix_path, bucket_name } = response.data;
@@ -23,7 +45,7 @@ const S3UploadForm = (props: any) => {
         Key: `${prefix_path}/${file.name}`,
         Body: file,
       };
-      const s3 = new S3Client({
+      let s3 = new S3Client({
         region: "ap-east-1",
         credentials: {
           accessKeyId: access_key_id,
@@ -36,7 +58,7 @@ const S3UploadForm = (props: any) => {
         Key: params.Key
       });
       const createMultipartUploadResponse = await s3.send(createMultipartUploadCommand);
-      console.log("Create multipart upload response:", createMultipartUploadResponse);
+
       const { UploadId } = createMultipartUploadResponse;
 
       const chunkSize = 5 * 1024 * 1024; // 5MB
@@ -57,9 +79,26 @@ const S3UploadForm = (props: any) => {
           PartNumber: partNumber,
           Body: chunk,
         });
-        const ret = (await s3.send(uploadPartCommand));
-        parts.push({ PartNumber: partNumber, ETag: ret.ETag })
-        setPrecent(parseInt(String(((i + 1) / totalChunks) * 100)));
+        try {
+          const ret = (await s3.send(uploadPartCommand));
+          parts.push({ PartNumber: partNumber, ETag: ret.ETag })
+          setPrecent(parseInt(String(((i + 1) / totalChunks) * 100)));
+        } catch (err) {
+          console.log(err)
+          const refreshToken = await getS3ClientParams(prefix_path);
+          s3 = new S3Client({
+            region: "ap-east-1",
+            credentials: {
+              accessKeyId: refreshToken.data.sts.access_key_id,
+              secretAccessKey: refreshToken.data.sts.access_secret,
+              sessionToken: refreshToken.data.sts.security_token,
+            },
+          });
+          const ret = (await s3.send(uploadPartCommand));
+          parts.push({ PartNumber: partNumber, ETag: ret.ETag })
+          setPrecent(parseInt(String(((i + 1) / totalChunks) * 100)));
+        }
+
       }
 
       const completeMultipartUploadCommand = new CompleteMultipartUploadCommand({
@@ -77,7 +116,7 @@ const S3UploadForm = (props: any) => {
       setImageUrl(file.name);
       setLoading(false);
       console.log("Upload successful. File location:", Location);
-      const streamToBlob = async (stream:any) => {
+      const streamToBlob = async (stream: any) => {
         const reader = stream.getReader();
         const chunks = [];
         let done, value;
@@ -114,7 +153,7 @@ const S3UploadForm = (props: any) => {
 
       message.success("Upload successful");
       onSuccess(null, file);
-      props.onChange&&props.onChange(Location);
+      props.onChange && props.onChange(Location);
     } catch (err) {
       console.error("Upload error:", err);
       message.error("Upload failed");
@@ -122,16 +161,16 @@ const S3UploadForm = (props: any) => {
     }
   };
 
- 
+
   const uploadButton = (
     <button style={{ border: 0, background: 'none', color: '#fff' }} >
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload {precent ?`${precent}%`:''}</div>
+      <div style={{ marginTop: 8 }}>Upload {precent ? `${precent}%` : ''}</div>
     </button>
   );
 
   return (
-    <Upload customRequest={handleUpload} name="avatar" style={{border:'none'}}
+    <Upload beforeUpload={beforeUpload} customRequest={handleUpload} name="avatar" style={{ border: 'none' }}
       listType="picture-card"
       className="avatar-uploader" showUploadList={false}>
       {imageUrl ? imageUrl.replace(/(\w{5})\w+(\w{4})/, "$1...$2") : uploadButton}

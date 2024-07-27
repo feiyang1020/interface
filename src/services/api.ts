@@ -50,17 +50,14 @@ export async function refreshToken(
 }
 
 export async function getUserInfo(options?: { [key: string]: any }) {
-  return request<API.Ret<API.UserInfo>>(
-    `${ApiHost}/api/user/curr`,
-    {
-      method: "GET",
-      ...(options || {
-        headers: {
-          Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
-        },
-      }),
-    }
-  );
+  return request<API.Ret<API.UserInfo>>(`${ApiHost}/api/user/curr`, {
+    method: "GET",
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
 }
 
 export async function getModelList(
@@ -111,6 +108,8 @@ export async function checkLikeAndDownload(
 
 export async function createModel(
   data: {
+    url: string;
+    percent: number;
     name: string;
     description: string;
     tags: string[];
@@ -118,10 +117,31 @@ export async function createModel(
     file_path: string;
     price: number;
     type: number;
+    depends: { id: number; percent: number }[];
   },
   options?: { [key: string]: any }
 ) {
   return request<API.Ret<{ id: number }>>(`${ApiHost}/api/model/create`, {
+    method: "POST",
+    data,
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+
+export async function createModelDepend(
+  data: {
+    url: string;
+   
+    name: string;
+   
+  },
+  options?: { [key: string]: any }
+) {
+  return request<API.Ret<{ id: number }>>(`${ApiHost}/api/model/depend/create`, {
     method: "POST",
     data,
     ...(options || {
@@ -178,7 +198,39 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
   });
 }
 
-export async function downloadToken(id:number,options?: { [key: string]: any }) {
+export async function s3STSForModelRefresh(
+  params: {
+    prefix_path: string;
+  },
+  options?: { [key: string]: any }
+) {
+  return request<
+    API.Ret<{
+      sts: {
+        access_key_id: "string";
+        access_secret: "string";
+        security_token: "string";
+        expire_time: 0;
+      };
+      prefix_path: "string";
+      session_name: "string";
+      bucket_name: "string";
+    }>
+  >(`${ApiHost}/api/file/model/refresh/token`, {
+    method: "GET",
+    params,
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+
+export async function downloadToken(
+  id: number,
+  options?: { [key: string]: any }
+) {
   return request<
     API.Ret<{
       sts: {
@@ -193,7 +245,7 @@ export async function downloadToken(id:number,options?: { [key: string]: any }) 
     }>
   >(`${ApiHost}/api/model/download`, {
     method: "POST",
-    data:{id},
+    data: { id },
     ...(options || {
       headers: {
         Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
@@ -285,7 +337,6 @@ export async function orderCommit(
     }
   );
 }
-
 
 export async function editProfile(
   data: {

@@ -1,6 +1,7 @@
 import { OverPack } from 'rc-scroll-anim';
 import './index.less'
 import QueueAnim from 'rc-queue-anim';
+import flow from '@/assets/flow.svg'
 export default () => {
   return (
     <OverPack className="homePage2" replay style={{height:'20vh'}}>
@@ -17,6 +18,9 @@ export default () => {
           blockchain to the community in the form of a protocol. The community can
           develop various AI applications based on Bitcoin principles based on the
           BitModel protocol.
+        </div>
+        <div className="imgWrap" key='t3'>
+          <img src={flow} alt="" className='flow'/>
         </div>
       </QueueAnim>
     </OverPack>

@@ -43,7 +43,7 @@ export default ({ show, onClose }: Props) => {
       className="walletModal"
       footer={null}
       maskClosable={true}
-      style={{ zIndex: 9999, }}
+      style={{ zIndex: 99999, }}
       styles={{ mask: { 'backdropFilter': 'blur(20px)' } }}
     >
       {mobile ? <div className="walletWrap">

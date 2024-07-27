@@ -1,6 +1,6 @@
 import { Button, Col, ConfigProvider, Form, Input, InputNumber, Modal, Row, Select, Space, message } from "antd";
 import "./index.less";
-import { createModel } from "@/services/api";
+import { createModel, createModelDepend } from "@/services/api";
 import { useState } from "react";
 import S3UploadForm from "../S3Upload";
 import UploadImage from "../S3Upload/UploadImage";
@@ -29,23 +29,38 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   const { connected, connect } = useModel('global')
   const [submiting, setSubmitLoading] = useState<boolean>(false)
   const handleSubmit = async () => {
-    const { name, describe, model, cover, type, tags, price,modelDependencyAndRevenueSharing} = form.getFieldsValue();
+    const { name, describe, model, cover, type, tags, price, modelDependencyAndRevenueSharing, percent, url } = form.getFieldsValue();
     console.log(name, describe, model);
     await form.validateFields();
     try {
-      const sums = modelDependencyAndRevenueSharing.reduce((a, b) => { return a + b.revenue }, 0);
+      const sums = modelDependencyAndRevenueSharing.reduce((a, b) => { return a + b.revenue }, percent);
       if (sums !== 100) {
-         throw new Error('The sum of revenue sharing must be 100%');
+        throw new Error('The sum of revenue sharing must be 100%');
       }
-      setSubmitLoading(true)
+      setSubmitLoading(true);
+      const depends = []
+      for (let i = 0; i < modelDependencyAndRevenueSharing.length; i++) {
+        const { url, name } = modelDependencyAndRevenueSharing[i];
+        const ret = await createModelDepend({
+          url, name
+        });
+        if (ret.code !== 0) {
+          throw new Error('Hugging Face URL is not valid');
+        }
+        depends.push({ id: ret.data.id, percent: modelDependencyAndRevenueSharing[i].revenue })
+      }
+
       const ret = await createModel({
+        url,
         name,
+        percent,
         description: describe,
         tags: tags,
         cover: cover,
         file_path: model,
         price: price,
-        type: type
+        type: type,
+        depends: depends
       });
       if (ret.code === 0) {
         message.success('success');
@@ -64,7 +79,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   return (
     <Modal
       open={open}
-      width={620}
+      width={700}
       onCancel={onClose}
       closable={false}
       className="publishPage"
@@ -72,8 +87,6 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       confirmLoading={submiting}
       styles={{ mask: { 'backdropFilter': 'blur(20px)', background: 'rgba(8, 8, 44, 0.5)', } }}
       footer={[
-
-
         connected ?
           <Button key="submit1" type="primary" size='large' loading={submiting} shape="round" onClick={handleSubmit}> Submit</Button>
           : <Button key="submit2" type="primary" size='large' loading={submiting} shape="round" onClick={connect}>Connect</Button>
@@ -113,12 +126,39 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           style={{ maxWidth: 600 }}
           form={form}
         >
-          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
+
+          <Form.Item label="Hugging Face URL" name="url" rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
+            async validator(_, value) {
+              if (!value) {
+                return Promise.resolve();
+              }
+
+              const { isPass, name } = await checkHfUrl(value);
+              if (!isPass) {
+                return Promise.reject(new Error('Hugging Face URL is not valid'));
+              }
+              setFieldValue('name', name)
+
+              return Promise.resolve();
+            },
+          })]}
+            validateTrigger="onBlur">
             <Input size="large" />
+          </Form.Item>
+          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
+            <Input size="large" disabled />
           </Form.Item>
 
           <Form.Item label="Describe" name="describe" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
             <Input.TextArea size="large" />
+          </Form.Item>
+
+          <Form.Item
+            label="Revenue"
+            name="percent"
+            rules={[{ required: true, message: 'Please input !', }]}
+          >
+            <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' />
           </Form.Item>
           <Row>
             <Col span={12}>
@@ -168,14 +208,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               </Form.Item>
             </Col>
           </Row>
-
-          {/* <Form.Item label="cover" name="cover" labelCol={{span:12}}>
-            <UploadImage />
-          </Form.Item>
-          <Form.Item label="model" name="model" labelCol={{span:12}}>
-            <S3UploadForm />
-          </Form.Item> */}
-          <Form.Item label="Revenue Sharing">
+          <Form.Item label="Dependent Model">
             <Form.List name="modelDependencyAndRevenueSharing" >
               {(fields, { add, remove, }) => (
                 <div style={{ display: 'flex', flexDirection: 'column', rowGap: 16 }}>
@@ -216,21 +249,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                         noStyle
                         {...restField}
                         name={[name, 'revenue']}
-                      // dependencies={[fields.filter(_item => _item.name !== name).map(_item => ['modelDependencyAndRevenueSharing', _item.name, 'revenue'])]}
-                      // rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
-                      //   async validator(_, value) {
-                      //     if (!value) {
-                      //       return Promise.resolve();
-                      //     }
-                      //     // console.log('getFieldValue', value, getFieldValue('modelDependencyAndRevenueSharing'))
-                      //     const values = getFieldValue('modelDependencyAndRevenueSharing');
-                      //     const sums = values.reduce((a, b) => { return a + b.revenue }, 0);
-                      //     if (sums !== 100) {
-                      //       return Promise.reject(new Error('The sum of revenue sharing must be 100%'));
-                      //     }
-                      //     return Promise.resolve();
-                      //   },
-                      // })]}
+
 
 
                       >
@@ -250,7 +269,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                   ))}
                   <Form.Item>
                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                      Add field
+                      Add Dependency
                     </Button>
                   </Form.Item>
                 </div>

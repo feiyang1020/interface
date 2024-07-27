@@ -14,7 +14,11 @@ export default function App() {
   return (
     <div className="indexPage animation-slide-bottom">
       <HomePage1 />
-      <HomePage2 />
+      <div className="page23">
+        <HomePage2 />
+        <img src={bg3} alt="" className="bg3" />
+      </div>
+
       <div className="page34">
         <HomePage3 />
         <HomePage4 />
