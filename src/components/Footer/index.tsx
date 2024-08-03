@@ -60,7 +60,7 @@ export default () => {
             Paris, France
           </div>
         </Col>
-        {MenuData.map((item) => {
+        {MenuData.filter((item)=>!item.onlyShowInHeader).map((item) => {
           return <Col xs={24} md={6} className="navWrap" key={item.title}>
             <div className="navTitle">{item.title}</div>
             <div className="navs">

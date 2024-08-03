@@ -95,7 +95,7 @@ export default function Layout() {
 
 
   const items: CollapseProps["items"] = useMemo(() => {
-    return MenuData.map((item) => {
+    return MenuData.filter((item)=>!item.onlyShowInHeader).map((item) => {
       return {
         key: item.title,
         label: item.title,
