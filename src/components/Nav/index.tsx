@@ -125,7 +125,7 @@ export default () => {
     <div className="navWrap">
       {MenuData.map((item) => (
         <>
-          {item.onlyShowInHeader ? <div className="nav" onClick={() => {
+          {item.onlyShowInHeader ? <div className={`nav ${path === item.link ? "active" : ""}`} onClick={() => {
             history.push(item.link)
           }}>
             {item.title}
