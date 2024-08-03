@@ -5,7 +5,7 @@ import type { ItemData, ItemExtraNodeProps } from "react-silky-waterfall";
 import { cancleLikeModel, checkLikeAndDownload, getModelList, getTagList, likeModel } from "@/services/api";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";
-import { Button, ConfigProvider, Spin, message } from "antd";
+import { Button, Carousel, ConfigProvider, Spin, message } from "antd";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import PublishModal from "@/components/PublishModal";
 import { buyModel } from "@/utils/order";
@@ -13,6 +13,7 @@ import ModelCard from "@/components/ModelCard";
 import { useModel } from "umi";
 import ModelModal from "@/components/ModelModal";
 import { downloadFile } from "@/utils/dowmload";
+import flow from '@/assets/flow.svg'
 const breakpointColumnsObj = {
   default: 6,
   1500: 5,
@@ -103,8 +104,8 @@ export default () => {
       //  fetchList();
 
       setList(list.map((item) => {
-        if(item.id === id){
-          return {...item,is_like:1,like:item.like+1}
+        if (item.id === id) {
+          return { ...item, is_like: 1, like: item.like + 1 }
         }
         return item
       }))
@@ -125,8 +126,8 @@ export default () => {
       // setPage(1);
       // fetchList();
       setList(list.map((item) => {
-        if(item.id === id){
-          return {...item,is_like:0,like:item.like-1}
+        if (item.id === id) {
+          return { ...item, is_like: 0, like: item.like - 1 }
         }
         return item
       }))
@@ -142,6 +143,15 @@ export default () => {
   return (
     <div className="servicesPage animation-slide-bottom">
       <div className="pageTitle">Services</div>
+      <Carousel autoplay autoplaySpeed={10000}>
+        <div className="imgWrap">
+          <img src={flow} alt="" className='flow' />
+        </div>
+        <div className="imgWrap">
+          <img src={flow} alt="" className='flow' />
+        </div>
+
+      </Carousel>
       <div className="uploadBtn">
         <ConfigProvider
           theme={{
