@@ -96,6 +96,13 @@ export const MenuData = [
         icon: _Roadmap,
         disabled: false,
       },
+      {
+        title: "Privacy",
+        link: "/privacy",
+        desc: "Learn more about the value of BitModel ",
+        icon: _whitePaper,
+        disabled: false,
+      },
 
     ],
   },

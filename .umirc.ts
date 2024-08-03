@@ -8,6 +8,7 @@ export default defineConfig({
     { path: "/profile", component: "profile" },
     { path: "/roadmap", component: "roadMap" },
     { path: "/whitePaper", component: "whitePaper" },
+    { path: "/privacy", component: "privacy" },
   ],
   npmClient: "pnpm",
   plugins: ["@umijs/plugins/dist/model", "@umijs/plugins/dist/request"],

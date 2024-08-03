@@ -29,7 +29,7 @@ export default function App() {
 
 
       <HomePage6 />
-      <HomePage7 />
+      {/* <HomePage7 /> */}
       <HomePage8 />
     </div>
   );
