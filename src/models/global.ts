@@ -132,7 +132,10 @@ export default () => {
           const _mvc = await window.metaidwallet.getAddress();
           const { network } = await window.metaidwallet.getNetwork();
           const btcAddress = await window.metaidwallet.btc.getAddress();
-          const { data: user } = await getUserInfo();
+          const { data: user,code } = await getUserInfo();
+          if(code !== 0){
+            throw new Error("get user info error");
+          }
           await getBal();
           setUserInfo(user);
           setConnected(true);
