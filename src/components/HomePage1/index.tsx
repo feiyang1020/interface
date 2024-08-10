@@ -12,13 +12,9 @@ export default () => {
         <div className="title" key='title'>
           BitModel
         </div>
-        <div className="title" key='title2'>
-          Valuing Every Contri-
+        <div className="title title2" key='title2'>
+          Valuing Every Contribution to <span>AI</span>
 
-        </div>
-        <div className="title" key='title3'>
-
-          bution to <span>AI</span>
         </div>
         <div className="subTitle" key='subTitle'>
           BitModel, Valuing Every Contribution to AI
