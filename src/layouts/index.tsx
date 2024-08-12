@@ -7,6 +7,7 @@ import {
   CollapseProps,
   ConfigProvider,
   Dropdown,
+  DropdownProps,
   message,
   theme,
 } from "antd";
@@ -73,11 +74,18 @@ export default function Layout() {
   const location = useLocation();
   const { loginModalShow, setLoginModalShow } = useModel('global')
   const [showMenus, setShowMenus] = useState<boolean>(false);
-  
+
   const onChange = (key: string | string[]) => {
     console.log(key);
   };
   const [isShow, setIsShow] = useState(false)
+
+  const handleOpenChange: DropdownProps['onOpenChange'] = (nextOpen, info) => {
+    if (info.source === 'trigger' || nextOpen) {
+      setShowMenus(false);
+    }
+  };
+
   useEffect(() => {
     // 监听
     window.addEventListener('scroll', handleScroll)
@@ -95,7 +103,7 @@ export default function Layout() {
 
 
   const items: CollapseProps["items"] = useMemo(() => {
-    return MenuData.filter((item)=>!item.onlyShowInHeader).map((item) => {
+    return MenuData.filter((item) => !item.onlyShowInHeader).map((item) => {
       return {
         key: item.title,
         label: item.title,
@@ -115,8 +123,8 @@ export default function Layout() {
               >
                 <img src={nav.icon} alt="" className="icon" />
                 <div className="navText">
-                  <div className="name">{item.title}</div>
-                  <div className="sub">{item.desc}</div>
+                  <div className="name">{nav.title}</div>
+                  <div className="sub">{nav.desc}</div>
                 </div>
               </div>
             ))}
@@ -133,7 +141,7 @@ export default function Layout() {
       }}
     >
       <div className="page">
-        <div className="header" style={{background:isShow?'#08082a':'transparent'}}>
+        <div className="header" style={{ background: isShow ? '#08082a' : 'transparent' }}>
           <div className="headerwrap">
             <img
               src={logo}
@@ -148,7 +156,8 @@ export default function Layout() {
             <Dropdown
               overlayClassName="menuOverlay"
               placement="bottom"
-              overlayStyle={{ top: 50, left: 0, right: 0, bottom: 0 }}
+              overlayStyle={{ top: 50, left: 0, right: 0 }}
+              onOpenChange={handleOpenChange}
               dropdownRender={() => (
                 <div className="menuWrap">
                   <Collapse
@@ -162,7 +171,10 @@ export default function Layout() {
             >
               <div
                 className="menus"
-                onClick={() => setShowMenus((prev) => !prev)}
+                onClick={(e) => {
+                  !showMenus &&
+                   setShowMenus(true)
+                }}
               >
                 <div className="line1"></div>
                 <div className="line2"></div>
@@ -180,7 +192,7 @@ export default function Layout() {
           show={loginModalShow}
           onClose={() => setLoginModalShow(false)}
         />
-      </div>
-    </ConfigProvider>
+      </div >
+    </ConfigProvider >
   );
 }
