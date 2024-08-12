@@ -1,10 +1,10 @@
 import servicesIcon from "@/assets/servicesIcon.png";
 import modelsIcon from "@/assets/models.png";
-import { Button, Dropdown, Popover } from "antd";
+import { Button, Dropdown, DropdownProps, Popover } from "antd";
 import { ArrowRightOutlined, DownOutlined } from "@ant-design/icons";
 import { history, useLocation } from "umi";
 import "./index.less";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import _model from "@/assets/route_slices/Models@2x.png";
 import _dataset from '@/assets/route_slices/Dataset@2x.png'
 import _api from '@/assets/route_slices/API@2x.png'
@@ -121,6 +121,19 @@ export default () => {
   const location = useLocation();
   const path = location.pathname;
   const [curMenu, setCurMenu] = useState<string>();
+  const handleOpenChange: DropdownProps['onOpenChange'] = (nextOpen, info) => {
+    if (info.source === 'trigger' || nextOpen) {
+      setCurMenu(undefined);
+    }
+  };
+
+  useEffect(() => {
+    if (path) {  // 可以排除不需要置顶的页面
+      if (document?.documentElement || document?.body) {
+        document.documentElement.scrollTop = document.body.scrollTop = 0;  // 切换路由时手动置顶
+      }
+    }
+  }, [path]);
   return (
     <div className="navWrap">
       {MenuData.map((item) => (
@@ -134,6 +147,7 @@ export default () => {
             <Dropdown
               key={item.title}
               open={curMenu === item.title}
+              onOpenChange={handleOpenChange}
               placement="bottom"
               dropdownRender={() => (
                 <div className="navDetail">
