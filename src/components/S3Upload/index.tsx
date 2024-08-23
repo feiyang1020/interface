@@ -21,7 +21,7 @@ const S3UploadForm = (props: any) => {
 
   const beforeUpload = (file: FileType) => {
     console.log("beforeUpload file:", file);
-    const isZip = file.type === 'application/zip';
+    const isZip = file.type === 'application/zip' || file.type === 'application/x-zip-compressed';
     if (!isZip) {
       message.error('You can only upload zip file!');
     }
