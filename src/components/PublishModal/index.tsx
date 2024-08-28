@@ -29,7 +29,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   const { connected, connect } = useModel('global')
   const [submiting, setSubmitLoading] = useState<boolean>(false)
   const handleSubmit = async () => {
-    const { name, describe, model, cover, type, tags, price, modelDependencyAndRevenueSharing, percent, url } = form.getFieldsValue();
+    const { name, describe, model, cover, type, tags, price, modelDependencyAndRevenueSharing=[], percent, url } = form.getFieldsValue();
     console.log(name, describe, model);
     await form.validateFields();
     try {
