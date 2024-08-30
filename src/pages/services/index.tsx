@@ -46,9 +46,9 @@ export default () => {
       tag: tag,
     });
     let _list: API.ModelItem[] = data.list || [];
-    if (connected) {
-      const { data: { list = [] } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
-      if(list){
+    if (connected && _list.length) {
+      const { data: { list = [] } } = await checkLikeAndDownload({ model_ids: _list.map((item) => item.id).join(",") });
+      if (list) {
         _list = _list.map((model: API.ModelItem) => {
           const _item = list.find((i) => i.model_id === model.id);
           if (_item) {
@@ -57,7 +57,7 @@ export default () => {
           return model;
         });
       }
-      
+
     }
     if (code !== 0 || data.total <= page * size) {
       setIsEnd(true);
