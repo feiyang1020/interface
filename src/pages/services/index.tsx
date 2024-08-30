@@ -45,12 +45,9 @@ export default () => {
       page_size: size,
       tag: tag,
     });
-
-
-    console.log(connected, 'connected');
     let _list: API.ModelItem[] = data.list || [];
     if (connected) {
-      const { data: { list } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
+      const { data: { list = [] } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
       _list = _list.map((model: API.ModelItem) => {
         const _item = list.find((i) => i.model_id === model.id);
         if (_item) {
@@ -99,9 +96,7 @@ export default () => {
   const handleLike = async (id: number) => {
     if (!connected) return;
     try {
-      // await likeModel({ id });
-      // setPage(1);
-      //  fetchList();
+
 
       setList(list.map((item) => {
         if (item.id === id) {
@@ -153,17 +148,17 @@ export default () => {
 
       </Carousel>
       <div className="uploadBtn">
-        
-          <Button
-            type="primary"
-            shape="round"
-            icon={<CloudUploadOutlined />}
-            iconPosition="start"
-            onClick={() => { setUploadVisiable(true) }}
-          >
-            Upload
-          </Button>
-       
+
+        <Button
+          type="primary"
+          shape="round"
+          icon={<CloudUploadOutlined />}
+          iconPosition="start"
+          onClick={() => { setUploadVisiable(true) }}
+        >
+          Upload
+        </Button>
+
       </div>
       <Spin spinning={loading || initializing} tip="Loading...">
         <div className="ListWraper">
