@@ -3,10 +3,14 @@ import { createOrder, orderCommit } from "@/services/api";
 import { getTokenTxInput, getTokenTxOutput } from "./txCheck";
 
 const txProof = async (txHex: string, genesis: string, codehash: string) => {
-  const api = new Api(API_NET.TEST, API_TARGET.CYBER3,'https://mvcapi-testnet.cyber3.space');
+  const api = new Api(
+    API_NET.TEST,
+    API_TARGET.CYBER3,
+    "https://mvcapi-testnet.cyber3.space"
+  );
   const tx = new mvc.Transaction(txHex);
   const outputProof = getTokenTxOutput(codehash, genesis, tx);
-  if(!outputProof) throw new Error("output not found");
+  if (!outputProof) throw new Error("output not found");
   const inputProof = getTokenTxInput(genesis, tx, outputProof.index);
   let preTxHex = "";
   if (inputProof.inputIndex > -1) {
@@ -25,27 +29,34 @@ const txProof = async (txHex: string, genesis: string, codehash: string) => {
 };
 
 export const buyModel = async (modelId: number) => {
-  const { code, data: orderInfo } = await createOrder({ model_id: modelId });
+  const {
+    code,
+    data: orderInfo,
+    msg,
+  } = await createOrder({ model_id: modelId });
+  if(code !== 0) throw new Error(msg);
 
-  const transferResp = await window.metaidwallet.transfer({
-    tasks: [
-      {
-        type: 'token',
-        genesis: orderInfo.genesis,
-        codehash: orderInfo.code_hash,
-        receivers: [
-          {
-            amount: orderInfo.amount,
-            address: orderInfo.address,
-          },
-        ],
-      },
-    ],
-    broadcast: false,
-  }).catch(err=>{
-    throw new Error(err);
-  })
-  if(transferResp.status) throw new Error(transferResp.status);
+  const transferResp = await window.metaidwallet
+    .transfer({
+      tasks: [
+        {
+          type: "token",
+          genesis: orderInfo.genesis,
+          codehash: orderInfo.code_hash,
+          receivers: [
+            {
+              amount: orderInfo.amount,
+              address: orderInfo.address,
+            },
+          ],
+        },
+      ],
+      broadcast: false,
+    })
+    .catch((err) => {
+      throw new Error(err);
+    });
+  if (transferResp.status) throw new Error(transferResp.status);
   console.log(transferResp);
   const routeCheckTxHex = transferResp.res[0].routeCheckTxHex;
   const txHex = transferResp.res[0].txHex;

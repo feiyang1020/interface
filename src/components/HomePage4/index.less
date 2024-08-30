@@ -89,13 +89,22 @@
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2; /* 这里是超出几行省略 */
+      -webkit-line-clamp: 2;
       overflow: hidden;
+      height: 73px;
     }
     .cardIcon {
       margin: 0 auto;
       height: 150px;
       width: 150px;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        height: 150px;
+        width: 150px;
+      }
     }
     .cardInfo {
       font-size: 14px;
@@ -103,7 +112,7 @@
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 5; /* 这里是超出几行省略 */
+      -webkit-line-clamp: 5;
       overflow: hidden;
     }
     .detail-wrapper {

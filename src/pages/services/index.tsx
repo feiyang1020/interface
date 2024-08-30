@@ -22,7 +22,7 @@ const breakpointColumnsObj = {
   500: 1,
 };
 export default () => {
-  const { connected, mvcAddress, initializing } = useModel('global')
+  const { connected, mvcAddress, initializing, connect } = useModel('global')
   const [uploadVisiable, setUploadVisiable] = useState<boolean>(false)
   const [detailVisiable, setDetailVisiable] = useState<boolean>(false);
   const [curModel, setCurModel] = useState<API.ModelItem>();
@@ -48,13 +48,16 @@ export default () => {
     let _list: API.ModelItem[] = data.list || [];
     if (connected) {
       const { data: { list = [] } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
-      _list = _list.map((model: API.ModelItem) => {
-        const _item = list.find((i) => i.model_id === model.id);
-        if (_item) {
-          return { ...model, ..._item };
-        }
-        return model;
-      });
+      if(list){
+        _list = _list.map((model: API.ModelItem) => {
+          const _item = list.find((i) => i.model_id === model.id);
+          if (_item) {
+            return { ...model, ..._item };
+          }
+          return model;
+        });
+      }
+      
     }
     if (code !== 0 || data.total <= page * size) {
       setIsEnd(true);
@@ -73,7 +76,10 @@ export default () => {
   useEffect(() => { getTags() }, [getTags]);
 
   const handleBuy = async (id: number) => {
-    if (!connected) return;
+    if (!connected) {
+      connect();
+      return
+    };
     try {
       const { data: { list: checkList } } = await checkLikeAndDownload({ model_ids: String(id) });
       if (!checkList[0].is_download) {
@@ -94,7 +100,11 @@ export default () => {
     }
   };
   const handleLike = async (id: number) => {
-    if (!connected) return;
+    console.log('handleLike', id);
+    if (!connected) {
+      connect();
+      return
+    };
     try {
 
 
@@ -115,7 +125,10 @@ export default () => {
   }
 
   const handleCanelLike = async (id: number) => {
-    if (!connected) return;
+    if (!connected) {
+      connect();
+      return
+    };
     try {
       // await cancleLikeModel({ id });
       // setPage(1);

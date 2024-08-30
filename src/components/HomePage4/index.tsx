@@ -10,7 +10,7 @@ import _H from '@/assets/chain/高性能高并发处理能力 1.png'
 import _L from '@/assets/chain/低手续费动态扩容 1.png'
 import _J from '@/assets/chain/LAYER_智能合约 1.png'
 import _K from '@/assets/chain/结构多维立体 1.png'
-import _M from '@/assets/chain/分布式身份 1.png'
+import _M from '@/assets/chain/分布式身份1.png'
 import _N from '@/assets/chain/去中心化和安全性.png'
 const { useBreakpoint } = Grid;
 const data = [
@@ -96,7 +96,10 @@ export default () => {
 
                 <div className="cardTitle">{item.title}</div>
 
-                <img src={item.bg} alt="" className="cardIcon" />
+                <div className="cardIcon">
+                  <img src={item.bg} alt="" />
+                </div>
+
 
                 <div className="cardInfo">{item.subTitle}</div>
                 <div className="detail-wrapper">

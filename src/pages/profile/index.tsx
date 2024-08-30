@@ -56,14 +56,17 @@ export default function App() {
         console.log(connected, 'connected');
         let _list: API.ModelItem[] = data.list;
         if (connected) {
-            const { data: { list } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
-            _list = _list.map((model: API.ModelItem) => {
-                const _item = list.find((i) => i.model_id === model.id);
-                if (_item) {
-                    return { ...model, ..._item };
-                }
-                return model;
-            });
+            const { data: { list = [] } } = await checkLikeAndDownload({ model_ids: data.list.map((item) => item.id).join(",") });
+            if (list) {
+                _list = _list.map((model: API.ModelItem) => {
+                    const _item = list.find((i) => i.model_id === model.id);
+                    if (_item) {
+                        return { ...model, ..._item };
+                    }
+                    return model;
+                });
+            }
+
         }
         setList((prev) => {
             if (page === 1) { return [..._list]; }

@@ -1,7 +1,8 @@
 import "./index.less";
-import { Button, ConfigProvider } from "antd";
+import { Button, ConfigProvider, message } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import bgCard from '@/assets/bg_card.png'
+import { history } from "umi";
 
 export default () => {
   return (
@@ -32,6 +33,9 @@ export default () => {
               shape="round"
               icon={<ArrowRightOutlined />}
               iconPosition="end"
+              onClick={() => {
+                message.info({ content: "coming soon" ,icon: "🚀",});
+              }}
             >
               Become a contributor
             </Button>
@@ -42,6 +46,7 @@ export default () => {
               shape="round"
               icon={<ArrowRightOutlined />}
               iconPosition="end"
+              onClick={() => { history.push('/services') }}
             >
               Model library
             </Button>
@@ -52,6 +57,9 @@ export default () => {
               shape="round"
               icon={<ArrowRightOutlined />}
               iconPosition="end"
+              onClick={() => {
+                message.info({ content: "coming soon" ,icon: "🚀",});
+              }}
             >
               Data set
             </Button>

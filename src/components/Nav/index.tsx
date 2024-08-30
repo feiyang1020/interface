@@ -149,16 +149,12 @@ export default () => {
               // open={curMenu === item.title}
               onOpenChange={handleOpenChange}
               placement="bottom"
-              trigger={["click", "hover"]}
+              trigger={["click",'hover']}
               dropdownRender={() => (
                 <div className="navDetail">
                   <div className="desc">
                     <div className="title">{item.title}</div>
                     <div className="subtitle">{item.desc}</div>
-                    {/* <div className="link">
-                  <a href={item.link}>Learn More</a>{" "}
-                  <ArrowRightOutlined className="arrow" />
-                </div> */}
                     <div className="nav">
                       <img src={item.icon} alt="" className="navIcon" />
                     </div>
