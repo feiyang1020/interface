@@ -42,6 +42,8 @@ export const buyModel = async (modelId: number) => {
       },
     ],
     broadcast: false,
+  }).catch(err=>{
+    throw new Error(err);
   })
   if(transferResp.status) throw new Error(transferResp.status);
   console.log(transferResp);

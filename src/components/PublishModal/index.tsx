@@ -29,7 +29,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   const { connected, connect } = useModel('global')
   const [submiting, setSubmitLoading] = useState<boolean>(false)
   const handleSubmit = async () => {
-    const { name, describe, model, cover, type, tags, price, modelDependencyAndRevenueSharing=[], percent, url } = form.getFieldsValue();
+    const { name, describe, model, cover, type, tags = [], price, modelDependencyAndRevenueSharing = [], percent, url } = form.getFieldsValue();
     console.log(name, describe, model);
     await form.validateFields();
     try {
@@ -126,6 +126,16 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           style={{ maxWidth: 600 }}
           form={form}
         >
+          <Form.Item label="Type" name="type"  rules={[{ required: true, message: 'Please select !', }]} >
+            <Select
+              placeholder="Select Type"
+              allowClear
+              size="large"
+            >
+              <Select.Option value={1}>Original</Select.Option>
+              <Select.Option value={2}>Republish</Select.Option>
+            </Select>
+          </Form.Item>
 
           <Form.Item label="Hugging Face URL" name="url" rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
             async validator(_, value) {
@@ -156,24 +166,15 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           <Form.Item
             label="Revenue"
             name="percent"
-            rules={[{ required: true, message: 'Please input !', }]}
+            rules={[{ required: true, message: 'Please input !', }, { type: 'number', min: 0, max: 100, message: 'The value must be between 0 and 100' }]}
           >
             <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' />
           </Form.Item>
           <Row>
             <Col span={12}>
-              <Form.Item label="Type" name="type" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !', }]} >
-                <Select
-                  placeholder="Select Type"
-                  allowClear
-                  size="large"
-                >
-                  <Select.Option value={1}>Original</Select.Option>
-                  <Select.Option value={2}>Republish</Select.Option>
-                </Select>
-              </Form.Item>
+
             </Col>
-            <Col span={12}>
+            {/* <Col span={12}>
               <Form.Item label="Tags" name="tags" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please select !', }]}>
                 <Select
                   placeholder="Select Tags"
@@ -188,7 +189,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
                 </Select>
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
 
 

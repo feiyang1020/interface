@@ -45,7 +45,7 @@ export default ({ show, onClose }: Props) => {
       className="walletModal"
       footer={null}
       maskClosable={true}
-      style={{ zIndex: 99999, }}
+      zIndex={9999}
       styles={{ mask: { 'backdropFilter': 'blur(20px)' } }}
     >
       {mobile ? <div className="walletWrap">
@@ -53,7 +53,7 @@ export default ({ show, onClose }: Props) => {
           Please visit the PC version at: bitmodel.ai
         </div>
         <CopyToClipboard text={window.location.href
-        } onCopy={()=>{message.success('Copied')}} >
+        } onCopy={() => { message.success('Copied') }} >
           <Button shape="round" size='large' style={{ width: 263 }} type="primary" block>
 
             Copy Link
