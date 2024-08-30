@@ -22,7 +22,7 @@ declare interface Window {
     signMessage(arg0: {
       message: string;
       encoding?: string;
-    }): { signature: any } | PromiseLike<{ signature: any }>;
+    }):   PromiseLike<{ signature: any,status:string }> ;
     getAddress(): any;
     getMvcBalance: () => Promise<{
       address: string;
@@ -49,7 +49,7 @@ declare interface Window {
       pubKey?: string;
       status?: string;
     }>;
-    isConnected: () => Promise<boolean|{status:string}>;
+    isConnected: () => PromiseLike<boolean|{status:string}>;
     btc: {
       getAddress: () => Promise<string>;
       getPublicKey: () => Promise<string>;

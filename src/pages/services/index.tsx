@@ -153,18 +153,7 @@ export default () => {
 
       </Carousel>
       <div className="uploadBtn">
-        <ConfigProvider
-          theme={{
-            components: {
-              Button: {
-                colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                lineWidth: 0,
-              },
-            },
-          }}
-        >
+        
           <Button
             type="primary"
             shape="round"
@@ -174,7 +163,7 @@ export default () => {
           >
             Upload
           </Button>
-        </ConfigProvider>
+       
       </div>
       <Spin spinning={loading || initializing} tip="Loading...">
         <div className="ListWraper">

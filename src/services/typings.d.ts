@@ -51,6 +51,7 @@ declare namespace API {
     code: number;
     msg: string;
     data: T;
+    message: string;
   }
 
   interface ListRet<T> {

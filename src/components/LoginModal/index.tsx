@@ -3,7 +3,7 @@ import metalet from "@/assets/metalet.png";
 import "./index.less";
 import { Button, Modal, message } from "antd";
 import { useModel } from "umi";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { isMobile } from "@/utils/utils";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 };
 export default ({ show, onClose }: Props) => {
   const { handleLogin } = useModel('global');
-
+  const [loading, setLoading] = useState<boolean>(false);
   const isInstalled = useMemo(() => {
     return !!window.metaidwallet
   }, []);
@@ -27,11 +27,13 @@ export default ({ show, onClose }: Props) => {
         );
         return;
       }
+      setLoading(true);
       await handleLogin();
       onClose();
     } catch (err: any) {
       message.error(err.message || 'unknown error');
     }
+    setLoading(false);
   };
   return (
     <Modal
@@ -63,7 +65,7 @@ export default ({ show, onClose }: Props) => {
           Metalat Wallet
         </div>
         {!isInstalled && <div className="tip">It looks like you don't have a wallet installed yet. Please install the Metalat wallet.</div>}
-        <Button shape="round" size='large' style={{ width: 263 }} type="primary" onClick={handleConnect} block>
+        <Button shape="round" size='large' style={{ width: 263 }} type="primary" loading={loading} onClick={handleConnect} block>
 
           <span>{isInstalled ? 'Connect' : 'Install Wallet Now'}</span>
         </Button>

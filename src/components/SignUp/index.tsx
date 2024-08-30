@@ -3,17 +3,20 @@ import { Avatar, Button, ConfigProvider, Dropdown, Space, message } from "antd";
 import { useModel, history } from "umi";
 import coin from '@/assets/coin.png'
 import { isMobile } from "@/utils/utils";
+import { useState } from "react";
 
 export default ({ showLogined = true }: { showLogined?: boolean }) => {
   const { connect, connected, userInfo, disConnect, userBal } = useModel("global");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleConnect = async () => {
     try {
-
+      setLoading(true);
       await connect();
     } catch (e: any) {
       message.error(e.message);
     }
+    setLoading(false);
   }
 
   return (
@@ -21,6 +24,8 @@ export default ({ showLogined = true }: { showLogined?: boolean }) => {
       {connected ? (<>
         {showLogined && <Dropdown
           arrow
+          trigger={['click', 'hover']}
+          overlayStyle={{ zIndex: 9999 }}
           dropdownRender={() => (
             <div className="walletInfo">
               <div className="bal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -65,28 +70,17 @@ export default ({ showLogined = true }: { showLogined?: boolean }) => {
 
 
       ) : (
-        <ConfigProvider
-          theme={{
-            components: {
-              Button: {
-                colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                lineWidth: 0,
-              },
-            },
-          }}
+
+        <Button
+          type="primary"
+          shape="round"
+          icon={<ArrowRightOutlined />}
+          iconPosition="end"
+          onClick={handleConnect}
         >
-          <Button
-            type="primary"
-            shape="round"
-            icon={<ArrowRightOutlined />}
-            iconPosition="end"
-            onClick={handleConnect}
-          >
-            Sign up
-          </Button>
-        </ConfigProvider>
+          Sign up
+        </Button>
+
       )}
     </>
   );

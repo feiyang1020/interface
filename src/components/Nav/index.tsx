@@ -146,9 +146,10 @@ export default () => {
 
             <Dropdown
               key={item.title}
-              open={curMenu === item.title}
+              // open={curMenu === item.title}
               onOpenChange={handleOpenChange}
               placement="bottom"
+              trigger={["click", "hover"]}
               dropdownRender={() => (
                 <div className="navDetail">
                   <div className="desc">

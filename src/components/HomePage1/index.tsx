@@ -16,23 +16,12 @@ export default () => {
           Valuing Every Contribution to <span>AI</span>
 
         </div>
-        <div className="subTitle" key='subTitle'>
+        {/* <div className="subTitle" key='subTitle'>
           BitModel, Valuing Every Contribution to AI
-        </div>
+        </div> */}
 
         <div className="buttons" key='btns'>
-          <ConfigProvider
-            theme={{
-              components: {
-                Button: {
-                  colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                  colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                  colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-                  lineWidth: 0,
-                },
-              },
-            }}
-          >
+          
             <Button
               type="primary"
               size="large"
@@ -43,19 +32,6 @@ export default () => {
             >
               Model library
             </Button>
-          </ConfigProvider>
-          <ConfigProvider
-            theme={{
-              components: {
-                Button: {
-                  colorPrimary: `rgba(255,255,255,0.2)`,
-                  colorPrimaryHover: `rgba(255,255,255,0.3)`,
-                  colorPrimaryActive: `rgba(255,255,255,0.3)`,
-                  lineWidth: 0,
-                },
-              },
-            }}
-          >
             <Button
               type="primary"
               size="large"
@@ -65,7 +41,7 @@ export default () => {
             >
               Data set
             </Button>
-          </ConfigProvider>
+          
         </div>
       </QueueAnim>
     </div>

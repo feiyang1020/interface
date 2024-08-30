@@ -32,9 +32,9 @@ const _themes = {
   components: {
     Button: {
       primaryShadow: "0 0px 0 rgba(0, 0, 0, 0)",
-      colorPrimary: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-      colorPrimaryHover: `linear-gradient(135deg, #B193CB, #60E4DE)`,
-      colorPrimaryActive: `linear-gradient(135deg, #B193CB, #60E4DE)`,
+      colorPrimary: `rgba(255, 255, 255, 0.40)`,
+      colorPrimaryHover: `linear-gradient(270deg, #B193CB, #60E4DE)`,
+      colorPrimaryActive: `linear-gradient(270deg, #B193CB, #60E4DE)`,
       lineWidth: 0,
     },
     Segmented: {
@@ -173,7 +173,7 @@ export default function Layout() {
                 className="menus"
                 onClick={(e) => {
                   !showMenus &&
-                   setShowMenus(true)
+                    setShowMenus(true)
                 }}
               >
                 <div className="line1"></div>
