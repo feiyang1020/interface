@@ -81,11 +81,16 @@ export default () => {
       return
     };
     try {
-      const { data: { list: checkList } } = await checkLikeAndDownload({ model_ids: String(id) });
-      if (!checkList[0].is_download) {
-        await buyModel(id);
-      }
       const find = list.find((item) => item.id === id);
+      if (!find) return;
+      if (find.price !== 0) {
+        const { data: { list: checkList } } = await checkLikeAndDownload({ model_ids: String(id) });
+        if (!checkList[0].is_download) {
+          await buyModel(id);
+        }
+      }
+
+
       if (find) {
         const file = new URL(find.file_path);
         console.log(file.pathname);
