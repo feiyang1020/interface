@@ -95,6 +95,7 @@ export default () => {
         const file = new URL(find.file_path);
         console.log(file.pathname);
         await downloadFile(id, decodeURIComponent(file.pathname.slice(1)));
+        message.success('Download success');
       }
 
       setPage(1);
