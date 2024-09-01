@@ -27,12 +27,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # - name: Npm Install
-      #   run: |
-      #     yarn install
-      # - name: Production Build
-      #   run: |
-      #     yarn build
+      - name: Npm Install
+        run: |
+          yarn install
+      - name: Production Build
+        run: |
+          yarn build
 
       - name: S3 Sync
         # You may pin to the exact commit or the version.
