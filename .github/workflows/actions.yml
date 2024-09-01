@@ -29,10 +29,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Npm Install
         run: |
-          yarn install
+          pnpm install
       - name: Production Build
         run: |
-          yarn build
+          pnpm build
 
       - name: S3 Sync
         # You may pin to the exact commit or the version.
