@@ -47,7 +47,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_S3_ENDPOINT: 'http://bm-web-s3.s3-website.ap-east-1.amazonaws.com'
-          AWS_REGION: "ap-east-1" # optional: defaults to us-east-1
+          AWS_REGION: "ap-east-1" # optional: defaults to us-east-1test
           SOURCE_DIR: "dist"
 
       # # Invalidate Cloudfront (this action) d
