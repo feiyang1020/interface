@@ -10,6 +10,7 @@ import './index.less'
 import coin from '@/assets/coin.png'
 import { useModel } from "umi";
 import LikeAction from "../LikeAction";
+import defaultBg from '@/assets/default.png'
 type Props = {
     open: boolean,
     onClose: () => void,
@@ -29,12 +30,13 @@ export default ({ model, open, onClose, onLike, onBuy, onDislike }: Props) => {
         styles={{ mask: { 'backdropFilter': 'blur(20px)' }, content: { padding: 10, } }}
         footer={null}
         style={{ padding: 0, }}
+        centered
 
     >
         <div className="modelModal">
-            <Row gutter={[12,12]}>
+            <Row gutter={[12, 12]}>
                 <Col md={12} span={24}>
-                    <img src={model.cover} alt={model.name} />
+                    <img src={model.cover||defaultBg} alt={model.name} className="cover" />
                 </Col>
 
                 <Col className="info" md={12} span={24}>

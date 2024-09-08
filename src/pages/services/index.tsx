@@ -15,9 +15,9 @@ import ModelModal from "@/components/ModelModal";
 import { downloadFile } from "@/utils/dowmload";
 import flow from '@/assets/flow.svg'
 const breakpointColumnsObj = {
-  default: 6,
-  1500: 5,
-  1100: 4,
+  default: 5,
+  1500: 4,
+  1100: 2,
   700: 2,
   500: 1,
 };

@@ -39,7 +39,10 @@ export default () => {
 
   const handleLogin = async () => {
     if (!checkExtension()) return;
-    const isConnected = await window.metaidwallet.isConnected();
+    const isConnected:any = await window.metaidwallet.isConnected();
+    if (isConnected.status === "no-wallets") {
+      throw new Error("no wallets");
+    }
     if (isConnected.status === "locked") {
       throw new Error("unlock first");
     }
