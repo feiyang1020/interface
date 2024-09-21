@@ -1,7 +1,7 @@
 import { OverPack } from 'rc-scroll-anim';
 import './index.less'
 import QueueAnim from 'rc-queue-anim';
-import flow from '@/assets/flow.svg'
+import flow from '@/assets/flow.png'
 export default () => {
   return (
     <OverPack className="homePage2" replay style={{height:'20vh'}}>

@@ -27,8 +27,8 @@
       z-index: -1;
     }
     .timeline-item {
-      min-width: 24px;
-      min-height: 24px;
+      min-width: 20px;
+      min-height: 20px;
       background-color: #b193cb;
       border-radius: 50%;
       position: relative;
@@ -130,14 +130,13 @@
           border-left: 1px dashed #b193cb;
           .arrow {
             position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid #b193cb;
+            top: -15px;
+            left: -9px;
+            // transform: translateX(-50%);
+            // width: 0;
+            // height: 0;
+           
+            color: #b193cb;
           }
         }
         .item-card {
@@ -159,17 +158,18 @@
           .arrow {
             position: absolute;
             top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 8px;
+            transform: rotate(180deg);
             width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-top: 10px solid #b193cb;
+            // height: 0;
+            // border-left: 10px solid transparent;
+            // border-right: 10px solid transparent;
+            // border-top: 10px solid #b193cb;
+            color: #b193cb;
           }
         }
         .item-card {
-          top: 70px;
+          top: 76px;
           left: 12px;
           border-radius: 0px 34px 34px 34px;
         }

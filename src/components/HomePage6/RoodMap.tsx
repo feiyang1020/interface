@@ -49,7 +49,9 @@ export default () => {
             {ROADMAP_EVENTS.map((item, index) => {
                 return <div className={`timeline-item ${index % 2 === 0 ? 'timeline-item-bottom' : 'timeline-item-top'}`} >
                     <div className="line">
-                        <div className="arrow"></div>
+                        <div className="arrow">
+                            <UpOutlined />
+                        </div>
                     </div>
                     <div className={`item-card ${item.className}`} >
 

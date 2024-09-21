@@ -13,7 +13,7 @@ import ModelCard from "@/components/ModelCard";
 import { useModel } from "umi";
 import ModelModal from "@/components/ModelModal";
 import { downloadFile } from "@/utils/dowmload";
-import flow from '@/assets/flow.svg'
+import flow from '@/assets/flow.png'
 const breakpointColumnsObj = {
   default: 5,
   1500: 4,
