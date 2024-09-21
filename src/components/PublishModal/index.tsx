@@ -1,12 +1,13 @@
 import { Button, Col, ConfigProvider, Form, Input, InputNumber, Modal, Row, Select, Space, message } from "antd";
 import "./index.less";
-import { createModel, createModelDepend } from "@/services/api";
+import { createModel, createModelDepend, getModelList } from "@/services/api";
 import { useState } from "react";
 import S3UploadForm from "../S3Upload";
 import UploadImage from "../S3Upload/UploadImage";
 import { useModel } from "umi";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { checkHfUrl } from "@/utils/utils";
+import DebounceSelect from "./DebounceSelect";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -125,8 +126,10 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           variant="filled"
           style={{ maxWidth: 600 }}
           form={form}
+          validateTrigger='onChange'
+          initialValues={{ price: 1 }}
         >
-          <Form.Item label="Type" name="type"  rules={[{ required: true, message: 'Please select !', }]} >
+          <Form.Item label="Type" name="type" rules={[{ required: true, message: 'Please select !', }]}  >
             <Select
               placeholder="Select Type"
               allowClear
@@ -137,7 +140,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
             </Select>
           </Form.Item>
 
-          <Form.Item label="Hugging Face URL" name="url" rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
+          {/* <Form.Item label="Hugging Face URL" name="url" rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
             async validator(_, value) {
               if (!value) {
                 return Promise.resolve();
@@ -154,9 +157,9 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           })]}
             validateTrigger="onBlur">
             <Input size="large" />
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
-            <Input size="large" disabled />
+            <Input size="large" />
           </Form.Item>
 
           <Form.Item label="Describe" name="describe" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
@@ -168,7 +171,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
             name="percent"
             rules={[{ required: true, message: 'Please input !', }, { type: 'number', min: 0, max: 100, message: 'The value must be between 0 and 100' }]}
           >
-            <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' />
+            <InputNumber size="large" style={{ width: "100%" }} placeholder="revenue " suffix='%' />
           </Form.Item>
           <Row>
             <Col span={12}>
@@ -195,7 +198,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
 
           <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please input !', }]}>
-            <InputNumber size="large" style={{ width: '100%' }} />
+            <InputNumber size="large" style={{ width: '100%' }} disabled  />
           </Form.Item>
           <Row>
             <Col span={12}>
@@ -214,38 +217,42 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               {(fields, { add, remove, }) => (
                 <div style={{ display: 'flex', flexDirection: 'column', rowGap: 16 }}>
                   {fields.map(({ key, name, ...restField }) => (
-                    <Space key={key} >
-                      <Form.Item
-                        noStyle
-                        {...restField}
-                        name={[name, 'url']}
+                    <Row key={key}  gutter={[24,24]}>
+                      <Col span={12}>
+                        <Form.Item
+                          noStyle
+                          {...restField}
+                          name={[name, 'name']}
 
 
-                        rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
-                          async validator(_, value) {
-                            if (!value) {
-                              return Promise.resolve();
-                            }
-                            const values = getFieldValue('modelDependencyAndRevenueSharing');
-                            const find = values.filter((item: any) => item.url === value);
-                            if (find.length > 1) {
-                              return Promise.reject(new Error('Hugging Face URL is duplicated'));
-                            }
-                            const { isPass, name } = await checkHfUrl(value);
-                            if (!isPass) {
-                              return Promise.reject(new Error('Hugging Face URL is not valid'));
-                            }
+                          rules={[{ required: true },]}
+                          wrapperCol={{ span: 12 }}
+                        >
+                          <DebounceSelect
 
-                            Object.assign(values[key], { name })
-                            setFieldValue('modelDependencyAndRevenueSharing', values)
+                            showSearch
+                            placeholder="Select"
+                            fetchOptions={async (search) => {
+                              const ret = await getModelList({
+                                page: 1,
+                                page_size: 10,
+                                name: search,
+                              });
+                              if (ret.code === 0 && ret.data.list) {
+                                return ret.data.list.map((item) => ({
+                                  label: item.name,
+                                  value: item.id,
+                                }));
+                              }
+                              return []
+                            }}
 
-                            return Promise.resolve();
-                          },
-                        })]}
-                        validateTrigger="onBlur"
-                      >
-                        <Input placeholder="Hugging Face URL" />
-                      </Form.Item>
+                            style={{ width: '100%' }}
+                            size="large"
+                          />
+                        </Form.Item>
+                      </Col>
+                      <Col span={10}>
                       <Form.Item
                         noStyle
                         {...restField}
@@ -254,19 +261,19 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
 
                       >
-                        <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' />
+                        <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' size="large" />
                       </Form.Item>
-                      <Form.Item
-                        noStyle
-                        {...restField}
-                        name={[name, 'name']}
+                      </Col>
+                      <Col span={2} style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}>
 
-                      >
-                        <Input placeholder="Model Name" disabled />
-                      </Form.Item>
 
                       <MinusCircleOutlined onClick={() => remove(name)} />
-                    </Space>
+                      </Col>
+                    </Row>
                   ))}
                   <Form.Item>
                     <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>

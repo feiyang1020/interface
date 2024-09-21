@@ -66,6 +66,7 @@ export async function getModelList(
     page_size: number;
     tag?: string;
     uploader_id?: string;
+    name?: string;
   },
   options?: { [key: string]: any }
 ) {
