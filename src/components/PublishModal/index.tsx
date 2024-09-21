@@ -8,6 +8,7 @@ import { useModel } from "umi";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { checkHfUrl } from "@/utils/utils";
 import DebounceSelect from "./DebounceSelect";
+import ColorPicker from "./ColorPicker";
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -198,7 +199,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
 
           <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please input !', }]}>
-            <InputNumber size="large" style={{ width: '100%' }} disabled  />
+            <InputNumber size="large" style={{ width: '100%' }} disabled />
           </Form.Item>
           <Row>
             <Col span={12}>
@@ -212,12 +213,15 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               </Form.Item>
             </Col>
           </Row>
+          <Form.Item label="background" name="background" >
+            <ColorPicker />
+          </Form.Item>
           <Form.Item label="Dependent Model">
             <Form.List name="modelDependencyAndRevenueSharing" >
               {(fields, { add, remove, }) => (
                 <div style={{ display: 'flex', flexDirection: 'column', rowGap: 16 }}>
                   {fields.map(({ key, name, ...restField }) => (
-                    <Row key={key}  gutter={[24,24]}>
+                    <Row key={key} gutter={[24, 24]}>
                       <Col span={12}>
                         <Form.Item
                           noStyle
@@ -253,16 +257,16 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                         </Form.Item>
                       </Col>
                       <Col span={10}>
-                      <Form.Item
-                        noStyle
-                        {...restField}
-                        name={[name, 'revenue']}
+                        <Form.Item
+                          noStyle
+                          {...restField}
+                          name={[name, 'revenue']}
 
 
 
-                      >
-                        <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' size="large" />
-                      </Form.Item>
+                        >
+                          <InputNumber style={{ width: "100%" }} placeholder="revenue " suffix='%' size="large" />
+                        </Form.Item>
                       </Col>
                       <Col span={2} style={{
                         display: 'flex',
@@ -271,7 +275,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
                       }}>
 
 
-                      <MinusCircleOutlined onClick={() => remove(name)} />
+                        <MinusCircleOutlined onClick={() => remove(name)} />
                       </Col>
                     </Row>
                   ))}
