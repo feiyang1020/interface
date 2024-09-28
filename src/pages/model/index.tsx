@@ -4,7 +4,7 @@ import { getModel } from "@/services/api";
 import { MdEditor, MdCatalog, MdPreview } from 'md-editor-rt';
 import 'md-editor-rt/lib/preview.css';
 import './index.less';
-import { Card, Col, Divider, Row, Spin } from "antd";
+import { Avatar, Card, Col, Divider, Row, Space, Spin } from "antd";
 
 
 export default () => {
@@ -42,7 +42,7 @@ export default () => {
                 model.name
             }
             <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
-                <Row style={{padding:'0 28px'}}>
+                <Row style={{ padding: '0 28px' }}>
                     <Col span={18} style={{ borderRight: '1px solid #866D9B' }}>
                         <div className="descTitle">
                             Introduction
@@ -57,9 +57,20 @@ export default () => {
                             </Spin>
                         </div>
                     </Col>
-                    <Col span={6}>
-                        
-                        
+                    <Col span={6} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <div className="modelInfo">
+                            <Space size={10}>
+                                <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>
+                                <span className="nickname">
+                                    {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{5})/, "$1...$2")}
+                                </span>
+                            </Space>
+                            <div className="coverWrap">
+                                <img className="cover" src={model.cover} alt={model.name} />
+                            </div>
+
+                        </div>
+
                     </Col>
                 </Row>
 
