@@ -1,6 +1,6 @@
 import { Button, Col, ConfigProvider, Form, Input, InputNumber, Modal, Row, Select, Space, message } from "antd";
 import "./index.less";
-import { createModel, createModelDepend, getModelList } from "@/services/api";
+import { createModel, createModelDepend, getModelList, s3STSForImage } from "@/services/api";
 import { useState } from "react";
 import S3UploadForm from "../S3Upload";
 import UploadImage from "../S3Upload/UploadImage";
@@ -9,6 +9,9 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { checkHfUrl } from "@/utils/utils";
 import DebounceSelect from "./DebounceSelect";
 import ColorPicker from "./ColorPicker";
+import MarkdownEditor from "../MdEditor";
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { v4 as uuidv4 } from 'uuid';
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -30,10 +33,45 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
   const [form] = Form.useForm();
   const { connected, connect } = useModel('global')
   const [submiting, setSubmitLoading] = useState<boolean>(false)
+  const uploadMardown = async (text = '') => {
+    const blob = new Blob([text], { type: "text/markdown" });
+    const file = new File([blob], "markdown-file.md", { type: "text/markdown" });
+    try {
+
+      const response = await s3STSForImage();
+      const { access_key_id, access_secret, security_token, expire_time } =
+        response.data.sts;
+      const { prefix_path, bucket_name } = response.data;
+      const fileName = `${uuidv4()}.${file.name.split('.').pop()}`;
+      const params = {
+        Bucket: bucket_name,
+        Key: `${prefix_path}/${fileName}`,
+        Body: file,
+      };
+      const s3 = new S3Client({
+        region: "ap-east-1",
+        credentials: {
+          accessKeyId: access_key_id,
+          secretAccessKey: access_secret,
+          sessionToken: security_token,
+        },
+      });
+      const putObjectCommand = new PutObjectCommand(params);
+      const upload = await s3.send(putObjectCommand);
+      const Location = `https://${bucket_name}.s3.ap-east-1.amazonaws.com/${prefix_path}/${fileName}`
+      console.log("Upload response:", upload);
+      return Location
+    } catch (err) {
+      console.error("Upload error:", err);
+      message.error("Upload failed");
+
+    }
+  }
   const handleSubmit = async () => {
     const { name, describe, model, cover, type, tags = [], price, modelDependencyAndRevenueSharing = [], percent, url } = form.getFieldsValue();
     console.log(name, describe, model);
     await form.validateFields();
+    const description = await uploadMardown(describe)
     try {
       const sums = modelDependencyAndRevenueSharing.reduce((a, b) => { return a + b.revenue }, percent);
       if (sums !== 100) {
@@ -56,7 +94,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
         url,
         name,
         percent,
-        description: describe,
+        description: description,
         tags: tags,
         cover: cover,
         file_path: model,
@@ -164,7 +202,8 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           </Form.Item>
 
           <Form.Item label="Describe" name="describe" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
-            <Input.TextArea size="large" />
+            {/* <Input.TextArea size="large" /> */}
+            <MarkdownEditor />
           </Form.Item>
 
           <Form.Item
