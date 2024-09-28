@@ -1,40 +1,29 @@
 .modelCard {
- background: #4b5078;
-  margin-bottom: 12px;
-  border-radius: 14px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   min-height: 200px;
- 
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+
   .cover {
-    width: 100%;
-    min-height: 200px;
+    height: 160px;
+    width: 160px;
+
+    border-radius: 12px;
     object-fit: cover;
     display: flex;
   }
-  .likeIcon {
-    .isLike {
-    }
-  }
+
   .info {
+    flex-grow: 1;
     z-index: 4;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    padding: 14px 14px 5px 14px;
-    transition: all 0.3s ease;
-    background: rgba(0, 0, 0, 0.1);
-    &:hover {
-      background: rgba(0, 0, 0, 0.3);
-    }
+   
+
     .nickname {
       font-size: 14px;
       color: #ffffff;
@@ -52,10 +41,11 @@
       color: #ffffff;
       opacity: 0.6;
     }
+
     .footerInfo {
-      width: 100%;
       display: flex;
       flex-wrap: wrap;
+
       align-items: center;
       gap: 10px;
       justify-content: space-between;
@@ -86,6 +76,21 @@
           gap: 10px;
         }
       }
+      .likes {
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+  .modelCard {
+    .cover {
+      height: 120px;
+      width: 120px;
+      border-radius: 12px;
+      object-fit: cover;
+      display: flex;
     }
   }
 }

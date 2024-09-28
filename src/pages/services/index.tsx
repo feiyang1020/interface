@@ -5,7 +5,7 @@ import type { ItemData, ItemExtraNodeProps } from "react-silky-waterfall";
 import { cancleLikeModel, checkLikeAndDownload, getModelList, getTagList, likeModel } from "@/services/api";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";
-import { Button, Carousel, ConfigProvider, Spin, message } from "antd";
+import { Button, Carousel, Col, ConfigProvider, Row, Spin, message } from "antd";
 import { CloudUploadOutlined } from "@ant-design/icons";
 import PublishModal from "@/components/PublishModal";
 import { buyModel } from "@/utils/order";
@@ -181,28 +181,27 @@ export default () => {
       </div>
       <Spin spinning={loading || initializing} tip="Loading...">
         <div className="ListWraper">
-          <Masonry
-            breakpointCols={breakpointColumnsObj}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
-            {list.map((item) => (
-              <ModelCard
-                key={item.id}
-                model={item}
-                onLike={(id) => {
-                  handleLike(id);
-                }}
-                onDislike={(id) => {
-                  handleCanelLike(id);
-                }}
-                onBuy={(id) => {
-                  handleBuy(id);
-                }}
-                onPreview={(model) => { setCurModel(model); setDetailVisiable(true) }}
-              />
+          <Row gutter={[24,24]}>
+            {list.map((item,index) => (
+              <Col key={item.id} xs={24} sm={24} md={index>1?8:12} >
+                <ModelCard
+                  key={item.id}
+                  model={item}
+                  onLike={(id) => {
+                    handleLike(id);
+                  }}
+                  onDislike={(id) => {
+                    handleCanelLike(id);
+                  }}
+                  onBuy={(id) => {
+                    handleBuy(id);
+                  }}
+                  onPreview={(model) => { setCurModel(model); setDetailVisiable(true) }}
+                />
+              </Col>
             ))}
-          </Masonry>
+          </Row>
+
           <InfiniteScroll
             id="mason_grid"
             onMore={() => {
