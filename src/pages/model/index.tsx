@@ -58,7 +58,7 @@ export default () => {
                         </div>
                     </Col>
                     <Col span={6} style={{ display: 'flex', justifyContent: 'center' }}>
-                        <div className="modelInfo">
+                        <div className="modelInfoLeft">
                             <Space size={10}>
                                 <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>
                                 <span className="nickname">
