@@ -5,6 +5,8 @@ export default defineConfig({
   routes: [
     { path: "/", component: "index" },
     { path: "/services", component: "services" },
+    { path: "/models", component: "services" },
+    { path: "/models/:id", component: "model" },
     { path: "/profile", component: "profile" },
     { path: "/roadmap", component: "roadMap" },
     { path: "/whitePaper", component: "whitePaper" },

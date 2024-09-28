@@ -14,6 +14,7 @@ import { useModel } from "umi";
 import ModelModal from "@/components/ModelModal";
 import { downloadFile } from "@/utils/dowmload";
 import flow from '@/assets/flow.png'
+import { history } from "umi";
 const breakpointColumnsObj = {
   default: 5,
   1500: 4,
@@ -196,7 +197,9 @@ export default () => {
                   onBuy={(id) => {
                     handleBuy(id);
                   }}
-                  onPreview={(model) => { setCurModel(model); setDetailVisiable(true) }}
+                  onPreview={(model) => { 
+                    history.push(`/models/${model.id}`)
+                  }}
                 />
               </Col>
             ))}

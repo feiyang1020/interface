@@ -77,6 +77,19 @@ export async function getModelList(
   });
 }
 
+export async function getModel(
+  params: {
+   id: number;
+  },
+  options?: { [key: string]: any }
+) {
+  return request<API.Ret<API.ModelItem>>(`${ApiHost}/api/model/show`, {
+    method: "GET",
+    params,
+    ...(options || {}),
+  });
+}
+
 export async function getTagList(options?: { [key: string]: any }) {
   return request<API.ListRet<API.Tag>>(`${ApiHost}/api/pub/tag/list`, {
     method: "GET",
