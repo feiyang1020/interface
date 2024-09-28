@@ -41,20 +41,31 @@ export default () => {
             {
                 model.name
             }
-            <Card style={{background:'rgba(255,255,255,0.2)'}} bordered={false}>
-                <Row>
-                    <Col>
+            <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
+                <Row style={{padding:'0 28px'}}>
+                    <Col span={18} style={{ borderRight: '1px solid #866D9B' }}>
                         <div className="descTitle">
                             Introduction
                         </div>
-                        <Divider />
+
                         <MdPreview modelValue={model.description} theme="dark" language="en-US" />
+                        <div className="descTitle">
+                            Contribution flow
+                        </div>
+                        <div>
+                            <Spin spinning={true}>
+                            </Spin>
+                        </div>
+                    </Col>
+                    <Col span={6}>
+                        
+                        
                     </Col>
                 </Row>
-               
+
             </Card>
 
-           
+
 
         </div>}
     </div>
