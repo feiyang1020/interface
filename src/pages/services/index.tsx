@@ -5,8 +5,8 @@ import type { ItemData, ItemExtraNodeProps } from "react-silky-waterfall";
 import { cancleLikeModel, checkLikeAndDownload, getModelList, getTagList, likeModel } from "@/services/api";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";
-import { Button, Carousel, Col, ConfigProvider, Row, Spin, message } from "antd";
-import { CloudUploadOutlined } from "@ant-design/icons";
+import { Button, Carousel, Col, ConfigProvider, Input, Row, Spin, message } from "antd";
+import { CloudUploadOutlined, SearchOutlined } from "@ant-design/icons";
 import PublishModal from "@/components/PublishModal";
 import { buyModel } from "@/utils/order";
 import ModelCard from "@/components/ModelCard";
@@ -34,6 +34,7 @@ export default () => {
   const [size, setSize] = useState<number>(20);
   const [loading, setLoading] = useState<boolean>(true);
   const [list, setList] = useState<API.ModelItem[]>([]);
+  const [searchKey, setSearchKey] = useState<string>('');
   const getTags = useCallback(async () => {
     const { data } = await getTagList()
     setTags(data.list)
@@ -45,6 +46,7 @@ export default () => {
       page,
       page_size: size,
       tag: tag,
+      name: searchKey
     });
     let _list: API.ModelItem[] = data.list || [];
     if (connected && _list.length) {
@@ -68,7 +70,7 @@ export default () => {
       return [...prev, ..._list];
     });
     setLoading(false);
-  }, [page, size, tag, connected, initializing]);
+  }, [page, size, tag, connected, initializing,searchKey]);
 
   useEffect(() => {
     fetchList();
@@ -167,24 +169,31 @@ export default () => {
         </div>
 
       </Carousel>
-      <div className="uploadBtn">
+      <div className="bar">
+        <Input placeholder="Search Models" variant="filled" suffix={<SearchOutlined />}  size='large' style={{maxWidth:300}} value={searchKey} onChange={(e)=>{
+          setSearchKey(e.target.value);
+          setPage(1);
+        }} />
+        <div className="uploadBtn">
 
-        <Button
-          type="primary"
-          shape="round"
-          icon={<CloudUploadOutlined />}
-          iconPosition="start"
-          onClick={() => { setUploadVisiable(true) }}
-        >
-          Upload
-        </Button>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<CloudUploadOutlined />}
+            iconPosition="start"
+            onClick={() => { setUploadVisiable(true) }}
+          >
+            Upload
+          </Button>
 
+        </div>
       </div>
+
       <Spin spinning={loading || initializing} tip="Loading...">
         <div className="ListWraper">
-          <Row gutter={[24,24]}>
-            {list.map((item,index) => (
-              <Col key={item.id} xs={24} sm={24} md={index>1?8:12} >
+          <Row gutter={[24, 24]}>
+            {list.map((item, index) => (
+              <Col key={item.id} xs={24} sm={24} md={index > 1 ? 8 : 12} >
                 <ModelCard
                   key={item.id}
                   model={item}
@@ -197,7 +206,7 @@ export default () => {
                   onBuy={(id) => {
                     handleBuy(id);
                   }}
-                  onPreview={(model) => { 
+                  onPreview={(model) => {
                     history.push(`/models/${model.id}`)
                   }}
                 />

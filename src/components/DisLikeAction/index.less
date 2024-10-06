@@ -1,0 +1,33 @@
+.likeWrap {
+  @keyframes scaleAnimation {
+    0% {
+      transform: scale(1) rotate(0);
+      //   transform: rotate(0);
+    }
+
+    50% {
+      transform: scale(2) ;
+    }
+    100% {
+      transform: scale(1) ;
+    }
+  }
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  gap: 5px;
+  font-size: 12px;
+  height: 34px;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1);
+  &:hover {
+    transform: scale(1.1);
+  }
+  .isLike {
+    animation: scaleAnimation 0.4s ease-in;
+  }
+}

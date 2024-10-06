@@ -1,10 +1,12 @@
 .servicesPage {
   min-height: 50vh;
- 
+
   display: flex;
   flex-direction: column;
-  max-width:1536px;
+  max-width: 1536px;
   margin: 0 auto;
+  padding: 0 24px;
+ 
 
   .pageTitle {
     display: flex;
@@ -23,7 +25,7 @@
   }
   .imgWrap {
     margin: 0 auto;
-    display: flex!important;
+    display: flex !important;
     align-items: center;
     justify-content: center;
     border-radius: 24px;
@@ -59,8 +61,13 @@
       display: flex;
       width: 800px;
       max-width: 98vw;
-      
     }
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:24px;
   }
   .uploadBtn {
     display: flex;
@@ -85,6 +92,6 @@
 @media screen and (max-width: 767px) {
   .servicesPage {
     margin: 0 16px;
+    padding: 0;
   }
 }
-

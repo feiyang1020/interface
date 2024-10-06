@@ -11,6 +11,8 @@ import coin from '@/assets/coin.png'
 import LikeAction from "../LikeAction";
 import defaultBg from '@/assets/default.png'
 import { getRadomColor } from "../PublishModal/ColorPicker";
+import DisLikeAction from "../DisLikeAction";
+import { hexToRgba } from "@/utils/utils";
 type Props = {
     model: API.ModelItem,
     onBuy: (modelId: number) => void,
@@ -19,7 +21,7 @@ type Props = {
     onDislike: (modelId: number) => void,
 }
 export default ({ model, onLike, onBuy, onDislike, onPreview }: Props) => {
-    return <Card onClick={() => onPreview(model)} style={{background:model.background||getRadomColor()}}>
+    return <Card onClick={() => onPreview(model)} style={{background:hexToRgba(model.background||getRadomColor(),0.85)}} bordered={false}>
         <div className="modelCard">
             <img className="cover" src={model.cover || defaultBg} alt={model.name} />
             <div className="info">
@@ -48,7 +50,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview }: Props) => {
                     </div>
                     <div className="likes">
                         <LikeAction model={model} handleLike={onLike} handleDislike={onDislike} />
-                        <LikeAction model={model} handleLike={onLike} handleDislike={onDislike} />
+                        <DisLikeAction model={model} handleLike={onLike} handleDislike={onDislike} />
                     </div>
                 </div>
 
