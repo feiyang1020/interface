@@ -19,8 +19,10 @@ type Props = {
     onPreview: (model: API.ModelItem) => void,
     onLike: (modelId: number) => void,
     onDislike: (modelId: number) => void,
+    onHate: (modelId: number) => void,
+    onHateCancel: (modelId: number) => void,
 }
-export default ({ model, onLike, onBuy, onDislike, onPreview }: Props) => {
+export default ({ model, onLike, onBuy, onDislike, onPreview,onHate,onHateCancel }: Props) => {
     return <Card onClick={() => onPreview(model)} style={{background:hexToRgba(model.background||getRadomColor(),0.85)}} bordered={false}>
         <div className="modelCard">
             <img className="cover" src={model.cover || defaultBg} alt={model.name} />
@@ -50,7 +52,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview }: Props) => {
                     </div>
                     <div className="likes">
                         <LikeAction model={model} handleLike={onLike} handleDislike={onDislike} />
-                        <DisLikeAction model={model} handleLike={onLike} handleDislike={onDislike} />
+                        <DisLikeAction model={model} handleLike={onHate} handleDislike={onHateCancel} />
                     </div>
                 </div>
 

@@ -70,7 +70,7 @@ export default () => {
       return [...prev, ..._list];
     });
     setLoading(false);
-  }, [page, size, tag, connected, initializing,searchKey]);
+  }, [page, size, tag, connected, initializing, searchKey]);
 
   useEffect(() => {
     fetchList();
@@ -109,14 +109,11 @@ export default () => {
     }
   };
   const handleLike = async (id: number) => {
-    console.log('handleLike', id);
     if (!connected) {
       connect();
       return
     };
     try {
-
-
       setList(list.map((item) => {
         if (item.id === id) {
           return { ...item, is_like: 1, like: item.like + 1 }
@@ -126,10 +123,8 @@ export default () => {
       if (curModel && curModel.id === id) {
         setCurModel({ ...curModel, is_like: 1, like: curModel.like + 1 })
       }
-      // message.success('success');
     } catch (e: any) {
       console.log(e);
-      // message.error(e.message);
     }
   }
 
@@ -139,9 +134,6 @@ export default () => {
       return
     };
     try {
-      // await cancleLikeModel({ id });
-      // setPage(1);
-      // fetchList();
       setList(list.map((item) => {
         if (item.id === id) {
           return { ...item, is_like: 0, like: item.like - 1 }
@@ -151,10 +143,48 @@ export default () => {
       if (curModel && curModel.id === id) {
         setCurModel({ ...curModel, is_like: 0, like: curModel.like - 1 })
       }
-      // message.success('cancel success');
     } catch (e: any) {
       console.log(e);
-      // message.error(e.message);
+    }
+  }
+
+  const handleHate = async (id: number) => {
+    if (!connected) {
+      connect();
+      return
+    };
+    try {
+      setList(list.map((item) => {
+        if (item.id === id) {
+          return { ...item, is_hate: 1, hate: item.hate + 1 }
+        }
+        return item
+      }))
+      if (curModel && curModel.id === id) {
+        setCurModel({ ...curModel, is_hate: 1, hate: curModel.hate + 1 })
+      }
+    } catch (e: any) {
+      console.log(e);
+    }
+  }
+
+  const handleCanelHate = async (id: number) => {
+    if (!connected) {
+      connect();
+      return
+    };
+    try {
+      setList(list.map((item) => {
+        if (item.id === id) {
+          return { ...item, is_hate: 0, hate: item.hate - 1 }
+        }
+        return item
+      }))
+      if (curModel && curModel.id === id) {
+        setCurModel({ ...curModel, is_hate: 0, hate: curModel.hate - 1 })
+      }
+    } catch (e: any) {
+      console.log(e);
     }
   }
   return (
@@ -170,7 +200,7 @@ export default () => {
 
       </Carousel>
       <div className="bar">
-        <Input placeholder="Search Models" variant="filled" suffix={<SearchOutlined />}  size='large' style={{maxWidth:300}} value={searchKey} onChange={(e)=>{
+        <Input placeholder="Search Models" variant="filled" suffix={<SearchOutlined />} size='large' style={{ maxWidth: 300 }} value={searchKey} onChange={(e) => {
           setSearchKey(e.target.value);
           setPage(1);
         }} />
@@ -203,6 +233,13 @@ export default () => {
                   onDislike={(id) => {
                     handleCanelLike(id);
                   }}
+                  onHate={(id) => {
+                    handleHate(id);
+                  }}
+                  onHateCanel={(id) => {
+                    handleCanelHate(id);
+                  }
+                  }
                   onBuy={(id) => {
                     handleBuy(id);
                   }}

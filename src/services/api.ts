@@ -319,6 +319,42 @@ export async function cancleLikeModel(
   );
 }
 
+export async function hateModel(
+  data: {
+    id: number;
+  },
+  options?: { [key: string]: any }
+) {
+  return request<API.Ret<API.RefreshToken>>(`${ApiHost}/api/model/hate`, {
+    method: "POST",
+    data,
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+export async function cancleHateModel(
+  data: {
+    id: number;
+  },
+  options?: { [key: string]: any }
+) {
+  return request<API.Ret<API.RefreshToken>>(
+    `${ApiHost}/api/model/cancel/hate`,
+    {
+      method: "POST",
+      data,
+      ...(options || {
+        headers: {
+          Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+        },
+      }),
+    }
+  );
+}
+
 export async function createOrder(
   data: {
     model_id: number;

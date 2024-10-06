@@ -25,6 +25,7 @@ declare namespace API {
     update_at: string;
     is_like: number;
     is_download: number;
+    background: string;
   };
   type LoginRet = {
     id: number;
