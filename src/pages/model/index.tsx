@@ -4,7 +4,9 @@ import { getModel } from "@/services/api";
 import { MdEditor, MdCatalog, MdPreview } from 'md-editor-rt';
 import 'md-editor-rt/lib/preview.css';
 import './index.less';
-import { Avatar, Card, Col, Divider, Row, Space, Spin } from "antd";
+import { Avatar, Button, Card, Col, Divider, Row, Space, Spin } from "antd";
+import { CloudDownloadOutlined, EyeOutlined } from "@ant-design/icons";
+import coin from '@/assets/coin.png'
 
 
 export default () => {
@@ -38,11 +40,40 @@ export default () => {
 
         </Spin>
         {model && <div className="modelPageContent">
-            {
-                model.name
-            }
+            <div className="info">
+                <div className="infoleft">
+                    <div className="titleWrap">
+                        <div className="title">
+                            {model.name}
+                        </div>
+                        <div className="likeInfo">
+
+                        </div>
+
+                    </div>
+                    <div className="time">
+                        <span>{model.create_at}</span>
+                    </div>
+                    <div className="item right">
+                        <div className="itemText">
+                            <EyeOutlined /> {model.click}
+                        </div>
+                        <div className="itemText" onClick={(e) => { e.stopPropagation(); onBuy(model.id) }}>
+                            <CloudDownloadOutlined/> {model.download}
+                        </div>
+                        <div className="itemText">
+                            <img src={coin} alt="" /> {model.price}
+                        </div>
+                    </div>
+
+                </div>
+                <div className="download">
+                    <Button block key="submit1" type="primary" iconPosition='end' > Download </Button>
+                </div>
+            </div>
+
             <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
-                <Row style={{ padding: '0 28px' }}>
+                <Row style={{ padding: '0 0px 9px 28px' }}>
                     <Col span={18} style={{ borderRight: '1px solid #866D9B' }}>
                         <div className="descTitle">
                             Introduction
