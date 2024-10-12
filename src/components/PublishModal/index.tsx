@@ -168,16 +168,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           validateTrigger='onChange'
           initialValues={{ price: 1 }}
         >
-          <Form.Item label="Type" name="type" rules={[{ required: true, message: 'Please select !', }]}  >
-            <Select
-              placeholder="Select Type"
-              allowClear
-              size="large"
-            >
-              <Select.Option value={1}>Original</Select.Option>
-              <Select.Option value={2}>Republish</Select.Option>
-            </Select>
-          </Form.Item>
+
 
           {/* <Form.Item label="Hugging Face URL" name="url" rules={[{ required: true }, ({ setFieldValue, getFieldValue }) => ({
             async validator(_, value) {
@@ -200,11 +191,25 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
             <Input size="large" />
           </Form.Item>
-
           <Form.Item label="Describe" name="describe" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
             {/* <Input.TextArea size="large" /> */}
             <MarkdownEditor />
           </Form.Item>
+          <Form.Item label="Type" name="type" rules={[{ required: true, message: 'Please select !', }]}  >
+            <Select
+              placeholder="Select Type"
+              allowClear
+              size="large"
+            >
+              <Select.Option value={1}>Original</Select.Option>
+              <Select.Option value={2}>Republish</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please input !', }]}>
+            <InputNumber size="large" style={{ width: '100%' }} disabled />
+          </Form.Item>
+
+
 
           <Form.Item
             label="Revenue"
@@ -237,24 +242,9 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
 
 
-          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please input !', }]}>
-            <InputNumber size="large" style={{ width: '100%' }} disabled />
-          </Form.Item>
-          <Row>
-            <Col span={12}>
-              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
-                <S3UploadForm />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="cover" name="cover" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
-                <UploadImage />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Form.Item label="background" name="background" >
-            <ColorPicker />
-          </Form.Item>
+
+
+
           <Form.Item label="Dependent Model">
             <Form.List name="modelDependencyAndRevenueSharing" >
               {(fields, { add, remove, }) => (
@@ -327,6 +317,21 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               )}
             </Form.List>
           </Form.Item>
+          <Form.Item label="background" name="background" >
+            <ColorPicker />
+          </Form.Item>
+          <Row>
+            <Col span={12}>
+              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
+                <S3UploadForm />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item label="cover" name="cover" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
+                <UploadImage />
+              </Form.Item>
+            </Col>
+          </Row>
         </Form>
       </div>
     </Modal >
