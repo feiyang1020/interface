@@ -44,7 +44,7 @@ export default () => {
       throw new Error("no wallets");
     }
     if (isConnected.status === "locked") {
-      throw new Error("unlock first");
+      throw new Error("please unlock your wallet");
     }
     if (!isConnected) {
       const ret = await window.metaidwallet.connect();
