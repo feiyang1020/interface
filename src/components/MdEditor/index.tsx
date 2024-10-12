@@ -53,7 +53,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
 
 
     return (
-        <div>
+        <div className="mdeditor">
             <MdEditor
                 modelValue={value}
                 onChange={onChange}
