@@ -12,7 +12,7 @@ const App: React.FC = () => {
   // 
   return (
     <div className="init_loading" style={{ background: "#000" }}>
-      <img src={logo} alt="" className="logo" />
+      
       <Spin indicator={antIcon} />
     </div>
   );

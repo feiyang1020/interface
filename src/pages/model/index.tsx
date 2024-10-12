@@ -74,7 +74,7 @@ export default () => {
 
             <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
                 <Row style={{ padding: '0 0px 9px 28px' }}>
-                    <Col md={18} sm={24}  style={{ borderRight: '1px solid #866D9B' }}>
+                    <Col xl={18} md={24}  style={{ borderRight: '1px solid #866D9B' }}>
                         <div className="descTitle">
                             Introduction
                         </div>
@@ -88,7 +88,7 @@ export default () => {
                             </Spin>
                         </div>
                     </Col>
-                    <Col md={6} sm={24} style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Col xl={6} md={24} style={{ display: 'flex', justifyContent: 'center' }}>
                         <div className="modelInfoLeft">
                             <Space size={10}>
                                 <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>
