@@ -67,6 +67,9 @@ const _themes = {
     "Table": {
       "borderColor": "rgba(240, 240, 240, 0)",
       "colorBgContainer": "rgba(8, 7, 49, 0)"
+    },
+    "Message": {
+      "zIndexPopup": 201000
     }
   },
 };

@@ -25,7 +25,7 @@ export default ({ showLogined = true }: { showLogined?: boolean }) => {
         {showLogined && <Dropdown
           arrow
           trigger={['click', 'hover']}
-          overlayStyle={{ zIndex: 9999 }}
+          overlayStyle={{ zIndex: 1999 }}
           dropdownRender={() => (
             <div className="walletInfo">
               <div className="bal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
