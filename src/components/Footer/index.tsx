@@ -66,7 +66,7 @@ export default () => {
             <div className="navs">
               {item.children.map((nav) => {
                 return <div className="navItem" key={nav.title}>
-                  <a href={nav.link}>{nav.title}</a>
+                  <a href={nav.disabled?'':nav.link}>{nav.title}</a>
                 </div>
               })
               }
