@@ -1,46 +1,83 @@
 .homePage2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 129px 0;
   background-color: #08082a;
-
-  .imgWrap {
-    margin-top: 46px;
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    backdrop-filter: blur(20px);
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-
-      // background: linear-gradient(-30deg, #3fbbfe, #a541ff);
-      // backdrop-filter: blur(20px);
-      // opacity: 0.4;
+  text-align: center;
+  min-height: 600px;
+  box-sizing: border-box;
+  .pageSubTitle {
+    margin: 0 auto;
+    margin-top: 24px;
+  }
+  .flowWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    gap: 24px;
+    .carousel {
+      width: 653px;
+      max-width: 90vw;
     }
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -1;
-
-      // background: linear-gradient(-30deg, #b193cb, #60e4de);
-      // opacity: 0.1;
-    }
-    img {
+    .actions {
       display: flex;
-      width: 800px;
-      max-width: 98vw;
-      
+      flex-direction: column;
+      gap: 26px;
+      .action {
+        width: 298px;
+        height: 142px;
+        cursor: pointer;
+      }
     }
+    .imgWrap {
+      margin: 0 auto;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(20px);
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+  
+        // background: linear-gradient(-30deg, #3fbbfe, #a541ff);
+        // backdrop-filter: blur(20px);
+        // opacity: 0.4;
+      }
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+  
+        // background: linear-gradient(-30deg, #b193cb, #60e4de);
+        // opacity: 0.1;
+      }
+      img {
+        display: flex;
+        width: 653px;
+        max-width: 98vw;
+      }
+    }
+    // .imgWrap {
+    //   img {
+    //     display: flex;
+    //     width: 653px;
+    //     max-width: 90vw;
+    //     height: 311px;
+    //     max-width: 98vw;
+    //     object-fit: cover;
+    //   }
+    // }
   }
 }

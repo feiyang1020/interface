@@ -1,7 +1,9 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide   } from "swiper/react";
+import { Navigation } from 'swiper/modules';
 import bg from "@/assets/servicesIcon.png";
 import "swiper/css";
 import "swiper/css/pagination";
+import 'swiper/css/navigation';
 
 import "./index.less";
 import { Tooltip, Grid } from "antd";
@@ -16,39 +18,39 @@ const { useBreakpoint } = Grid;
 const data = [
   {
     bg: _H,
-    title: "High performance and high concurrent processing capability",
+    title: "High performance on parallel processing",
     subTitle:
-      "High performance on concurrent processing: Using an optimized UTXO model, MVC is capable of processing millions of transactions per second (TPS), which is critical for running AI models and smart contracts. Thanks to such an advantage, BitModel well matches the computing efficiency of AI systems and ensures fast response of Blockchain-based AI services.",
+      "Using an optimized UTXO architecture, BitModel  is capable of handling a high transaction throughput, which is critical for running AI models and smart contracts for a wide range of applications. Thanks to such an advantage, BitModel well matches the computing efficiency of AI systems and ensures fast response of blockchain-based AI services.",
   },
   {
     bg: _J,
-    title: "Layer-1 smart contract (MetaContract)",
+    title: "Layer-1 smart contract",
     subTitle:
-      "Layer-1 smart contract with MetaContract: MVC enjoys a neat implementation of Layer-1 smart contract, which naturally supports automation, validation, and execution of AI models without involving additional efforts. Such an advantage simplifies the transcation process and thereby saves the cost.",
+      "BitModel enjoys a neat implementation of layer-1 smart contract, which naturally supports automation, validation, and execution of AI models without involving additional efforts. Such an advantage simplifies the transcation process and thereby saves the cost.",
   },
   {
     bg: _M,
-    title: "MetaID",
+    title: "Decentralized identity",
     subTitle:
-      "Distributed identity using MetaID: As a built-in function of MVC, MetaID allows users to share a unified identity across various applications. Such a feature facilitates the identity authentication and the privacy protection on BitModel.",
+      "As a built-in function, BitModel allows users to share a unified on-chain identity across various applications. Such a feature facilitates the decentralized identity authentication and the protection of data properties on BitModel.",
   },
   {
     bg: _N,
     title: "Decentralization and security",
     subTitle:
-      "Decentralization and security: MVC adopts the POW consensus mechanism and SHA-256 mining algorithm, same as Bitcoin, ensuring the decentralization and security of the network. Benefiting from such a design, BitModel well protects the security and non-tamperability of AI models, and hence guarantees the transparency and the verifiability of user contributions and serving history.",
+      "BitModel adopts the POW consensus mechanism and SHA-256 mining algorithm, same as Bitcoin, ensuring the decentralization and security of the network. Benefiting from such a design, BitModel well protects the security and immutability of AI models, and hence guarantees the transparency and the verifiability of user contributions and serving history.",
   },
   {
     bg: _L,
-    title: "Low transaction fees and dynamic expansion",
+    title: "Low transaction fee and dynamic scalability",
     subTitle:
-      "Low transaction fee and dynamic expansion: One of the goals of MVC is to keep low transaction fee along with the number of users increaseing, or even realize unlimiated expansion. Leveraging such a design, BitModel aims to maintain a low-cost yet high-permance AI ecosystem, encouraging the entire community to contribute to and take advantage of open-sourced AI.",
+      "One of the goals of BitModel is to keep low transaction fee along with the number of users increaseing, or even realize unlimiated scaling. Leveraging such a design, BitModel aims to maintain a low-cost yet high-permance AI ecosystem, encouraging the entire community to contribute to and take advantage of open-sourced AI.",
   },
   {
     bg: _K,
-    title: "Support complex AI applications",
+    title: "Support of complex AI applications",
     subTitle:
-      "Support of complex AI applications: The serving efficiency and the smart contract design of MVC make BitModel a practical platform to build complex AI applications, which may incorporate models from various domains, including natural language processing, computer vision, multi-modality, etc.",
+      "The serving efficiency and the smart contract design of BitModel make it a practical platform to build complex AI applications, which may incorporate models from various domains, including natural language processing, computer vision, multi-modality, etc.",
   },
 ];
 export default () => {
@@ -80,7 +82,7 @@ export default () => {
     <div className="homePage4">
       <div className="pageTitle">BitModel Blockchain</div>
       <div className="pageSubTitle">
-        Built upon blockchain techniques, BitModel serves as a general solution to tracing the contributions to AI. We select MicrovisionChain (MVC) as the foundation of Web3, considering its advantages of xxx and xxx.
+      Built upon blockchain techniques, BitModel serves as a general solution to tracing the contributions to AI, i.e., contribution flows. 
       </div>
       <div className="swiperWrap">
         <Swiper
@@ -89,6 +91,13 @@ export default () => {
           centeredSlides={true}
           className="mySwiper"
           ref={swiperRef}
+          modules={[Navigation]}
+          // navigation={true}
+          navigation= {{
+            
+            enabled: true,
+          }}
+         
         >
           {data.map((item) => (
             <SwiperSlide key={item.title}>
@@ -109,6 +118,7 @@ export default () => {
               </div>
             </SwiperSlide>
           ))}
+
         </Swiper>
       </div>
     </div>
