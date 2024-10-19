@@ -7,8 +7,8 @@ import { message } from "antd";
 type Props = { model: API.ModelItem, handleLike: (id: number) => void; handleDislike: (id: number) => void; }
 export default ({ model, handleLike, handleDislike }: Props) => {
     const { connected, connect } = useModel('global')
-    const [isLike, setIsLike] = useState<boolean>(Boolean(model.is_like));
-    const [likeCount, setLikeCount] = useState<number>(model.like);
+    const [isLike, setIsLike] = useState<boolean>(Boolean(model.is_hate));
+    const [likeCount, setLikeCount] = useState<number>(model.hate);
     const onLike = async (id: number) => {
         if (!connected) {
             connect()
