@@ -68,7 +68,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
     }
   }
   const handleSubmit = async () => {
-    const { name, describe, model, cover, type, tags = [], price, modelDependencyAndRevenueSharing = [], percent, url } = form.getFieldsValue();
+    const { name, describe, model, cover, type, tags = [], price, modelDependencyAndRevenueSharing = [], percent, url,background='#84D4FF' } = form.getFieldsValue();
     console.log(name, describe, model);
     await form.validateFields();
     const description = await uploadMardown(describe)
@@ -100,7 +100,8 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
         file_path: model,
         price: price,
         type: type,
-        depends: depends
+        depends: depends,
+        background
       });
       if (ret.code === 0) {
         message.success('success');
