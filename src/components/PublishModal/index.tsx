@@ -80,14 +80,14 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       setSubmitLoading(true);
       const depends = []
       for (let i = 0; i < modelDependencyAndRevenueSharing.length; i++) {
-        const { url, name } = modelDependencyAndRevenueSharing[i];
-        const ret = await createModelDepend({
-          url, name
-        });
-        if (ret.code !== 0) {
-          throw new Error('Hugging Face URL is not valid');
-        }
-        depends.push({ id: ret.data.id, percent: modelDependencyAndRevenueSharing[i].revenue })
+        const { revenue, name } = modelDependencyAndRevenueSharing[i];
+        // const ret = await createModelDepend({
+        //   url, name
+        // });
+        // if (ret.code !== 0) {
+        //   throw new Error('Hugging Face URL is not valid');
+        // }
+        depends.push({ id: name.value, percent: revenue })
       }
 
       const ret = await createModel({
