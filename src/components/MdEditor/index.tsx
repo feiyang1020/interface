@@ -61,6 +61,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
                 preview={false}
                 language="en-US"
                 onUploadImg={handleUpload}
+                style={{ height: '250px' }}
             />
         </div>
     );
