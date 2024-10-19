@@ -188,14 +188,29 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
             validateTrigger="onBlur">
             <Input size="large" />
           </Form.Item> */}
-          <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
+          <Form.Item
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: 'Please input !', whitespace: true }]}
+            tooltip="Please name the model with an easy-to-remember name, no more than 50 English characters, numbers, or underscores."
+          >
             <Input size="large" />
           </Form.Item>
-          <Form.Item label="Describe" name="describe" rules={[{ required: true, message: 'Please input !', whitespace: true }]}>
+          <Form.Item
+            label="Describe"
+            name="describe"
+            rules={[{ required: true, message: 'Please input !', whitespace: true }]}
+            tooltip='Please describe the basic information, uses, or key characteristics of the model, etc.'
+          >
             {/* <Input.TextArea size="large" /> */}
             <MarkdownEditor />
           </Form.Item>
-          <Form.Item label="Type" name="type" rules={[{ required: true, message: 'Please select !', }]}  >
+          <Form.Item
+            label="Type"
+            name="type"
+            rules={[{ required: true, message: 'Please select !', }]}
+            tooltip=''
+          >
             <Select
               placeholder="Select Type"
               allowClear
@@ -205,8 +220,13 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               <Select.Option value={2}>Republish</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Please input !', }]}>
-            <InputNumber size="large" style={{ width: '100%' }} disabled />
+          <Form.Item
+            label="Price"
+            name="price"
+            rules={[{ required: true, message: 'Please input !', }]}
+            tooltip='Please set the desired revenue value.'
+          >
+            <InputNumber size="large" style={{ width: '100%' }} />
           </Form.Item>
 
 
@@ -215,6 +235,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
             label="Revenue"
             name="percent"
             rules={[{ required: true, message: 'Please input !', }, { type: 'number', min: 0, max: 100, message: 'The value must be between 0 and 100' }]}
+            tooltip='Please set the desired revenue share ratio and the Dependent Model. The total revenue is 100%.'
           >
             <InputNumber size="large" style={{ width: "100%" }} placeholder="revenue " suffix='%' />
           </Form.Item>
@@ -245,7 +266,10 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
 
 
 
-          <Form.Item label="Dependent Model">
+          <Form.Item
+            label="Dependent Model"
+            tooltip='Please fill in other models that this model depends on. Only models that have been uploaded on this platform are allowed, as well as the proportion of revenue distribution. The total revenue is 100.'
+          >
             <Form.List name="modelDependencyAndRevenueSharing" >
               {(fields, { add, remove, }) => (
                 <div style={{ display: 'flex', flexDirection: 'column', rowGap: 16 }}>
@@ -317,17 +341,31 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               )}
             </Form.List>
           </Form.Item>
-          <Form.Item label="background" name="background" >
+          <Form.Item label="Background" name="background" tooltip='Please select one as the default background color.' >
             <ColorPicker />
           </Form.Item>
           <Row>
             <Col span={12}>
-              <Form.Item label="model" name="model" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
+              <Form.Item
+                label="Model"
+                name="model"
+                labelCol={{ span: 12 }}
+                wrapperCol={{ span: 12 }}
+                rules={[{ required: true, message: 'Please upload !', }]}
+                tooltip='Please upload the model ZIP file.'
+              >
                 <S3UploadForm />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="cover" name="cover" labelCol={{ span: 12 }} wrapperCol={{ span: 12 }} rules={[{ required: true, message: 'Please upload !', }]}>
+              <Form.Item
+               label="Cover" 
+               name="cover" 
+               labelCol={{ span: 12 }} 
+               wrapperCol={{ span: 12 }} 
+               rules={[{ required: true, message: 'Please upload !', }]}
+               tooltip='Please upload a model cover picture.'
+               >
                 <UploadImage />
               </Form.Item>
             </Col>
