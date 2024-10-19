@@ -10,6 +10,7 @@ import coin from '@/assets/coin.png'
 import { useModel } from "umi";
 import { buyModel } from "@/utils/order";
 import { downloadFile } from "@/utils/dowmload";
+import Flow from "@/components/Flow";
 
 
 export default () => {
@@ -113,9 +114,8 @@ export default () => {
                         <div className="descTitle">
                             Contribution flow
                         </div>
-                        <div>
-                            <Spin spinning={true}>
-                            </Spin>
+                        <div className="flowWrap">
+                            <Flow />
                         </div>
                     </Col>
                     <Col xl={6} md={24} style={{ display: 'flex', justifyContent: 'center' }}>
