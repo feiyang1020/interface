@@ -14,6 +14,7 @@ import { useModel } from "umi";
 import ModelModal from "@/components/ModelModal";
 import { downloadFile } from "@/utils/dowmload";
 import flow from '@/assets/flow.png'
+import flow2 from '@/assets/flow2.png'
 import { history } from "umi";
 const breakpointColumnsObj = {
   default: 5,
@@ -195,7 +196,7 @@ export default () => {
           <img src={flow} alt="" className='flow' />
         </div>
         <div className="imgWrap">
-          <img src={flow} alt="" className='flow' />
+          <img src={flow2} alt="" className='flow' />
         </div>
 
       </Carousel>

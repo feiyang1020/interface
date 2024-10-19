@@ -1,21 +1,25 @@
 import { useMatch } from "umi";
 import { useCallback, useEffect, useState } from "react";
-import { getModel } from "@/services/api";
+import { checkLikeAndDownload, getModel } from "@/services/api";
 import { MdEditor, MdCatalog, MdPreview } from 'md-editor-rt';
 import 'md-editor-rt/lib/preview.css';
 import './index.less';
-import { Avatar, Button, Card, Col, Divider, Row, Space, Spin } from "antd";
+import { Avatar, Button, Card, Col, Divider, message, Row, Space, Spin } from "antd";
 import { CloudDownloadOutlined, EyeOutlined } from "@ant-design/icons";
 import coin from '@/assets/coin.png'
+import { useModel } from "umi";
+import { buyModel } from "@/utils/order";
+import { downloadFile } from "@/utils/dowmload";
 
 
 export default () => {
-
+    const { connected, mvcAddress, initializing, connect } = useModel('global')
     const match = useMatch('/models/:id');
     const id = match!.params.id
     console.log(id);
     const [loading, setLoading] = useState<boolean>(true);
     const [model, setModel] = useState<API.ModelItem>();
+    const [submitting, setSubmitting] = useState<boolean>(false);
     const _getModel = useCallback(async () => {
         if (!id) return
         setLoading(true)
@@ -35,6 +39,32 @@ export default () => {
     }, [_getModel]);
     const [id1] = useState('preview-only');
     const [scrollElement] = useState(document.documentElement);
+
+    const handleBuy = async () => {
+        if (!connected) {
+            connect();
+            return
+        };
+        setSubmitting(true);
+        try {
+            if (!model) throw new Error('Model not found');
+            if (model.price !== 0) {
+                const { data: { list: checkList } } = await checkLikeAndDownload({ model_ids: String(id) });
+                if (!checkList[0].is_download) {
+                    await buyModel(model.id);
+                }
+            }
+            const file = new URL(model.file_path);
+            console.log(file.pathname);
+            await downloadFile(model.id, decodeURIComponent(file.pathname.slice(1)));
+            message.success('Download success');
+
+        } catch (e: any) {
+            console.log(e);
+            message.error(e.message);
+        }
+        setSubmitting(false);
+    };
     return <div className='modelPage'>
         <Spin spinning={loading}>
 
@@ -58,7 +88,7 @@ export default () => {
                         <div className="itemText">
                             <EyeOutlined /> {model.click}
                         </div>
-                        <div className="itemText" onClick={(e) => { e.stopPropagation(); onBuy(model.id) }}>
+                        <div className="itemText" onClick={(e) => { e.stopPropagation(); }}>
                             <CloudDownloadOutlined /> {model.download}
                         </div>
                         <div className="itemText">
@@ -68,13 +98,13 @@ export default () => {
 
                 </div>
                 <div className="download">
-                    <Button block key="submit1" type="primary" iconPosition='end' > Download </Button>
+                    <Button block key="submit1" type="primary" iconPosition='end' onClick={handleBuy} loading={submitting}> Download </Button>
                 </div>
             </div>
 
             <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
                 <Row style={{ padding: '0 0px 9px 28px' }}>
-                    <Col xl={18} md={24}  style={{ borderRight: '1px solid #866D9B' }}>
+                    <Col xl={18} md={24} style={{ borderRight: '1px solid #866D9B' }}>
                         <div className="descTitle">
                             Introduction
                         </div>
