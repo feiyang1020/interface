@@ -191,7 +191,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           <Form.Item
             label="Name"
             name="name"
-            rules={[{ required: true, message: 'Please input !', whitespace: true }]}
+            rules={[{ required: true, message: 'Please input !', whitespace: true }, { max: 50, message: 'The name must be less than 50 characters' }]}
             tooltip="Please name the model with an easy-to-remember name, no more than 50 English characters, numbers, or underscores."
           >
             <Input size="large" />
@@ -359,13 +359,13 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
             </Col>
             <Col span={12}>
               <Form.Item
-               label="Cover" 
-               name="cover" 
-               labelCol={{ span: 12 }} 
-               wrapperCol={{ span: 12 }} 
-               rules={[{ required: true, message: 'Please upload !', }]}
-               tooltip='Please upload a model cover picture.'
-               >
+                label="Cover"
+                name="cover"
+                labelCol={{ span: 12 }}
+                wrapperCol={{ span: 12 }}
+                rules={[{ required: true, message: 'Please upload !', }]}
+                tooltip='Please upload a model cover picture.'
+              >
                 <UploadImage />
               </Form.Item>
             </Col>
