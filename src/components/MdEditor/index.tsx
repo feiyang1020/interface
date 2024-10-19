@@ -62,6 +62,7 @@ const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ value, onChange }) => {
                 language="en-US"
                 onUploadImg={handleUpload}
                 style={{ height: '250px' }}
+                toolbarsExclude={['github','htmlPreview','previewOnly','save',]}
             />
         </div>
     );
