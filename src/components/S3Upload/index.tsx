@@ -9,12 +9,13 @@ const S3UploadForm = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [precent, setPrecent] = useState(0);
   const [imageUrl, setImageUrl] = useState<string>();
-  const getS3ClientParams = async (prefix_path?: string) => {
-    if (!prefix_path) {
-      const response = await s3STSForModel();
+  const getS3ClientParams = async (prefix_path?: string, endpoint?: string) => {
+    if (prefix_path && endpoint) {
+
+      const response = await s3STSForModelRefresh({ prefix_path, endpoint });
       return response;
     } else {
-      const response = await s3STSForModelRefresh({ prefix_path });
+      const response = await s3STSForModel();
       return response;
     }
   };
@@ -39,20 +40,22 @@ const S3UploadForm = (props: any) => {
       const response = await getS3ClientParams();
       const { access_key_id, access_secret, security_token, expire_time } =
         response.data.sts;
-      const { prefix_path, bucket_name } = response.data;
+      const { prefix_path, bucket_name, endpoint, region } = response.data;
       const params = {
         Bucket: bucket_name,
         Key: `${prefix_path}/${file.name}`,
         Body: file,
       };
       let s3 = new S3Client({
-        region: "ap-east-1",
+        region: region,
+        endpoint: endpoint,
         credentials: {
           accessKeyId: access_key_id,
           secretAccessKey: access_secret,
           sessionToken: security_token,
         },
       });
+      console.log("S3 client:", s3);
       const createMultipartUploadCommand = new CreateMultipartUploadCommand({
         Bucket: params.Bucket,
         Key: params.Key
@@ -85,9 +88,11 @@ const S3UploadForm = (props: any) => {
           setPrecent(parseInt(String(((i + 1) / totalChunks) * 100)));
         } catch (err) {
           console.log(err)
-          const refreshToken = await getS3ClientParams(prefix_path);
+          const refreshToken = await getS3ClientParams(prefix_path, endpoint);
+          const { bucket_name, region } = response.data;
           s3 = new S3Client({
-            region: "ap-east-1",
+            region,
+            endpoint,
             credentials: {
               accessKeyId: refreshToken.data.sts.access_key_id,
               secretAccessKey: refreshToken.data.sts.access_secret,

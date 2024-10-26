@@ -180,6 +180,8 @@ export async function s3STSForImage(options?: { [key: string]: any }) {
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
+      endpoint:string;
+      region:string;
     }>
   >(`${ApiHost}/api/file/img/token`, {
     method: "GET",
@@ -203,6 +205,8 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
+      endpoint:string;
+      region:string;
     }>
   >(`${ApiHost}/api/file/model/token`, {
     method: "GET",
@@ -217,6 +221,7 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
 export async function s3STSForModelRefresh(
   params: {
     prefix_path: string;
+    endpoint:string;
   },
   options?: { [key: string]: any }
 ) {
@@ -231,6 +236,8 @@ export async function s3STSForModelRefresh(
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
+      endpoint:string;
+      region:string;
     }>
   >(`${ApiHost}/api/file/model/refresh/token`, {
     method: "GET",
@@ -429,6 +436,21 @@ export async function getPayList(
   options?: { [key: string]: any }
 ) {
   return request<API.ListRet<API.PayItem>>(`${ApiHost}/api/finance/pay/list`, {
+    method: "GET",
+    params,
+    ...(options || {
+      headers: {
+        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+      },
+    }),
+  });
+}
+
+export async function getDependTree(
+  params: { model_id: number; deep: number },
+  options?: { [key: string]: any }
+) {
+  return request<API.ListRet<API.PayItem>>(`${ApiHost}/api/model/depend/base`, {
     method: "GET",
     params,
     ...(options || {
