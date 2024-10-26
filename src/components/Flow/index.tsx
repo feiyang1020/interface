@@ -14,7 +14,7 @@ const initialNodes = [
     {
         id: 'hidden-0',
         type: 'input',
-        data: { label: 'M4' },
+        data: { label: 'C1' },
         position: { x: 250, y: 5 },
         style: {
             background: '#607DE4',
@@ -26,7 +26,7 @@ const initialNodes = [
     {
         id: 'hidden-1',
         type: 'input',
-        data: { label: 'M5' },
+        data: { label: 'C2' },
         position: { x: 500, y: 5 },
         style: {
             background: '#607DE4',
@@ -39,7 +39,7 @@ const initialNodes = [
         id: 'hidden-2',
         type: "selectorNode",
 
-        data: { label: 'Node 2' },
+        data: { label: 'Currnet Node' },
         position: { x: 380, y: 100 }, style: {
             background: '#FF66E7',
             color: '#fff',
@@ -48,7 +48,7 @@ const initialNodes = [
         },
     },
     {
-        id: 'hidden-3', data: { label: 'Node 3' }, type: 'output', position: { x: 250, y: 200 },
+        id: 'hidden-3', data: { label: 'P1' }, type: 'output', position: { x: 250, y: 200 },
         style: {
             background: '#60E4DE',
             color: '#fff',
@@ -57,7 +57,7 @@ const initialNodes = [
         },
     },
     {
-        id: 'hidden-4', data: { label: 'Node 4' }, type: 'output', position: { x: 500, y: 200 },
+        id: 'hidden-4', data: { label: 'P2' }, type: 'output', position: { x: 500, y: 200 },
         style: {
             background: '#60E4DE',
             color: '#fff',
