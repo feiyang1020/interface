@@ -6,6 +6,7 @@ import {
     addEdge,
     MiniMap,
     Controls,
+    MarkerType
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { getDependTree } from '@/services/api';
@@ -69,7 +70,12 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-    { id: 'hidden-e1-0', source: 'hidden-0', target: 'hidden-2', style: { stroke: '#8565f2' }, animated: true,label: '50%', },
+    { id: 'hidden-e1-0', source: 'hidden-0', target: 'hidden-2', style: { stroke: '#8565f2' }, animated: true,label: '50%',markerEnd: {
+        type: MarkerType.ArrowClosed,
+        width: 20,
+        height: 20,
+        color: '#8565f2',
+      }, },
     { id: 'hidden-e1-1', source: 'hidden-1', target: 'hidden-2', style: { stroke: '#8565f2' }, animated: true, },
     { id: 'hidden-e1-3', source: 'hidden-2', target: 'hidden-3', style: { stroke: '#8565f2' }, animated: true, },
     { id: 'hidden-e3-4', source: 'hidden-2', target: 'hidden-4', style: { stroke: '#8565f2' }, animated: true, },
