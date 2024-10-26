@@ -182,6 +182,7 @@ export async function s3STSForImage(options?: { [key: string]: any }) {
       bucket_name: "string";
       endpoint:string;
       region:string;
+      location_host:string;
     }>
   >(`${ApiHost}/api/file/img/token`, {
     method: "GET",

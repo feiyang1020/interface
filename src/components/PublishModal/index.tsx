@@ -41,7 +41,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       const response = await s3STSForImage();
       const { access_key_id, access_secret, security_token, expire_time } =
         response.data.sts;
-      const { prefix_path, bucket_name } = response.data;
+      const { prefix_path, bucket_name,region,location_host,endpoint } = response.data;
       const fileName = `${uuidv4()}.${file.name.split('.').pop()}`;
       const params = {
         Bucket: bucket_name,
@@ -49,7 +49,8 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
         Body: file,
       };
       const s3 = new S3Client({
-        region: "ap-east-1",
+        region,
+        endpoint,
         credentials: {
           accessKeyId: access_key_id,
           secretAccessKey: access_secret,
@@ -58,7 +59,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
       });
       const putObjectCommand = new PutObjectCommand(params);
       const upload = await s3.send(putObjectCommand);
-      const Location = `https://${bucket_name}.s3.ap-east-1.amazonaws.com/${prefix_path}/${fileName}`
+      const Location = `https://${location_host}/${prefix_path}/${fileName}`
       console.log("Upload response:", upload);
       return Location
     } catch (err) {

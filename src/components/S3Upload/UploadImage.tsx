@@ -23,7 +23,7 @@ const UploadImage = (props: any) => {
             const response = await s3STSForImage();
             const { access_key_id, access_secret, security_token, expire_time } =
                 response.data.sts;
-            const { prefix_path, bucket_name, endpoint, region } = response.data;
+            const { prefix_path, bucket_name, endpoint, region,location_host } = response.data;
             const params = {
                 Bucket: bucket_name,
                 Key: `${prefix_path}/${file.name}`,
@@ -41,10 +41,8 @@ const UploadImage = (props: any) => {
             const putObjectCommand = new PutObjectCommand(params);
             const upload = await s3.send(putObjectCommand);
 
-            const Location = endpoint.includes('amazonaws.com')
-                ? `https://${bucket_name}.s3.${region}.amazonaws.com/${prefix_path}/${file.name}`
-                : `${endpoint}/${bucket_name}/${prefix_path}/${file.name}`
-                
+            const Location = `https://${location_host}/${prefix_path}/${file.name}`
+
             console.log("Upload response:", upload,Location);
             setImageUrl(Location);
             message.success("Upload successful");

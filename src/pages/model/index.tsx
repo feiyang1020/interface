@@ -115,7 +115,7 @@ export default () => {
                             Contribution flow
                         </div>
                         <div className="flowWrap">
-                            <Flow />
+                            <Flow model_id={model.id} />
                         </div>
                     </Col>
                     <Col xl={6} md={24} style={{ display: 'flex', justifyContent: 'center' }}>
