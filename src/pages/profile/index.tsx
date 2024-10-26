@@ -1,4 +1,4 @@
-import { useModel } from 'umi';
+import { useModel,history } from 'umi';
 import './index.less'
 import { Avatar, Button, Col, Empty, Row, message } from 'antd';
 import { DatabaseOutlined, EditFilled, LineChartOutlined } from '@ant-design/icons';
@@ -129,6 +129,43 @@ export default function App() {
             message.error(e.message);
         }
     }
+
+    const handleHate = async (id: number) => {
+        if (!connected) {
+          connect();
+          return
+        };
+        try {
+          setList(list.map((item) => {
+            if (item.id === id) {
+              return { ...item, is_hate: 1, hate: item.hate + 1 }
+            }
+            return item
+          }))
+          if (curModel && curModel.id === id) {
+            setCurModel({ ...curModel, is_hate: 1, hate: curModel.hate + 1 })
+          }
+        } catch (e: any) {
+          console.log(e);
+        }
+      }
+    
+      const handleCanelHate = async (id: number) => {
+       
+        try {
+          setList(list.map((item) => {
+            if (item.id === id) {
+              return { ...item, is_hate: 0, hate: item.hate - 1 }
+            }
+            return item
+          }))
+          if (curModel && curModel.id === id) {
+            setCurModel({ ...curModel, is_hate: 0, hate: curModel.hate - 1 })
+          }
+        } catch (e: any) {
+          console.log(e);
+        }
+      }
     if (!connected) return <></>
     return (
         <div className="profilePage animation-slide-bottom">
@@ -154,33 +191,40 @@ export default function App() {
 
                     </div>
                     {tab === 'models' && <div className="ListWraper">
-                        <Masonry
-                            breakpointCols={breakpointColumnsObj}
-                            className="my-masonry-grid"
-                            columnClassName="my-masonry-grid_column"
-                        >
-                            {list.map((item) => (
-                                <ModelCard
-                                    key={item.id}
-                                    model={item}
-                                    onLike={(id) => {
-                                        handleLike(id);
-                                    }}
-                                    onDislike={(id) => {
-                                        handleCanelLike(id);
-                                    }}
-                                    onBuy={(id) => {
-                                        handleBuy(id);
-                                    }}
-                                    onPreview={(model) => { setCurModel(model); setDetailVisiable(true) }}
-                                />
+                        <Row gutter={[24, 24]}>
+                            {list.map((item, index) => (
+                                <Col key={item.id} xs={24} sm={24} md={12} xl={8} >
+                                    <ModelCard
+                                        key={item.id}
+                                        model={item}
+                                        onLike={(id) => {
+                                            handleLike(id);
+                                        }}
+                                        onDislike={(id) => {
+                                            handleCanelLike(id);
+                                        }}
+                                        onHate={(id) => {
+                                            handleHate(id);
+                                        }}
+                                        onHateCanel={(id) => {
+                                            handleCanelHate(id);
+                                        }
+                                        }
+                                        onBuy={(id) => {
+                                            handleBuy(id);
+                                        }}
+                                        onPreview={(model) => {
+                                            history.push(`/models/${model.id}`)
+                                        }}
+                                    />
+                                </Col>
                             ))}
-                        </Masonry>
+                        </Row>
                         <InfiniteScroll
                             id="mason_grid"
                             onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
                         />
-                        {isEnd && list.length > 0 && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center',marginTop:25 }}>No more data</div>}
+                        {isEnd && list.length > 0 && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center', marginTop: 25 }}>No more data</div>}
                         {isEnd && list.length === 0 && <Empty></Empty>}
                     </div>}
                     {tab === 'inc&Exp' && <IncomeAnalysis />}
