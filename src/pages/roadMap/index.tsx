@@ -19,7 +19,7 @@ export default () => {
                     Roadmap
                 </div>
                 <div className="subTitle">
-                    BitModel, Cherishing Every Contribution to AI
+                    Bitmodel, Cherishing Every Contribution to AI
                 </div>
             </div>
             <div className="iconWrap">

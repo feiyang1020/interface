@@ -190,7 +190,7 @@ export default () => {
   }
   return (
     <div className="servicesPage animation-slide-bottom">
-      <div className="pageTitle">Services</div>
+      <div className="pageTitle">Models</div>
       <Carousel autoplay autoplaySpeed={10000}>
         <div className="imgWrap">
           <img src={flow} alt="" className='flow' />
@@ -224,7 +224,7 @@ export default () => {
         <div className="ListWraper">
           <Row gutter={[24, 24]}>
             {list.map((item, index) => (
-              <Col key={item.id} xs={24} sm={24} md={index > 1 ? 8 : 12} >
+              <Col key={item.id} xs={24} sm={24} md={12} xl={index > 1 ? 8 : 12} >
                 <ModelCard
                   key={item.id}
                   model={item}

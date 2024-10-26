@@ -31,19 +31,19 @@ const data = [
     bg: _BVM,
     title: "Bitcoin Virtual Machine（BVM）",
     subTitle:
-      "As the foundation of BitModel, BVM provides a safe and decentralized environment to run scripts following the Bitcoin protocol. Compared with the Ethereum virtual machine (EVM), BVM enjoys stronger scalability, making it an ideal platform to deal with high-volume transactions and complex computing required by AGI. In addition, built with OP_PUSH_TX and MetaTxid, BVM naturally supports Turing-complete smart contracts. It is also noteworthy that, thanks to the discrete state in UTXO, the smart contracts implemented on BVM are more independent to each other than those implemented on EVM, and hence lead to higher performance on concurrent computing.",
+      "As the foundation of Bitmodel, BVM provides a safe and decentralized environment to run scripts following the Bitcoin protocol. Compared with the Ethereum virtual machine (EVM), BVM enjoys stronger scalability, making it an ideal platform to deal with high-volume transactions and complex computing required by AGI. In addition, built with OP_PUSH_TX and MetaTxid, BVM naturally supports Turing-complete smart contracts. It is also noteworthy that, thanks to the discrete state in UTXO, the smart contracts implemented on BVM are more independent to each other than those implemented on EVM, and hence lead to higher performance on concurrent computing.",
   },
   {
     bg: _MN,
     title: "Model Network",
     subTitle:
-      "BitModel aims to organize AI algorithms into a direcional graph, recording the reliance between various techniques. In this way, we are able to trace how a technique contributes to an AI service, making sure not only the customer-side models (e.g., ChatGPT and Stable Diffusion) but more importantly the underlying techniques (e.g., Transformer and Diffusion) could be adequately rewarded. Such an incentive mechanism is expected to inspire all levels of studies towards AGI, stimulate continuous development of high-quality models, and encourage community cooperation.",
+      "Bitmodel aims to organize AI algorithms into a direcional graph, recording the reliance between various techniques. In this way, we are able to trace how a technique contributes to an AI service, making sure not only the customer-side models (e.g., ChatGPT and Stable Diffusion) but more importantly the underlying techniques (e.g., Transformer and Diffusion) could be adequately rewarded. Such an incentive mechanism is expected to inspire all levels of studies towards AGI, stimulate continuous development of high-quality models, and encourage community cooperation.",
   },
   {
     bg: _R,
     title: "Rationalizing the Contribution Mechanism of Artificial Intelligence",
     subTitle:
-      "BitModel unifies different types of data based on the same blockchain-based infrastructure. In this way, we are able to develop the entire AI pipeline (e.g., data collection, algorithm design, model serving, etc.) on the blockchain, and further precisely quantify and monetize all kinds of contributions to AGI with the help of smart contracts. Such a design enables a healthy and sustainable AI ecosystem with a sound reward mechanism.",
+      "Bitmodel unifies different types of data based on the same blockchain-based infrastructure. In this way, we are able to develop the entire AI pipeline (e.g., data collection, algorithm design, model serving, etc.) on the blockchain, and further precisely quantify and monetize all kinds of contributions to AGI with the help of smart contracts. Such a design enables a healthy and sustainable AI ecosystem with a sound reward mechanism.",
   },
   {
     bg: _D ,

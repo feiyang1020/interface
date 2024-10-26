@@ -81,7 +81,7 @@ export default () => {
         </div>
       </Row>
       <Row className=""  justify="center">
-        <Col xs={24} md={12} className="Copyright"> ©2024 Copyright  BitModel</Col>
+        <Col xs={24} md={12} className="Copyright"> ©2024 Copyright  Bitmodel</Col>
 
       </Row>
       <Row className="bgWrap">

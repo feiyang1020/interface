@@ -10,7 +10,7 @@ export default () => {
     <div className="homePage6">
       <div className="pageTitle">Roadmap</div>
       <div className="pageSubTitle">
-        BitModel, Cherishing Every Contribution to AI
+        Bitmodel, Cherishing Every Contribution to AI
       </div>
       <RoodMap />
     </div>

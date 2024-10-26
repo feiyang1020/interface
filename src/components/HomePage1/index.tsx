@@ -10,14 +10,14 @@ export default () => {
 
       <QueueAnim delay={300} ease="easeOutQuart">
         <div className="title" key='title'>
-          BitModel
+          Bitmodel
         </div>
         <div className="title title2" key='title2'>
           Valuing Every Contribution to <span>AI</span>
 
         </div>
         {/* <div className="subTitle" key='subTitle'>
-          BitModel, Valuing Every Contribution to AI
+          Bitmodel, Valuing Every Contribution to AI
         </div> */}
 
         <div className="buttons" key='btns'>

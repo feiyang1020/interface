@@ -18,10 +18,10 @@ export default () => {
       >
         <div className="pageTitle" key='title'>Contribution Flow</div>
         <div className="pageSubTitle" key='subtitle'>
-          We have opened BitModel's core functions of solving AI problems based on
+          We have opened Bitmodel's core functions of solving AI problems based on
           blockchain to the community in the form of a protocol. The community can
           develop various AI applications based on Bitcoin principles based on the
-          BitModel protocol.
+          Bitmodel protocol.
         </div>
         <div className="flowWrap" key='flow'>
           <div className="carousel">

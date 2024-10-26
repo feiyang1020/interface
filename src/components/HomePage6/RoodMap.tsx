@@ -8,35 +8,35 @@ export const ROADMAP_EVENTS = [
     {
         date: '2023-04-15',
         title: '1.0',
-        description: 'BitModel for open-sourced models with contribution flows',
+        description: 'Bitmodel for open-sourced models with contribution flows',
         image: v1,
         className: 'bgImage'
     },
     {
         date: '2023-12-28',
         title: '2.0',
-        description: 'BitModel supports Initial Model Investing (IMI) ',
+        description: 'Bitmodel supports Initial Model Investing (IMI) ',
         image: v2,
         className: 'bgImage contentRow'
     },
     {
         date: '2024-02-16',
         title: '3.0',
-        description: 'BitModel supports model inference',
+        description: 'Bitmodel supports model inference',
         image: '',
         className: 'linearGradient'
     },
     {
         date: '2024-04-25',
         title: '4.0',
-        description: 'BitModel ecosystem for generated content',
+        description: 'Bitmodel ecosystem for generated content',
         image: '',
         className: ''
     },
     {
         date: '2024-04-30',
         title: '5.0',
-        description: 'BitModel supports IMO and launches the main network. ',
+        description: 'Bitmodel supports IMO and launches the main network. ',
         image: v5,
         className: 'bgImage contentRow opacity'
     }

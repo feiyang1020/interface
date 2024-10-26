@@ -20,37 +20,37 @@ const data = [
     bg: _H,
     title: "High performance on parallel processing",
     subTitle:
-      "Using an optimized UTXO architecture, BitModel  is capable of handling a high transaction throughput, which is critical for running AI models and smart contracts for a wide range of applications. Thanks to such an advantage, BitModel well matches the computing efficiency of AI systems and ensures fast response of blockchain-based AI services.",
+      "Using an optimized UTXO architecture, Bitmodel  is capable of handling a high transaction throughput, which is critical for running AI models and smart contracts for a wide range of applications. Thanks to such an advantage, Bitmodel well matches the computing efficiency of AI systems and ensures fast response of blockchain-based AI services.",
   },
   {
     bg: _J,
     title: "Layer-1 smart contract",
     subTitle:
-      "BitModel enjoys a neat implementation of layer-1 smart contract, which naturally supports automation, validation, and execution of AI models without involving additional efforts. Such an advantage simplifies the transcation process and thereby saves the cost.",
+      "Bitmodel enjoys a neat implementation of layer-1 smart contract, which naturally supports automation, validation, and execution of AI models without involving additional efforts. Such an advantage simplifies the transcation process and thereby saves the cost.",
   },
   {
     bg: _M,
     title: "Decentralized identity",
     subTitle:
-      "As a built-in function, BitModel allows users to share a unified on-chain identity across various applications. Such a feature facilitates the decentralized identity authentication and the protection of data properties on BitModel.",
+      "As a built-in function, Bitmodel allows users to share a unified on-chain identity across various applications. Such a feature facilitates the decentralized identity authentication and the protection of data properties on Bitmodel.",
   },
   {
     bg: _N,
     title: "Decentralization and security",
     subTitle:
-      "BitModel adopts the POW consensus mechanism and SHA-256 mining algorithm, same as Bitcoin, ensuring the decentralization and security of the network. Benefiting from such a design, BitModel well protects the security and immutability of AI models, and hence guarantees the transparency and the verifiability of user contributions and serving history.",
+      "Bitmodel adopts the POW consensus mechanism and SHA-256 mining algorithm, same as Bitcoin, ensuring the decentralization and security of the network. Benefiting from such a design, Bitmodel well protects the security and immutability of AI models, and hence guarantees the transparency and the verifiability of user contributions and serving history.",
   },
   {
     bg: _L,
     title: "Low transaction fee and dynamic scalability",
     subTitle:
-      "One of the goals of BitModel is to keep low transaction fee along with the number of users increaseing, or even realize unlimiated scaling. Leveraging such a design, BitModel aims to maintain a low-cost yet high-permance AI ecosystem, encouraging the entire community to contribute to and take advantage of open-sourced AI.",
+      "One of the goals of Bitmodel is to keep low transaction fee along with the number of users increaseing, or even realize unlimiated scaling. Leveraging such a design, Bitmodel aims to maintain a low-cost yet high-permance AI ecosystem, encouraging the entire community to contribute to and take advantage of open-sourced AI.",
   },
   {
     bg: _K,
     title: "Support of complex AI applications",
     subTitle:
-      "The serving efficiency and the smart contract design of BitModel make it a practical platform to build complex AI applications, which may incorporate models from various domains, including natural language processing, computer vision, multi-modality, etc.",
+      "The serving efficiency and the smart contract design of Bitmodel make it a practical platform to build complex AI applications, which may incorporate models from various domains, including natural language processing, computer vision, multi-modality, etc.",
   },
 ];
 export default () => {
@@ -80,9 +80,9 @@ export default () => {
   }, []);
   return (
     <div className="homePage4">
-      <div className="pageTitle">BitModel Blockchain</div>
+      <div className="pageTitle">Bitmodel Blockchain</div>
       <div className="pageSubTitle">
-      Built upon blockchain techniques, BitModel serves as a general solution to tracing the contributions to AI, i.e., contribution flows. 
+      Built upon blockchain techniques, Bitmodel serves as a general solution to tracing the contributions to AI, i.e., contribution flows. 
       </div>
       <div className="swiperWrap">
         <Swiper

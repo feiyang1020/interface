@@ -19,7 +19,7 @@ import _Resources from '@/assets/route_slices/resources 1.png'
 export const MenuData = [
   {
     title: "Models",
-    link: "/services",
+    link: "/models",
     desc: "Find any popular model here",
     icon: _model,
     disabled: false,
@@ -28,27 +28,27 @@ export const MenuData = [
   },
   {
     title: "Services",
-    desc: "Inspire BitModel community to share AI ecosystem resources.",
+    desc: "Inspire Bitmodel community to share AI ecosystem resources.",
     link: "/",
     icon: _Services,
     children: [
       {
         title: "Models",
-        link: "/services",
+        link: "/models",
         desc: "Find any popular model here",
         icon: _model,
         disabled: false,
       },
       {
         title: "Dataset",
-        link: "/models",
+        link: "/dataset",
         desc: "Share training data or selected digital content",
         icon: _dataset,
         disabled: true,
       },
       {
         title: "API",
-        link: "/models",
+        link: "/api",
         desc: "Experience interesting AI studios",
         icon: _api,
         disabled: true,
@@ -57,14 +57,14 @@ export const MenuData = [
   },
   {
     title: "Contributors",
-    desc: "Build, share, and benefit from BitModel AI ecosystem",
+    desc: "Build, share, and benefit from Bitmodel AI ecosystem",
     link: "/",
     icon: _Contributors,
     children: [
       {
         title: "Link Wallet & Identity Verification",
         link: "/Link",
-        desc: "Pay or receive benefit from BitModel contribution flow",
+        desc: "Pay or receive benefit from Bitmodel contribution flow",
         icon: _linkWallet,
         disabled: true,
       },
@@ -86,14 +86,14 @@ export const MenuData = [
   },
   {
     title: "Resources",
-    desc: "Find rich information about BitModel",
+    desc: "Find rich information about Bitmodel",
     link: "/",
     icon: _Resources,
     children: [
       {
         title: "White Paper",
         link: "/whitePaper",
-        desc: "Learn more about the value of BitModel ",
+        desc: "Learn more about the value of Bitmodel ",
         icon: _whitePaper,
         disabled: false,
       },
@@ -108,7 +108,7 @@ export const MenuData = [
       {
         title: "Privacy",
         link: "/privacy",
-        desc: "Learn more about the value of BitModel ",
+        desc: "Learn more about the value of Bitmodel ",
         icon: _whitePaper,
         disabled: false,
       },

@@ -39,7 +39,7 @@ export default () => {
                     Privacy
                 </div>
                 <div className="subTitle">
-                    {/* Learn more about the value of BitModel */}
+                    {/* Learn more about the value of Bitmodel */}
                 </div>
             </div>
             <div className="iconWrap">
