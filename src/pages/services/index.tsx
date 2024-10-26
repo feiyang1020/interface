@@ -15,6 +15,8 @@ import ModelModal from "@/components/ModelModal";
 import { downloadFile } from "@/utils/dowmload";
 import flow from '@/assets/flow.png'
 import flow2 from '@/assets/flow2.png'
+import _guide from '@/assets/Group 70.png'
+import _guide2 from '@/assets/Group 71.png'
 import { history } from "umi";
 const breakpointColumnsObj = {
   default: 5,
@@ -191,15 +193,24 @@ export default () => {
   return (
     <div className="servicesPage animation-slide-bottom">
       <div className="pageTitle">Models</div>
-      <Carousel autoplay autoplaySpeed={10000}>
-        <div className="imgWrap">
-          <img src={flow} alt="" className='flow' />
-        </div>
-        <div className="imgWrap">
-          <img src={flow2} alt="" className='flow' />
-        </div>
+      <div className="flowWrap" key='flow'>
+          <div className="carousel">
+            <Carousel autoplay autoplaySpeed={5000} infinite>
+              <div className="imgWrap">
+                <img src={flow} alt="" className='flow' />
+              </div>
+              <div className="imgWrap">
+                <img src={flow2} alt="" className='flow' />
+              </div>
 
-      </Carousel>
+            </Carousel>
+          </div>
+          <div className="actions">
+            <img src={_guide} alt="" className='action' />
+            <img src={_guide2} alt="" className='action' />
+          </div>
+
+        </div>
       <div className="bar">
         <Input placeholder="Search Models" variant="filled" suffix={<SearchOutlined />} size='large' style={{ maxWidth: 300 }} value={searchKey} onChange={(e) => {
           setSearchKey(e.target.value);
