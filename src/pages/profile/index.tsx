@@ -180,7 +180,7 @@ export default function App() {
                             id="mason_grid"
                             onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
                         />
-                        {isEnd && list.length > 0 && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
+                        {isEnd && list.length > 0 && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center',marginTop:25 }}>No more data</div>}
                         {isEnd && list.length === 0 && <Empty></Empty>}
                     </div>}
                     {tab === 'inc&Exp' && <IncomeAnalysis />}

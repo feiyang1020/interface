@@ -272,7 +272,7 @@ export default () => {
               }
             }}
           />
-          {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center' }}>No more data</div>}
+          {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center',marginTop:25 }}>No more data</div>}
         </div>
       </Spin>
       <PublishModal open={uploadVisiable} onClose={() => { setUploadVisiable(false) }} onSuccess={() => { setPage(1) }} tags={tags} />
