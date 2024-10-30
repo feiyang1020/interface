@@ -18,7 +18,7 @@ export default () => {
 
             <div className="titleWrap">
                 <div className="title">
-                    White Paper
+                Bitmodel White Paper
                 </div>
                 <div className="subTitle">
                     Learn more about the value of Bitmodel

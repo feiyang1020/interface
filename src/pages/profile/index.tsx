@@ -12,6 +12,8 @@ import InfiniteScroll from '@/components/InfiniteScroll';
 import Masonry from 'react-masonry-css';
 import ModelCard from '@/components/ModelCard';
 import IncomeAnalysis from './components/IncomeAnalysis';
+import { fetchUserClaimableTokenInfo } from '@/utils/bitmodel';
+import UserModel from '@/components/ModelCard/UserModel';
 const breakpointColumnsObj = {
     default: 5,
     1500: 4,
@@ -66,6 +68,9 @@ export default function App() {
                     return model;
                 });
             }
+            for(let i=0;i<_list.length;i++){
+                await fetchUserClaimableTokenInfo(_list[i].id);
+            } 
 
         }
         setList((prev) => {
@@ -194,7 +199,7 @@ export default function App() {
                         <Row gutter={[24, 24]}>
                             {list.map((item, index) => (
                                 <Col key={item.id} xs={24} sm={24} md={12} xl={8} >
-                                    <ModelCard
+                                    <UserModel
                                         key={item.id}
                                         model={item}
                                         onLike={(id) => {

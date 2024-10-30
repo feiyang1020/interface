@@ -38,7 +38,7 @@ const initialNodes = [
     },
     {
         id: 'hidden-2',
-        type: "selectorNode",
+        type: "default",
 
         data: { label: 'Currnet Node' },
         position: { x: 380, y: 100 }, style: {

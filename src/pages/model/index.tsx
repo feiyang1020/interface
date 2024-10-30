@@ -105,7 +105,7 @@ export default () => {
 
             <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
                 <Row style={{ padding: '0 0px 9px 28px' }}>
-                    <Col xl={18} md={24} style={{ borderRight: '1px solid #866D9B' }}>
+                    <Col xl={18} md={24} xs={24} style={{ borderRight: '1px solid #866D9B' }}>
                         <div className="descTitle">
                             Introduction
                         </div>

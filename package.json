@@ -12,13 +12,17 @@
     "@ant-design/icons": "^5.3.7",
     "@aws-sdk/client-s3": "^3.598.0",
     "@aws-sdk/credential-providers": "^3.592.0",
+    "@bitcoin-js/tiny-secp256k1-asmjs": "^2.2.3",
     "@umijs/plugins": "^4.2.5",
     "@xyflow/react": "^12.3.2",
     "antd": "^5.17.2",
     "bignumber.js": "^9.1.2",
+    "bitmodel-core": "0.1.5",
+    "bsv": "^2.0.10",
     "buffer": "^6.0.3",
     "buffer-compare": "^1.1.1",
     "easymde": "^2.18.0",
+    "ecpair": "3.0.0-rc.0",
     "lodash": "^4.17.21",
     "markdown-to-jsx": "^7.4.7",
     "md-editor-rt": "^4.20.2",
@@ -36,18 +40,23 @@
     "react-vertical-timeline-component": "^3.6.0",
     "remark-gfm": "^4.0.0",
     "remark-toc": "^9.0.0",
+    "scrypt-ts": "1.3.31",
+    "stream-browserify": "^3.0.0",
     "swiper": "^11.1.3",
-    "umi": "^4.2.3",
+    "token-core-ts": "^0.2.36",
+    "umi": "^4.3.28",
     "uuid": "^10.0.0",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/lodash": "^4.17.7",
     "@types/react": "^18.0.33",
     "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-dom": "^18.0.11",
     "@umijs/plugins": "^4.1.0",
     "node-polyfill-webpack-plugin": "^4.0.0",
-    "typescript": "^5.0.3"
+    "typescript": "^5.0.3",
+    "vite-plugin-node-polyfills": "^0.22.0"
   }
 }

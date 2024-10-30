@@ -1,4 +1,4 @@
-import { BITMODEL_USER_KEY } from "@/config";
+import { BITMODEL_API, BITMODEL_USER_KEY, MVC_API, NETWORK } from "@/config";
 import { getJsonItem } from "@/utils/utils";
 import { request } from "umi";
 
@@ -79,7 +79,7 @@ export async function getModelList(
 
 export async function getModel(
   params: {
-   id: number;
+    id: number;
   },
   options?: { [key: string]: any }
 ) {
@@ -180,9 +180,9 @@ export async function s3STSForImage(options?: { [key: string]: any }) {
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
-      endpoint:string;
-      region:string;
-      location_host:string;
+      endpoint: string;
+      region: string;
+      location_host: string;
     }>
   >(`${ApiHost}/api/file/img/token`, {
     method: "GET",
@@ -206,8 +206,8 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
-      endpoint:string;
-      region:string;
+      endpoint: string;
+      region: string;
     }>
   >(`${ApiHost}/api/file/model/token`, {
     method: "GET",
@@ -222,7 +222,7 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
 export async function s3STSForModelRefresh(
   params: {
     prefix_path: string;
-    endpoint:string;
+    endpoint: string;
   },
   options?: { [key: string]: any }
 ) {
@@ -237,8 +237,8 @@ export async function s3STSForModelRefresh(
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
-      endpoint:string;
-      region:string;
+      endpoint: string;
+      region: string;
     }>
   >(`${ApiHost}/api/file/model/refresh/token`, {
     method: "GET",
@@ -421,15 +421,18 @@ export async function getIncomeList(
   params: { page: number; page_size: number },
   options?: { [key: string]: any }
 ) {
-  return request<API.ListRet<API.IncomeItem>>(`${ApiHost}/api/finance/income/list`, {
-    method: "GET",
-    params,
-    ...(options || {
-      headers: {
-        Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
-      },
-    }),
-  });
+  return request<API.ListRet<API.IncomeItem>>(
+    `${ApiHost}/api/finance/income/list`,
+    {
+      method: "GET",
+      params,
+      ...(options || {
+        headers: {
+          Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
+        },
+      }),
+    }
+  );
 }
 
 export async function getPayList(
@@ -459,5 +462,30 @@ export async function getDependTree(
         Authorization: `Bearer ${getJsonItem(BITMODEL_USER_KEY).jwt_token}`,
       },
     }),
+  });
+}
+
+export async function getAssetInfo(
+  params: { id: number },
+  options?: { [key: string]: any }
+) {
+  return request<any>(`${BITMODEL_API}/asset/info`, {
+    method: "GET",
+    params,
+    ...(options || {}),
+  });
+}
+
+export async function getMVCTokenBal(
+  params: { address: string },
+  options?: { [key: string]: any }
+) {
+  return request<any>(`${MVC_API}/address/contract/ft/balance-list`, {
+    method: "GET",
+    params: {
+      ...params,
+      net: NETWORK,
+    },
+    ...(options || {}),
   });
 }
