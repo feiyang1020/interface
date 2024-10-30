@@ -454,7 +454,7 @@ export async function getDependTree(
   params: { model_id: number; deep: number },
   options?: { [key: string]: any }
 ) {
-  return request<API.ListRet<API.PayItem>>(`${ApiHost}/api/model/depend/base`, {
+  return request<API.Ret<any>>(`${ApiHost}/api/model/depend/base`, {
     method: "GET",
     params,
     ...(options || {
