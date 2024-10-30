@@ -8,9 +8,11 @@ import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
 import { API_TARGET } from "meta-contract";
 import {
   ModelAsset,
+  ModelAssetExt,
   ModelAssetRoleOp,
   ModelAssetTokenLock,
   UniqueData,
+  UniqueDataExt,
 } from "bitmodel-core";
 import { BitModel } from "bitmodel-core";
 import modelAsset from "bitmodel-core/artifacts/modelAsset.json";
@@ -97,10 +99,23 @@ export const claimToken = async (deployInfo: any) => {
   // })
   // console.log(transferRes, 'transferRes');
   _initLoadArtifact();
-  const bitModel = await BitModel.loadByDeployInfo(
+  const txStore = new Map();
+  for (const broadcastHex of deployInfo.broadcastHexList) {
+    const tx = new mvc.Transaction(broadcastHex);
+    txStore.set(tx.hash, tx);
+  }
+  console.log(txStore, "txStore");
+  const uniqueDataExt = new UniqueDataExt(
     mvcWalletBroadcast,
-    deployInfo
+    deployInfo.uniqueData,
+    txStore
   );
+  const modelAssetExt = new ModelAssetExt(
+    mvcWalletBroadcast,
+    deployInfo.modelAsset,
+    txStore
+  );
+  const bitModel = new BitModel(uniqueDataExt, modelAssetExt);
   const op = ModelAssetRoleOp.Owner;
   const { address } = await bitModel.modelAssetExt.getLockContractInfo(op);
   console.log(address.toString());

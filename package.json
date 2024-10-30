@@ -43,7 +43,7 @@
     "scrypt-ts": "1.3.31",
     "stream-browserify": "^3.0.0",
     "swiper": "^11.1.3",
-    "token-core-ts": "^0.2.36",
+    "token-core-ts": "^0.2.37",
     "umi": "^4.3.28",
     "uuid": "^10.0.0",
     "zustand": "^4.5.2"

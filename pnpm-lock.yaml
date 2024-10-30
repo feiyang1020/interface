@@ -111,8 +111,8 @@ importers:
         specifier: ^11.1.3
         version: 11.1.4
       token-core-ts:
-        specifier: ^0.2.36
-        version: 0.2.36(encoding@0.1.13)
+        specifier: ^0.2.37
+        version: 0.2.37(encoding@0.1.13)
       umi:
         specifier: ^4.3.28
         version: 4.3.28(@babel/core@7.24.7)(@types/node@20.14.2)(@types/react@18.3.3)(eslint@8.57.0)(lightningcss@1.22.1)(prettier@3.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@3.29.4)(stylelint@14.16.1)(terser@5.31.1)(type-fest@4.20.1)(typescript@5.4.5)
@@ -7248,8 +7248,8 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==, tarball: https://registry.npmjs.org/toidentifier/-/toidentifier-1.0.1.tgz}
     engines: {node: '>=0.6'}
 
-  token-core-ts@0.2.36:
-    resolution: {integrity: sha512-h3CxmbsBTTB1WZj/KScXkZGEvyMshCVRcPYCwWIOjF+gVykMrjLxxNLg6PXwgYaJD5SXj5BCmfyweSXSMA52Og==, tarball: https://registry.npmjs.org/token-core-ts/-/token-core-ts-0.2.36.tgz}
+  token-core-ts@0.2.37:
+    resolution: {integrity: sha512-WpHQcYTWaWTh9bCIDMYNfHz8gWnx3dsUifeBhKYK38tUFObBx5vlVrR4+E2tkQdgDMLnhXF7XlqrbPBYBMqYmg==, tarball: https://registry.npmjs.org/token-core-ts/-/token-core-ts-0.2.37.tgz}
 
   topojson-client@3.1.0:
     resolution: {integrity: sha512-605uxS6bcYxGXw9qi62XyrV6Q3xwbndjachmNxu8HWTtVPxZfEJN9fd/SZS1Q54Sn2y0TMyMxFj/cJINqGHrKw==, tarball: https://registry.npmjs.org/topojson-client/-/topojson-client-3.1.0.tgz}
@@ -12177,7 +12177,7 @@ snapshots:
       meta-contract: 0.4.4(encoding@0.1.13)
       patch-package: 8.0.0
       scrypt-ts: 1.3.31
-      token-core-ts: 0.2.36(encoding@0.1.13)
+      token-core-ts: 0.2.37(encoding@0.1.13)
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -17713,7 +17713,7 @@ snapshots:
 
   toidentifier@1.0.1: {}
 
-  token-core-ts@0.2.36(encoding@0.1.13):
+  token-core-ts@0.2.37(encoding@0.1.13):
     dependencies:
       dotenv: 16.4.5
       ecpair: 2.1.0
