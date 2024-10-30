@@ -49,6 +49,7 @@ export default defineConfig({
 
     //
   },
+  jsMinifier: "none",
   favicons: ["/favicon.ico"],
   title: "Bitmodel",
 });
