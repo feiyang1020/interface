@@ -68,9 +68,9 @@ export default function App() {
                     return model;
                 });
             }
-            for(let i=0;i<_list.length;i++){
-                await fetchUserClaimableTokenInfo(_list[i].id);
-            } 
+            // for(let i=0;i<_list.length;i++){
+            //     await fetchUserClaimableTokenInfo(_list[i].id);
+            // } 
 
         }
         setList((prev) => {
@@ -198,7 +198,7 @@ export default function App() {
                     {tab === 'models' && <div className="ListWraper">
                         <Row gutter={[24, 24]}>
                             {list.map((item, index) => (
-                                <Col key={item.id} xs={24} sm={24} md={12} xl={8} >
+                                <Col key={item.id} xs={24} sm={24} md={24} xl={12} xxl={8} >
                                     <UserModel
                                         key={item.id}
                                         model={item}
