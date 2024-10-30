@@ -46,7 +46,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
 
     const handleClaim = async () => {
         console.log('claim');
-        if (claimInfo.balance === 0) return;
+        // if (claimInfo.balance === 0) return;
         await claimToken(claimInfo.deployInfo)
     }
 
