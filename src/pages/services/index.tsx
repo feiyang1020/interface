@@ -223,7 +223,7 @@ export default () => {
             shape="round"
             icon={<CloudUploadOutlined />}
             iconPosition="start"
-            onClick={() => { setUploadVisiable(true) }}
+            onClick={() => { history.push('/upload') }}
           >
             Upload
           </Button>

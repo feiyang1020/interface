@@ -6,7 +6,6 @@ import S3UploadForm from "../S3Upload";
 import UploadImage from "../S3Upload/UploadImage";
 import { useModel } from "umi";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { checkHfUrl } from "@/utils/utils";
 import DebounceSelect from "./DebounceSelect";
 import ColorPicker from "./ColorPicker";
 import MarkdownEditor from "../MdEditor";

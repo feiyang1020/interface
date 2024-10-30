@@ -7,6 +7,7 @@ import process from "process";
 export default defineConfig({
   routes: [
     { path: "/", component: "index" },
+    { path: "/upload", component: "upload" },
     { path: "/services", component: "services" },
     { path: "/models", component: "services" },
     { path: "/models/:id", component: "model" },
