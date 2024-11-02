@@ -55,10 +55,10 @@ export default () => {
       <Row className="row navlink">
         <Col xs={24} md={6} className="infoWrap">
           <img src={logo} alt="" className="logo" />
-          <div className="info">
+          {/* <div className="info">
             April 10-11, 2024 <br />
             Paris, France
-          </div>
+          </div> */}
         </Col>
         {MenuData.filter((item)=>!item.onlyShowInHeader).map((item) => {
           return <Col xs={24} md={6} className="navWrap" key={item.title}>

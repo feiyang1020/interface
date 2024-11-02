@@ -70,6 +70,9 @@ const _themes = {
     },
     "Message": {
       "zIndexPopup": 201000
+    },
+    "Tooltip": {
+      "colorBgSpotlight": "rgb(196,100,255)"
     }
   },
 };
