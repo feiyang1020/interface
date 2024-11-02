@@ -31,12 +31,12 @@ export default defineConfig({
     //     process: "process/browser",
     //   },
     // ]);
-    // config.plugin("provide2").use(webpack.NormalModuleReplacementPlugin, [
-    //   /node/, // 匹配 `node:buffer` 前缀模块
-    //   (resource) => {
-    //     resource.request = resource.request.replace(/^node:/, "");
-    //   }, // 替换为 `buffer` 包
-    // ]);
+    config.plugin("provide2").use(webpack.NormalModuleReplacementPlugin, [
+      /node/, // 匹配 `node:buffer` 前缀模块
+      (resource) => {
+        resource.request = resource.request.replace(/^node:/, "");
+      }, // 替换为 `buffer` 包
+    ]);
 
     // 添加额外插件
     // memo.plugin('NodePolyfillPlugin').use(NodePolyfillPlugin, []);
