@@ -29,7 +29,7 @@ export default () => {
                 <img src={_Roadmap} alt="" className="icon" />
             </div>
         </div>
-        <div style={{ margin: ' 0 auto', zIndex: 4, width: 800, maxWidth: 'calc(100vw - 80px)' }}>
+        <div style={{ margin: ' 0 auto', zIndex: 4, width: 800, maxWidth: '100vw' }}>
             <Content />
         </div>
 

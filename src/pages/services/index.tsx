@@ -209,6 +209,10 @@ export default () => {
             <img src={_guide} alt="" className='action' />
             <img src={_guide2} alt="" className='action' />
           </div>
+          <div className="actions">
+            <img src={_guide} alt="" className='action' />
+            <img src={_guide2} alt="" className='action' />
+          </div>
 
         </div>
       <div className="bar">
