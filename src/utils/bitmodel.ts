@@ -1,8 +1,7 @@
 import { BITMODEL_TOKEN_CODEHASH, BITMODEL_TOKEN_GENESIS } from "@/config";
 import { getAssetInfo, getMVCTokenBal } from "@/services/api";
-import { MvcProvider } from "token-core-ts";
-import { MvcWallet } from "token-core-ts";
-import { bsv as mvc } from "scrypt-ts";
+import { MvcWallet, MvcProvider, UniqueProto } from "token-core-ts";
+import { bsv } from "scrypt-ts";
 import ECPairFactory, { SignerAsync } from "ecpair";
 import * as ecc from "@bitcoin-js/tiny-secp256k1-asmjs";
 import { API_TARGET } from "meta-contract";
@@ -13,6 +12,8 @@ import {
   ModelAssetTokenLock,
   UniqueData,
   UniqueDataExt,
+  UniqueUtxo,
+  getUniqueUtxo,
 } from "bitmodel-core";
 import { BitModel } from "bitmodel-core";
 import modelAsset from "bitmodel-core/artifacts/modelAsset.json";
@@ -52,10 +53,63 @@ const _initLoadArtifact = () => {
   UniqueData.loadArtifact(uniqueData);
 };
 
+const getTxPreTx = async (ma: ModelAssetExt) => {
+  const network = await ma.signer.getNetwork();
+  const utxo = await getUniqueUtxo(
+    ma.uniqueContractInfo.contractInfo.codehash,
+    ma.uniqueContractInfo.contractInfo.uniqueID,
+    network
+  );
+  if (utxo.success) {
+    const data: UniqueUtxo = utxo.data;
+    console.log(data.txid, ma.uniqueContractInfo.tx);
+    if (!data || data.txid === ma.uniqueContractInfo.tx) {
+      const tx = ma.tx;
+      const preTx = ma.preTx;
+      return {
+        tx: tx,
+        txIndex: 0,
+        preTx: preTx,
+        prevTxInputIndex: 0,
+        preCustomData: "",
+      };
+    }
+    const tx = await ma.signer.provider!.getTransaction(data.txid);
+    let prevTxInputIndex;
+    let preInput;
+    for (let i = 0; i < tx.inputs.length; i++) {
+      const input = tx.inputs[i];
+      if (input.script.chunks.length > 2) {
+        prevTxInputIndex = i;
+        preInput = input;
+        break;
+      }
+    }
+    const prevTxId = preInput!.prevTxId.toString("hex");
+    const preTx = await ma.signer.provider!.getTransaction(prevTxId);
+    let preCustomData = "";
+    if (preTx.hash !== ma.uniqueContractInfo.preTx) {
+      const prevUniqueData = ma.contract.fromLockingScript(
+        preTx.outputs[0].script.toHex()
+      );
+      const prevLockingScript = prevUniqueData.lockingScript.toHex();
+      const slen = BigInt(prevLockingScript.length / 2);
+      preCustomData = UniqueProto.getCustomData(prevLockingScript, slen);
+    }
+    return {
+      tx: tx,
+      txIndex: data.txIndex,
+      preTx: preTx,
+      prevTxInputIndex: prevTxInputIndex,
+      preCustomData: preCustomData,
+    };
+  }
+  throw Error(`get unique data error ${ma.uniqueContractInfo.contractInfo}`);
+};
 
 export const claimToken = async (deployInfo: any) => {
   const _mvcAddress = await window.metaidwallet.getAddress();
-  const network = mvc.Networks.testnet;
+  const network = bsv.Networks.testnet;
   const wif = "L1EmDSV5hqPAvGg4NUWLauTFSvXDsDNXkf22Q9CQftipeJG3ZpX2"; //new PrivateKey().toString();
   // console.log(wif,'wif');
   const signer = ECPair.fromWIF(wif);
@@ -101,7 +155,7 @@ export const claimToken = async (deployInfo: any) => {
   _initLoadArtifact();
   const txStore = new Map();
   for (const broadcastHex of deployInfo.broadcastHexList) {
-    const tx = new mvc.Transaction(broadcastHex);
+    const tx = new bsv.Transaction(broadcastHex);
     txStore.set(tx.hash, tx);
   }
   console.log(txStore, "txStore");
@@ -124,12 +178,11 @@ export const claimToken = async (deployInfo: any) => {
     BITMODEL_TOKEN_GENESIS,
     address.toString()
   );
-  console.log(ftUtxoList, "ftUtxoList");
+  console.log(ftUtxoList, address.toString(), "ftUtxoList");
   const feeUtxoList = await mvcWalletBroadcast.listUnspent(
     await mvcWalletBroadcast.getDefaultAddress()
   );
   console.log(feeUtxoList, "feeUtxoList");
-  console.log(await bitModel.uniqueDataExt.getTxPreTx(bitModel.uniqueDataExt.contract));
   const txInfo = await bitModel.modelAssetExt.transferClaim(
     mvcWalletNoBroadcast,
     op,
