@@ -266,6 +266,8 @@ export async function downloadToken(
       prefix_path: "string";
       session_name: "string";
       bucket_name: "string";
+      endpoint: string;
+      region: string;
     }>
   >(`${ApiHost}/api/model/download`, {
     method: "POST",

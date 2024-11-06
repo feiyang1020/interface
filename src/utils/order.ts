@@ -34,6 +34,7 @@ export const buyModel = async (modelId: number) => {
     data: orderInfo,
     msg,
   } = await createOrder({ model_id: modelId });
+  console.log(orderInfo,'orderInfo');
   if(code !== 0) throw new Error(msg);
 
   const transferResp = await window.metaidwallet

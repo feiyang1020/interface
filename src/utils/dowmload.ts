@@ -9,18 +9,19 @@ const streamToBlob = async (stream: any) => {
   }
   return new Blob(chunks);
 };
-export const downloadFile = async (id:number,url: string) => {
+export const downloadFile = async (id: number, url: string) => {
   try {
     const response = await downloadToken(id);
     const { access_key_id, access_secret, security_token, expire_time } =
       response.data.sts;
-    const { prefix_path, bucket_name } = response.data;
+    const { prefix_path, bucket_name, region, endpoint } = response.data;
     const params = {
       Bucket: bucket_name,
       Key: url,
     };
     const s3 = new S3Client({
-      region: "ap-east-1",
+      region,
+      endpoint,
       credentials: {
         accessKeyId: access_key_id,
         secretAccessKey: access_secret,

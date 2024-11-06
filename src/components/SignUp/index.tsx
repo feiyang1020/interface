@@ -4,6 +4,7 @@ import { useModel, history } from "umi";
 import coin from '@/assets/coin.png'
 import { isMobile } from "@/utils/utils";
 import { useState } from "react";
+import { BITMODEL_TOKEN_GENESIS } from "@/config";
 
 export default ({ showLogined = true }: { showLogined?: boolean }) => {
   const { connect, connected, userInfo, disConnect, userBal } = useModel("global");
@@ -31,7 +32,7 @@ export default ({ showLogined = true }: { showLogined?: boolean }) => {
               <div className="bal" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
                   <img src={coin} alt="" style={{ width: '18px', height: '18px' }} />
-                  <div className="value" style={{ color: '#FFAE00' }}>{userBal['ade0bbadd7e8bfb56e52610f218253938ecf8bf5'] || 0}</div>
+                  <div className="value" style={{ color: '#FFAE00' }}>{userBal[BITMODEL_TOKEN_GENESIS] || 0}</div>
                 </div>
 
                 <Button style={{ background: '#FFAE00', color: '#fff' }} shape='round' onClick={() => { window.open('https://mvcswap.com/#/swap/testnet-dexr') }}>Buy</Button>
