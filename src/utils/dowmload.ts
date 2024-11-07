@@ -15,12 +15,11 @@ export const downloadFile = async (id: number, url: string) => {
     const { access_key_id, access_secret, security_token, expire_time } =
       response.data.sts;
     const { prefix_path, bucket_name, region, endpoint } = response.data;
-    const key = url.replace('bm-pri/', "");
     
 
     const params = {
       Bucket: bucket_name,
-      Key: 'model/20241107235709_503/1sy3y601000d5g2iynnh7m9400mzq2ep/923e7a28-c2ca-474d-84a5-6b9f74f8d060.zip'
+      Key: url
     };
     console.log(params,{
       region,
