@@ -52,7 +52,7 @@ export default () => {
             if (model.price !== 0) {
                 const { data: { list: checkList } } = await checkLikeAndDownload({ model_ids: String(id) });
                 if (!checkList[0].is_download) {
-                    await buyModel(model.id);
+                    // await buyModel(model.id);
                 }
             }
             const file = new URL(model.file_path);
