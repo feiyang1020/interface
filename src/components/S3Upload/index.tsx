@@ -3,6 +3,7 @@ import { S3Client, PutObjectCommand, UploadPartCommand, CompleteMultipartUploadC
 import { Form, Input, Upload, Button, message } from "antd";
 import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { createTag, s3STSForImage, s3STSForModel, s3STSForModelRefresh } from "@/services/api";
+import { v4 as uuidv4 } from 'uuid';
 type FileType = /*unresolved*/ any
 const S3UploadForm = (props: any) => {
   console.log("S3UploadForm props:", props);
@@ -41,9 +42,10 @@ const S3UploadForm = (props: any) => {
       const { access_key_id, access_secret, security_token, expire_time } =
         response.data.sts;
       const { prefix_path, bucket_name, endpoint, region } = response.data;
+      const fileName = `${uuidv4()}.${file.name.split('.').pop()}`;
       const params = {
         Bucket: bucket_name,
-        Key: `${prefix_path}/${file.name}`,
+        Key: `${prefix_path}/${fileName}`,
         Body: file,
       };
       let s3 = new S3Client({
@@ -55,7 +57,15 @@ const S3UploadForm = (props: any) => {
           sessionToken: security_token,
         },
       });
-      console.log("S3 client:", s3);
+      console.log("Bucket:", {
+        region: region,
+        endpoint: endpoint,
+        credentials: {
+          accessKeyId: access_key_id,
+          secretAccessKey: access_secret,
+          sessionToken: security_token,
+        },
+      });
       const createMultipartUploadCommand = new CreateMultipartUploadCommand({
         Bucket: params.Bucket,
         Key: params.Key
@@ -77,7 +87,7 @@ const S3UploadForm = (props: any) => {
         const partNumber = i + 1;
         const uploadPartCommand = new UploadPartCommand({
           Bucket: bucket_name,
-          Key: `${prefix_path}/${file.name}`,
+          Key: `${prefix_path}/${fileName}`,
           UploadId,
           PartNumber: partNumber,
           Body: chunk,
@@ -108,7 +118,7 @@ const S3UploadForm = (props: any) => {
 
       const completeMultipartUploadCommand = new CompleteMultipartUploadCommand({
         Bucket: bucket_name,
-        Key: `${prefix_path}/${file.name}`,
+        Key: `${prefix_path}/${fileName}`,
         UploadId,
         MultipartUpload: {
           Parts: parts,
@@ -118,7 +128,7 @@ const S3UploadForm = (props: any) => {
       const res = await s3.send(completeMultipartUploadCommand);
       console.log("Complete multipart upload response:", res);
       const { Location } = res;
-      setImageUrl(file.name);
+      setImageUrl(fileName);
       setLoading(false);
       console.log("Upload successful. File location:", Location);
       const streamToBlob = async (stream: any) => {
@@ -132,6 +142,10 @@ const S3UploadForm = (props: any) => {
       };
       // 
       const downloadFile = async () => {
+        console.log({
+          Bucket: params.Bucket,
+          Key: params.Key
+        })
         try {
           const command = new GetObjectCommand({
             Bucket: params.Bucket,
@@ -143,7 +157,7 @@ const S3UploadForm = (props: any) => {
           const fileUrl = URL.createObjectURL(blob);
           const link = document.createElement("a");
           link.href = fileUrl;
-          link.download = file.name;
+          link.download = fileName;
           link.click();
           URL.revokeObjectURL(fileUrl);
           message.success("File downloaded successfully");
