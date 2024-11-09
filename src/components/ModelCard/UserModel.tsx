@@ -52,6 +52,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
         setLoading(true);
         try {
             await claimToken(model.id)
+            await _getClaimInfo()
         } catch (e) {
             console.log(e);
             message.error(e.message)
