@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Image, Space } from "antd"
+import { Avatar, Button, Card, Image, message, Space } from "antd"
 import {
     LikeOutlined,
     LikeFilled,
@@ -47,7 +47,15 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
     const handleClaim = async () => {
         console.log('claim');
         // if (claimInfo.balance === 0) return;
-        await claimToken(claimInfo.deployInfo)
+        setLoading(true);
+        try {
+            await claimToken(model.id)
+        } catch (e) {
+            console.log(e);
+            message.error(e.message)
+        }
+
+        setLoading(false);
     }
 
     return <Card onClick={() => onPreview(model)} style={{ background: hexToRgba(model.background || getRadomColor(), 0.85) }} bordered={false}>
@@ -86,11 +94,11 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
 
 
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4,marginTop:24 }}>
-                    <div className="cliamable" style={{ display: 'flex', alignItems: 'center', gap: 8,flexWrap:'nowrap',whiteSpace:'nowrap' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4, marginTop: 24 }}>
+                    <div className="cliamable" style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
                         Your Contribution:  <img src={coin} alt="" width={16} height={16} />{claimInfo.balance}
                     </div>
-                    <Button loading={loading} type='primary'  onClick={(e) => { e.stopPropagation(); handleClaim() }} > Claim </Button>
+                    <Button loading={loading} type='primary' onClick={(e) => { e.stopPropagation(); handleClaim() }} > Claim </Button>
                 </div>
 
 

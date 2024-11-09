@@ -14,12 +14,12 @@ export const downloadFile = async (id: number, url: string) => {
     const response = await downloadToken(id);
     const { access_key_id, access_secret, security_token, expire_time } =
       response.data.sts;
-    const { prefix_path, bucket_name, region, endpoint } = response.data;
+    const { path, bucket_name, region, endpoint } = response.data;
     
 
     const params = {
       Bucket: bucket_name,
-      Key: url
+      Key: path
     };
     console.log(params,{
       region,

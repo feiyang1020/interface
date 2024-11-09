@@ -478,6 +478,31 @@ export async function getAssetInfo(
   });
 }
 
+export async function getRelayAddress(
+  options?: { [key: string]: any }
+) {
+  return request<{ address: string }>(`${BITMODEL_API}/claim/address`, {
+    method: "GET",
+    ...(options || {}),
+  });
+}
+
+export async function claimModelReward(
+  params: {
+    feeTxHex: string;
+    modelId: string;
+    codeHash: string;
+    genesis: string;
+  },
+  options?: { [key: string]: any }
+) {
+  return request<{ txHexList: string[] }>(`${BITMODEL_API}/claim/modelReward`, {
+    method: "POST",
+    data: params,
+    ...(options || {}),
+  });
+}
+
 export async function getMVCTokenBal(
   params: { address: string },
   options?: { [key: string]: any }
