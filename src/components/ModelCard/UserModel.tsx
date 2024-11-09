@@ -26,8 +26,9 @@ type Props = {
     onDislike: (modelId: number) => void,
     onHate: (modelId: number) => void,
     onHateCancel: (modelId: number) => void,
+    bgColor?: string
 }
-export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCancel }: Props) => {
+export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCancel,bgColor="linear-gradient(180deg, #bb40c5 0%, #4451b6 100%)" }: Props) => {
     const [loading, setLoading] = useState<boolean>(true);
     const [claimInfo, setClaimInfo] = useState<any>({
         balance: 0,
@@ -59,7 +60,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
         setLoading(false);
     }
 
-    return <Card onClick={() => onPreview(model)} style={{ background: hexToRgba(model.background || getRadomColor(), 0.85) }} bordered={false}>
+    return <Card onClick={() => onPreview(model)}  style={{ background: bgColor, borderColor: '#636363' }} className="modelCardWrap">
         <div className="modelCard">
             <img className="cover" src={model.cover || defaultBg} alt={model.name} />
             <div className="info">
@@ -95,11 +96,11 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
 
 
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4, marginTop: 24 }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4, marginTop: 12 }}>
                     <div className="cliamable" style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
                         Your Contribution:  <img src={coin} alt="" width={16} height={16} />{claimInfo.balance}
                     </div>
-                    <Button loading={loading} type='primary' onClick={(e) => { e.stopPropagation(); handleClaim() }} > Claim </Button>
+                    <Button loading={loading} style={{height:24,fontSize:8}} type='primary' onClick={(e) => { e.stopPropagation(); handleClaim() }} > Claim </Button>
                 </div>
 
 
