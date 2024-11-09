@@ -11,6 +11,7 @@ import { useModel } from "umi";
 import { buyModel } from "@/utils/order";
 import { downloadFile } from "@/utils/dowmload";
 import Flow from "@/components/Flow";
+import Decimal from "decimal.js";
 
 
 export default () => {
@@ -93,7 +94,7 @@ export default () => {
                             <CloudDownloadOutlined /> {model.download}
                         </div>
                         <div className="itemText">
-                            <img src={coin} alt="" /> {model.price}
+                            <img src={coin} alt="" /> {new Decimal(model.price).div(1e8).toString()}
                         </div>
                     </div>
 

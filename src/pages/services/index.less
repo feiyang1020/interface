@@ -6,7 +6,6 @@
   max-width: 1536px;
   margin: 0 auto;
   padding: 0 24px;
- 
 
   .pageTitle {
     display: flex;
@@ -24,27 +23,21 @@
     margin: 48px auto 28px;
   }
   .flowWrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 48px;
-    flex-wrap: wrap;
-    gap: 24px;
     .carousel {
-      width: 653px;
-      max-width: 90vw;
+      overflow: hidden;
+      position: relative;
     }
     .actions {
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 24px;
       .action {
-        width: 298px;
-        height: 142px;
         cursor: pointer;
+        object-fit: cover;
       }
     }
     .imgWrap {
+      width: 100%;
       margin: 0 auto;
       display: flex !important;
       align-items: center;
@@ -61,7 +54,7 @@
         right: 0;
         bottom: 0;
         z-index: -1;
-  
+
         // background: linear-gradient(-30deg, #3fbbfe, #a541ff);
         // backdrop-filter: blur(20px);
         // opacity: 0.4;
@@ -74,14 +67,19 @@
         right: 0;
         bottom: 0;
         z-index: -1;
-  
+
         // background: linear-gradient(-30deg, #b193cb, #60e4de);
         // opacity: 0.1;
       }
       img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         display: flex;
-        width: 653px;
         max-width: 98vw;
+        object-fit: cover;
       }
     }
     // .imgWrap {
@@ -99,7 +97,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap:24px;
+    gap: 24px;
   }
   .uploadBtn {
     display: flex;

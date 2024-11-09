@@ -17,6 +17,7 @@ import DisLikeAction from "../DisLikeAction";
 import { hexToRgba } from "@/utils/utils";
 import { useCallback, useEffect, useState } from "react";
 import { claimToken, fetchUserClaimableTokenInfo } from "@/utils/bitmodel";
+import Decimal from "decimal.js";
 type Props = {
     model: API.ModelItem,
     onBuy: (modelId: number) => void,
@@ -88,7 +89,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
                             <CloudDownloadOutlined /> {model.download}
                         </div>
                         <div className="itemText">
-                            <img src={coin} alt="" /> {model.price}
+                            <img src={coin} alt="" /> {new Decimal(model.price).div(1e8).toString()}
                         </div>
                     </div>
 

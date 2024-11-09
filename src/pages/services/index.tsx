@@ -193,28 +193,28 @@ export default () => {
   return (
     <div className="servicesPage animation-slide-bottom">
       <div className="pageTitle">Models</div>
-      <div className="flowWrap" key='flow'>
-          <div className="carousel">
-            <Carousel autoplay autoplaySpeed={5000} infinite>
-              <div className="imgWrap">
-                <img src={flow} alt="" className='flow' />
-              </div>
-              <div className="imgWrap">
-                <img src={flow2} alt="" className='flow' />
-              </div>
+      <Row gutter={[24, 24]} className="flowWrap">
+        <Col span={24} md={12} className="carousel">
+          <Carousel autoplay autoplaySpeed={5000} infinite >
+            
+            <img src={flow} alt="" className='flow' />
 
-            </Carousel>
-          </div>
-          <div className="actions">
-            <img src={_guide} alt="" className='action' />
-            <img src={_guide2} alt="" className='action' />
-          </div>
-          <div className="actions">
-            <img src={_guide} alt="" className='action' />
-            <img src={_guide2} alt="" className='action' />
-          </div>
 
-        </div>
+            <img src={flow2} alt="" className='flow' />
+
+
+          </Carousel>
+        </Col>
+        <Col className="actions" span={24} md={6}>
+          <img src={_guide} alt="" className='action' />
+          <img src={_guide2} alt="" className='action' />
+        </Col>
+        <Col className="actions" span={24} md={6}>
+          <img src={_guide} alt="" className='action' />
+          <img src={_guide2} alt="" className='action' />
+        </Col>
+
+      </Row>
       <div className="bar">
         <Input placeholder="Search Models" variant="filled" suffix={<SearchOutlined />} size='large' style={{ maxWidth: 300 }} value={searchKey} onChange={(e) => {
           setSearchKey(e.target.value);
@@ -276,7 +276,7 @@ export default () => {
               }
             }}
           />
-          {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center',marginTop:25 }}>No more data</div>}
+          {isEnd && <div style={{ margin: '0  auto', width: "100%", textAlign: 'center', marginTop: 25 }}>No more data</div>}
         </div>
       </Spin>
       <PublishModal open={uploadVisiable} onClose={() => { setUploadVisiable(false) }} onSuccess={() => { setPage(1) }} tags={tags} />

@@ -13,6 +13,7 @@ import defaultBg from '@/assets/default.png'
 import { getRadomColor } from "../PublishModal/ColorPicker";
 import DisLikeAction from "../DisLikeAction";
 import { hexToRgba } from "@/utils/utils";
+import Decimal from "decimal.js";
 type Props = {
     model: API.ModelItem,
     onBuy: (modelId: number) => void,
@@ -47,7 +48,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview,onHate,onHateCancel
                             <CloudDownloadOutlined /> {model.download}
                         </div>
                         <div className="itemText">
-                            <img src={coin} alt="" /> {model.price}
+                            <img src={coin} alt="" /> {new Decimal(model.price).div(1e8).toString()}
                         </div>
                     </div>
                     <div className="likes">
