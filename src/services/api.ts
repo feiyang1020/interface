@@ -1,8 +1,8 @@
-import { BITMODEL_API, BITMODEL_USER_KEY, MVC_API, NETWORK } from "@/config";
+import { BITMODEL_API, BITMODEL_USER_KEY, MVC_API, NETWORK, SERVERAPI } from "@/config";
 import { getJsonItem } from "@/utils/utils";
 import { request } from "umi";
 
-const ApiHost = "https://api-dev.bitmodel.ai";
+const ApiHost = SERVERAPI;
 
 export async function getNonce(
   params: {
@@ -471,7 +471,7 @@ export async function getAssetInfo(
   params: { id: number },
   options?: { [key: string]: any }
 ) {
-  return request<any>(`${BITMODEL_API}/asset/info`, {
+  return request<any>(`${SERVERAPI}/asset/info`, {
     method: "GET",
     params,
     ...(options || {}),
@@ -481,7 +481,7 @@ export async function getAssetInfo(
 export async function getRelayAddress(
   options?: { [key: string]: any }
 ) {
-  return request<{ address: string }>(`${BITMODEL_API}/claim/address`, {
+  return request<{ address: string }>(`${SERVERAPI}/claim/address`, {
     method: "GET",
     ...(options || {}),
   });
@@ -496,7 +496,7 @@ export async function claimModelReward(
   },
   options?: { [key: string]: any }
 ) {
-  return request<{ txidList: string[] }>(`${BITMODEL_API}/claim/modelReward`, {
+  return request<{ txidList: string[] }>(`${SERVERAPI}/claim/modelReward`, {
     method: "POST",
     data: params,
     ...(options || {}),

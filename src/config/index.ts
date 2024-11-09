@@ -5,3 +5,4 @@ export const BITMODEL_TOKEN_GENESIS =
 export const BITMODEL_TOKEN_CODEHASH = "c9cc7bbd1010b44873959a8b1a2bcedeb62302b7";
 export const MVC_API = "https://www.metalet.space/wallet-api/v4/mvc";
 export const NETWORK = "testnet";
+export const SERVERAPI = "https://api-dev.bitmodel.ai";
