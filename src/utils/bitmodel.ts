@@ -1,5 +1,6 @@
 import { BITMODEL_TOKEN_CODEHASH, BITMODEL_TOKEN_GENESIS } from "@/config";
 import { claimModelReward, getAssetInfo, getMVCTokenBal, getRelayAddress } from "@/services/api";
+import { Decimal } from "decimal.js";
 
 
 
@@ -14,14 +15,14 @@ export const fetchUserClaimableTokenInfo = async (id: number) => {
       },
     },
   } = data;
-  console.log(owner);
+  console.log(owner, 'owner');
   const tokens = await getMVCTokenBal({ address: owner });
   const token = tokens.data.list.find(
     (item: any) => item.genesis === BITMODEL_TOKEN_GENESIS
   );
   let balance = 0;
   if (token) {
-    balance = token.confirmed;
+    balance = new Decimal(token.confirmed).dividedBy(Math.pow(10, token.decimal)).toNumber();
   }
   return {
     balance,
@@ -55,8 +56,8 @@ export const claimToken = async (modelId: number) => {
     codeHash: BITMODEL_TOKEN_CODEHASH,
     genesis: BITMODEL_TOKEN_GENESIS
   })
-  if (ret && ret.txHexList) {
-    return ret.txHexList
+  if (ret && ret.txidList) {
+    return ret.txidList
   }
   throw new Error('claim failed')
 

@@ -496,7 +496,7 @@ export async function claimModelReward(
   },
   options?: { [key: string]: any }
 ) {
-  return request<{ txHexList: string[] }>(`${BITMODEL_API}/claim/modelReward`, {
+  return request<{ txidList: string[] }>(`${BITMODEL_API}/claim/modelReward`, {
     method: "POST",
     data: params,
     ...(options || {}),

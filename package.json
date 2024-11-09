@@ -21,6 +21,7 @@
     "bsv": "^2.0.10",
     "buffer": "^6.0.3",
     "buffer-compare": "^1.1.1",
+    "decimal.js": "^10.4.3",
     "easymde": "^2.18.0",
     "ecpair": "3.0.0-rc.0",
     "lodash": "^4.17.21",
