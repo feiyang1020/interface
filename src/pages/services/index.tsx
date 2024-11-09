@@ -21,9 +21,10 @@ import { history } from "umi";
 const breakpointColumnsObj = {
   default: 5,
   1500: 4,
-  1100: 2,
-  700: 2,
-  500: 1,
+  1100: 4,
+  700: 3,
+  500: 2,
+  400: 1
 };
 export default () => {
   const { connected, mvcAddress, initializing, connect } = useModel('global')
@@ -196,7 +197,7 @@ export default () => {
       <Row gutter={[24, 24]} className="flowWrap">
         <Col span={24} md={12} className="carousel">
           <Carousel autoplay autoplaySpeed={5000} infinite >
-            
+
             <img src={flow} alt="" className='flow' />
 
 
@@ -237,35 +238,39 @@ export default () => {
 
       <Spin spinning={loading || initializing} tip="Loading...">
         <div className="ListWraper">
-          <Row gutter={[24, 24]}>
+          <Masonry
+            breakpointCols={breakpointColumnsObj}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
             {list.map((item, index) => (
-              <Col key={item.id} xs={24} sm={24} md={12} xl={index > 1 ? 8 : 12} >
-                <ModelCard
-                  key={item.id}
-                  model={item}
-                  onLike={(id) => {
-                    handleLike(id);
-                  }}
-                  onDislike={(id) => {
-                    handleCanelLike(id);
-                  }}
-                  onHate={(id) => {
-                    handleHate(id);
-                  }}
-                  onHateCanel={(id) => {
-                    handleCanelHate(id);
-                  }
-                  }
-                  onBuy={(id) => {
-                    handleBuy(id);
-                  }}
-                  onPreview={(model) => {
-                    history.push(`/models/${model.id}`)
-                  }}
-                />
-              </Col>
+              <ModelCard
+                key={item.id}
+                model={item}
+                onLike={(id) => {
+                  handleLike(id);
+                }}
+                onDislike={(id) => {
+                  handleCanelLike(id);
+                }}
+                onHate={(id) => {
+                  handleHate(id);
+                }}
+                onHateCanel={(id) => {
+                  handleCanelHate(id);
+                }
+                }
+                onBuy={(id) => {
+                  handleBuy(id);
+                }}
+                onPreview={(model) => {
+                  history.push(`/models/${model.id}`)
+                }}
+              />
+
             ))}
-          </Row>
+          </Masonry>
+
 
           <InfiniteScroll
             id="mason_grid"

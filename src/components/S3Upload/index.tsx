@@ -41,7 +41,7 @@ const S3UploadForm = (props: any) => {
       const response = await getS3ClientParams();
       const { access_key_id, access_secret, security_token, expire_time } =
         response.data.sts;
-      const { prefix_path, bucket_name, endpoint, region } = response.data;
+      const { prefix_path, bucket_name, endpoint, region, location_host } = response.data;
       const fileName = `${uuidv4()}.${file.name.split('.').pop()}`;
       const params = {
         Bucket: bucket_name,
@@ -127,7 +127,8 @@ const S3UploadForm = (props: any) => {
 
       const res = await s3.send(completeMultipartUploadCommand);
       console.log("Complete multipart upload response:", res);
-      const { Location } = res;
+      // const { Location } = res;
+      const Location = `https://${location_host}/${prefix_path}/${fileName}`
       setImageUrl(fileName);
       setLoading(false);
       console.log("Upload successful. File location:", Location);

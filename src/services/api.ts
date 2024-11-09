@@ -208,6 +208,7 @@ export async function s3STSForModel(options?: { [key: string]: any }) {
       bucket_name: "string";
       endpoint: string;
       region: string;
+      location_host: string;
     }>
   >(`${ApiHost}/api/file/model/token`, {
     method: "GET",
@@ -239,6 +240,7 @@ export async function s3STSForModelRefresh(
       bucket_name: "string";
       endpoint: string;
       region: string;
+      location_host: string;
     }>
   >(`${ApiHost}/api/file/model/refresh/token`, {
     method: "GET",

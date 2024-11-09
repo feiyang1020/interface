@@ -24,7 +24,7 @@ type Props = {
     onHateCancel: (modelId: number) => void,
 }
 export default ({ model, onLike, onBuy, onDislike, onPreview,onHate,onHateCancel }: Props) => {
-    return <Card onClick={() => onPreview(model)} style={{background:hexToRgba(model.background||getRadomColor(),0.85)}} className="modelCardWrap" >
+    return <Card onClick={() => onPreview(model)} style={{background:`linear-gradient(180deg, #a0cfff 0%, #a924e7 100%)`,borderColor:'#636363'}} className="modelCardWrap"  >
         <div className="modelCard">
             <img className="cover" src={model.cover || defaultBg} alt={model.name} />
             <div className="info">

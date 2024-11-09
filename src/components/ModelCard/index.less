@@ -1,21 +1,19 @@
-.modelCardWrap{
-  &:hover{
-    border: 1px solid #85F1FF;
-    box-shadow: #85F1FF 0px 3px 12px;
+.modelCardWrap {
+  
+  &+.modelCardWrap{
+    margin-top: 24px;
   }
 }
 .modelCard {
   cursor: pointer;
   min-height: 200px;
   display: flex;
+  flex-direction: column ;
   justify-content: space-between;
   gap: 24px;
-  
 
   .cover {
-    height: 160px;
-    width: 160px;
-
+    width: 100%;
     border-radius: 12px;
     object-fit: cover;
     display: flex;
@@ -103,8 +101,7 @@
 @media screen and (max-width: 767px) {
   .modelCard {
     .cover {
-      height: 120px;
-      width: 120px;
+      width: 100%;
       border-radius: 12px;
       object-fit: cover;
       display: flex;
