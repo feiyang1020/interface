@@ -1,4 +1,4 @@
-import { useModel,history } from 'umi';
+import { useModel, history } from 'umi';
 import './index.less'
 import { Avatar, Button, Col, Empty, Row, message } from 'antd';
 import { DatabaseOutlined, EditFilled, LineChartOutlined } from '@ant-design/icons';
@@ -14,8 +14,9 @@ import ModelCard from '@/components/ModelCard';
 import IncomeAnalysis from './components/IncomeAnalysis';
 import { fetchUserClaimableTokenInfo } from '@/utils/bitmodel';
 import UserModel from '@/components/ModelCard/UserModel';
+import { hexToRgba } from '@/utils/utils';
 const breakpointColumnsObj = {
-    default: 5,
+    default: 4,
     1500: 4,
     1100: 3,
     700: 2,
@@ -137,40 +138,40 @@ export default function App() {
 
     const handleHate = async (id: number) => {
         if (!connected) {
-          connect();
-          return
+            connect();
+            return
         };
         try {
-          setList(list.map((item) => {
-            if (item.id === id) {
-              return { ...item, is_hate: 1, hate: item.hate + 1 }
+            setList(list.map((item) => {
+                if (item.id === id) {
+                    return { ...item, is_hate: 1, hate: item.hate + 1 }
+                }
+                return item
+            }))
+            if (curModel && curModel.id === id) {
+                setCurModel({ ...curModel, is_hate: 1, hate: curModel.hate + 1 })
             }
-            return item
-          }))
-          if (curModel && curModel.id === id) {
-            setCurModel({ ...curModel, is_hate: 1, hate: curModel.hate + 1 })
-          }
         } catch (e: any) {
-          console.log(e);
+            console.log(e);
         }
-      }
-    
-      const handleCanelHate = async (id: number) => {
-       
+    }
+
+    const handleCanelHate = async (id: number) => {
+
         try {
-          setList(list.map((item) => {
-            if (item.id === id) {
-              return { ...item, is_hate: 0, hate: item.hate - 1 }
+            setList(list.map((item) => {
+                if (item.id === id) {
+                    return { ...item, is_hate: 0, hate: item.hate - 1 }
+                }
+                return item
+            }))
+            if (curModel && curModel.id === id) {
+                setCurModel({ ...curModel, is_hate: 0, hate: curModel.hate - 1 })
             }
-            return item
-          }))
-          if (curModel && curModel.id === id) {
-            setCurModel({ ...curModel, is_hate: 0, hate: curModel.hate - 1 })
-          }
         } catch (e: any) {
-          console.log(e);
+            console.log(e);
         }
-      }
+    }
     if (!connected) return <></>
     return (
         <div className="profilePage animation-slide-bottom">
@@ -196,35 +197,41 @@ export default function App() {
 
                     </div>
                     {tab === 'models' && <div className="ListWraper">
-                        <Row gutter={[24, 24]}>
+                        <Masonry
+                            breakpointCols={breakpointColumnsObj}
+                            className="my-masonry-grid"
+                            columnClassName="my-masonry-grid_column"
+                        >
                             {list.map((item, index) => (
-                                <Col key={item.id} xs={24} sm={24} md={24} xl={12} xxl={8} >
-                                    <UserModel
-                                        key={item.id}
-                                        model={item}
-                                        onLike={(id) => {
-                                            handleLike(id);
-                                        }}
-                                        onDislike={(id) => {
-                                            handleCanelLike(id);
-                                        }}
-                                        onHate={(id) => {
-                                            handleHate(id);
-                                        }}
-                                        onHateCanel={(id) => {
-                                            handleCanelHate(id);
-                                        }
-                                        }
-                                        onBuy={(id) => {
-                                            handleBuy(id);
-                                        }}
-                                        onPreview={(model) => {
-                                            history.push(`/models/${model.id}`)
-                                        }}
-                                    />
-                                </Col>
+                                <UserModel
+                                    bgColor={
+                                        `linear-gradient(180deg, ${hexToRgba('#823DBF', 0.6)} 0%, ${hexToRgba('#492966', 0.6)} 100%)`
+                                    }
+                                    key={item.id}
+                                    model={item}
+                                    onLike={(id) => {
+                                        handleLike(id);
+                                    }}
+                                    onDislike={(id) => {
+                                        handleCanelLike(id);
+                                    }}
+                                    onHate={(id) => {
+                                        handleHate(id);
+                                    }}
+                                    onHateCanel={(id) => {
+                                        handleCanelHate(id);
+                                    }
+                                    }
+                                    onBuy={(id) => {
+                                        handleBuy(id);
+                                    }}
+                                    onPreview={(model) => {
+                                        history.push(`/models/${model.id}`)
+                                    }}
+                                />
+
                             ))}
-                        </Row>
+                        </Masonry>
                         <InfiniteScroll
                             id="mason_grid"
                             onMore={() => { !isEnd && setPage((prev) => prev + 1) }}
