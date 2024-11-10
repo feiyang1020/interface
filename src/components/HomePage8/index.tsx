@@ -10,8 +10,7 @@ export default () => {
       <div className="actions">
         <img className='bgCard' src={bgCard} alt="" />
         <div className="info">
-          It's time to join the thousands of creators, artists, and developers
-          using MVC.
+        It's time to join the community of researchers, developers, and creators using Bitmodel.
         </div>
         <ConfigProvider
           theme={{
