@@ -24,8 +24,11 @@ type Props = {
     onHateCancel: (modelId: number) => void,
     bgColor?: string
 }
-export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCancel, bgColor="linear-gradient(180deg, #bb40c5 0%, #4451b6 100%)" }: Props) => {
-    return <Card onClick={() => onPreview(model)} style={{ background: bgColor, borderColor: '#636363' }} className="modelCardWrap"  >
+export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCancel, bgColor = "linear-gradient(180deg, #bb40c5 0%, #4451b6 100%)" }: Props) => {
+    return <Card onClick={() => onPreview(model)} style={{
+        background:
+            model.background.indexOf('linear') > -1 ? model.background : getRadomColor(), borderColor: '#636363'
+    }} className="modelCardWrap"  >
         <div className="modelCard">
             <img className="cover" src={model.cover || defaultBg} alt={model.name} />
             <div className="info">

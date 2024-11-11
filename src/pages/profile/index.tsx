@@ -16,7 +16,7 @@ import { fetchUserClaimableTokenInfo } from '@/utils/bitmodel';
 import UserModel from '@/components/ModelCard/UserModel';
 import { hexToRgba } from '@/utils/utils';
 const breakpointColumnsObj = {
-    default: 4,
+    default: 5,
     1500: 4,
     1100: 3,
     700: 2,
@@ -85,6 +85,8 @@ export default function App() {
 
     }, [fetchList]);
     useEffect(() => { getTags() }, [getTags]);
+
+
 
     const handleBuy = async (id: number) => {
         try {

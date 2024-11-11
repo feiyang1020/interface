@@ -69,9 +69,7 @@ export default () => {
         setSubmitting(false);
     };
     return <div className='modelPage'>
-        <Spin spinning={loading}>
-
-        </Spin>
+        <Spin spinning={submitting}  fullscreen />
         {model && <div className="modelPageContent">
             <div className="info">
                 <div className="infoleft">

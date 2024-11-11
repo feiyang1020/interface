@@ -248,7 +248,7 @@ export default () => {
             {list.map((item, index) => (
               <ModelCard
                 bgColor={
-                 getRadomColor()
+                  item.background.indexOf('linear') > -1 ? item.background : getRadomColor()
                 }
                 key={item.id}
                 model={item}
