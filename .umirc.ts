@@ -1,8 +1,5 @@
 import { defineConfig } from "umi";
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
-import NodeModulesPolyfillPlugin from "@esbuild-plugins/node-modules-polyfill";
-import { Buffer } from "buffer";
-import process from "process";
+
 
 export default defineConfig({
   routes: [
