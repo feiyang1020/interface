@@ -168,6 +168,7 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
           form={form}
           validateTrigger='onChange'
           initialValues={{ price: 1 }}
+          
         >
 
 
@@ -221,14 +222,14 @@ export default ({ open, onClose, onSuccess, tags = [] }: PublishProps) => {
               <Select.Option value={2}>Republish</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             label="Price"
             name="price"
             rules={[{ required: true, message: 'Please input !', }]}
             tooltip='Please set the desired revenue value.'
           >
             <InputNumber size="large" style={{ width: '100%' }} />
-          </Form.Item>
+          </Form.Item> */}
 
 
 

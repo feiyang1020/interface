@@ -4,7 +4,7 @@ import { checkLikeAndDownload, getModel } from "@/services/api";
 import { MdEditor, MdCatalog, MdPreview } from 'md-editor-rt';
 import 'md-editor-rt/lib/preview.css';
 import './index.less';
-import { Avatar, Button, Card, Col, Divider, message, Row, Space, Spin } from "antd";
+import { Avatar, Button, Card, Col, Grid, message, Row, Space, Spin } from "antd";
 import { CloudDownloadOutlined, EyeOutlined } from "@ant-design/icons";
 import coin from '@/assets/coin.png'
 import { useModel } from "umi";
@@ -12,13 +12,14 @@ import { buyModel } from "@/utils/order";
 import { downloadFile } from "@/utils/dowmload";
 import Flow from "@/components/Flow";
 import Decimal from "decimal.js";
+const { useBreakpoint } = Grid;
 
 
 export default () => {
     const { connected, mvcAddress, initializing, connect } = useModel('global')
     const match = useMatch('/models/:id');
     const id = match!.params.id
-    console.log(id);
+    const { md } = useBreakpoint()
     const [loading, setLoading] = useState<boolean>(true);
     const [model, setModel] = useState<API.ModelItem>();
     const [submitting, setSubmitting] = useState<boolean>(false);
@@ -105,8 +106,8 @@ export default () => {
             </div>
 
             <Card style={{ background: 'rgba(255,255,255,0.2)', borderRadius: 20, padding: 0 }} styles={{ body: { padding: 0 } }} bordered={false}>
-                <Row style={{ padding: '0 0px 9px 28px' }}>
-                    <Col xl={18} md={24} xs={24} style={{ borderRight: '1px solid #866D9B' }}>
+                <Row style={{ padding: md ? '0 0px 9px 28px' : 24, flexDirection: md ? 'row' : 'column-reverse' }}>
+                    <Col xl={18} md={18} xs={24} style={{ borderRight: md ? '1px solid #866D9B' : 'none' }}>
                         <div className="descTitle">
                             Introduction
                         </div>
@@ -119,7 +120,7 @@ export default () => {
                             <Flow model_id={model.id} />
                         </div>
                     </Col>
-                    <Col xl={6} md={24} style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Col xl={6} md={6} style={{ display: 'flex', justifyContent: 'center' }}>
                         <div className="modelInfoLeft">
                             <Space size={10}>
                                 <Avatar style={{ backgroundColor: '#8565F2', color: '#fff' }} size={34} src={model.uploader_avatar ? <img src={model.uploader_avatar} alt="avatar" /> : null} > {model.uploader_nickname || model.uploader_address.replace(/(\w{5})\w+(\w{4})/, "$2")}</Avatar>

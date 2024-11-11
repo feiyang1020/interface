@@ -19,6 +19,7 @@ import _guide from '@/assets/Group 70.png'
 import _guide2 from '@/assets/Group 71.png'
 import { history } from "umi";
 import { hexToRgba } from "@/utils/utils";
+import { getRadomColor } from "@/components/PublishModal/ColorPicker";
 const breakpointColumnsObj = {
   default: 5,
   1500: 4,
@@ -247,7 +248,7 @@ export default () => {
             {list.map((item, index) => (
               <ModelCard
                 bgColor={
-                  `linear-gradient(180deg, ${hexToRgba('#823DBF',0.6)} 0%, ${hexToRgba('#492966',0.6)} 100%)`
+                 getRadomColor()
                 }
                 key={item.id}
                 model={item}
