@@ -3,9 +3,6 @@ import { claimModelReward, getAssetInfo, getMVCTokenBal, getRelayAddress } from 
 import { Decimal } from "decimal.js";
 
 
-
-
-
 export const fetchUserClaimableTokenInfo = async (id: number) => {
   const data = await getAssetInfo({ id });
   const {

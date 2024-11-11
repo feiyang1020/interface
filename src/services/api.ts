@@ -270,6 +270,7 @@ export async function downloadToken(
       bucket_name: "string";
       endpoint: string;
       region: string;
+      path: string;
     }>
   >(`${ApiHost}/api/model/download`, {
     method: "POST",

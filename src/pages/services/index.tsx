@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import "./index.less";
-import Waterfall from "react-silky-waterfall";
-import type { ItemData, ItemExtraNodeProps } from "react-silky-waterfall";
 import { cancleLikeModel, checkLikeAndDownload, getModelList, getTagList, likeModel } from "@/services/api";
 import Masonry from "react-masonry-css";
 import InfiniteScroll from "@/components/InfiniteScroll";

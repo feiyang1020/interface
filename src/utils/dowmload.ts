@@ -15,13 +15,12 @@ export const downloadFile = async (id: number, url: string) => {
     const { access_key_id, access_secret, security_token, expire_time } =
       response.data.sts;
     const { path, bucket_name, region, endpoint } = response.data;
-    
 
     const params = {
       Bucket: bucket_name,
-      Key: path
+      Key: path,
     };
-    console.log(params,{
+    console.log(params, {
       region,
       endpoint,
       credentials: {

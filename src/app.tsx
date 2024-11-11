@@ -1,7 +1,4 @@
-import { ModelAsset, ModelAssetTokenLock, UniqueData } from "bitmodel-core";
-import modelAsset from "bitmodel-core/artifacts/modelAsset.json";
-import modelAssetTokenLock from "bitmodel-core/artifacts/modelAssetTokenLock.json";
-import uniqueData from "bitmodel-core/artifacts/uniqueData.json";
+
 import nekyReport from "./utils/collect.js";
 nekyReport.init({
     url: "https://api-dev.bitmodel.ai/api/pub/event_tracking.gif", //采集地址，采用发送一张1x1的图片带上参数进行数据采集
@@ -11,11 +8,3 @@ nekyReport.init({
     clickAttr: {},
     version: "1.0.1",
 });
-
-const _initLoadArtifact = () => {
-    ModelAsset.loadArtifact(modelAsset);
-    ModelAssetTokenLock.loadArtifact(modelAssetTokenLock);
-    UniqueData.loadArtifact(uniqueData);
-  };
-
-  _initLoadArtifact();
