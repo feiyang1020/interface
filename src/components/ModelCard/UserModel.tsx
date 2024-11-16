@@ -101,7 +101,7 @@ export default ({ model, onLike, onBuy, onDislike, onPreview, onHate, onHateCanc
                     <div className="cliamable" style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'nowrap', whiteSpace: 'nowrap' }}>
                         Your Contribution:  <img src={coin} alt="" width={16} height={16} />{claimInfo.balance}
                     </div>
-                    <Button loading={loading} style={{ height: 24, fontSize: 8 }} type='primary' onClick={(e) => { e.stopPropagation(); handleClaim() }} > Claim </Button>
+                    <Button loading={loading}  disabled={claimInfo.balance===0} style={{ height: 24, fontSize: 8 }} type='primary' onClick={(e) => { e.stopPropagation(); handleClaim() }} > Claim </Button>
                 </div>
 
 

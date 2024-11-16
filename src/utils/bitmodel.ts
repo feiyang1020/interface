@@ -42,6 +42,9 @@ export const claimToken = async (modelId: number) => {
       },
     ],
   }).catch((err) => {
+    if (typeof err === 'string' && err.includes('Insufficient balance')) {
+      throw new Error('Insufficient space balance');
+    }
     throw new Error(err);
   });
   console.log(res);
