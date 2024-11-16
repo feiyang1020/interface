@@ -14,6 +14,31 @@ Bitmodelai@gmail.com
 
 Artificial Intelligence (AI) is profoundly shaping industries and transforming economies. But there are still many fundamental factors constraining the sound development of AI, such as the ambiguous value of data properties in AI models, the unclear relationship of model inheritance in deployed applications, and inappropriately-recognized contributions of developers and researchers for open sources. In our view, the absence of canonical infrastructures that are capable of formalizing the value chain of AI contributions is the crux of existing dilemmas. Taking advantage of Bitcoin Virtual Machine (BVM) in UTXO-based blockchains, we propose a brand-new solution in this paper to address these issues arising in AI. We first grow the entire AI ecosystem via a scalable blockchain with layer-1 smart contract, in the sense that data, compute power, models, applications, and such related ingredients are all built on-chain on a decentralized platform with economic incentives called Bitmodel. Contributions on Bitmodel are dynamically traced with contribution flows (C-Flows) that systematically recognize specific contributions from different contributors. We then monetize contribution flows with on-chain smart contract, thus formalizing monetary gains of the whole chain for tasks and applications. Moreover, Bitmodel proposes two financial paradigms for token raising of model development and token launch of model monetization: Initial Model Investing (IMI) and Initial Model Offering (IMO). Powered by BVM, therefore, Bitmodel is capable of rationalizing diverse contributions by monetizing entire workflows in AI, shedding light on constructing more powerful infrastructures capable of adapting to the new era of AI-driven technologies.
 
+- You
+  - How do blockchains aid AI? Please list four items pertaining to data, compute power, models, and developers, respectively. Each item is within two sentences.
+   
+- ChatGPT
+1. **Data**: Blockchains enable secure and transparent data sharing among multiple parties, ensuring data integrity and authenticity for AI training. Through decentralized storage and cryptographic techniques, blockchains facilitate the creation of robust datasets for training AI models while preserving privacy and preventing data tampering.
+2. **Compute Power**: Blockchain networks can leverage distributed computing resources, harnessing the collective processing power of network participants for AI tasks like training complex models or executing large-scale computations. This decentralized approach democratizes access to computational resources, potentially reducing costs and accelerating AI innovation.
+3. **Models**: Blockchains provide a platform for deploying and executing AI models in a decentralized manner, enabling trustless interactions between users and models without the need for intermediaries. Smart contracts on blockchains can automate model transactions, ensuring fair compensation for model usage and incentivizing model developers to continuously improve their algorithms.
+4. **Developers**: Blockchain ecosystems foster communities of developers who collaborate on building AI applications, sharing models, and refining algorithms. Through tokenization and decentralized governance mechanisms, blockchains incentivize developers to contribute to AI projects, driving innovation and accelerating the development of AI solutions.
+<u>(a) ChatGPT [6]</u>
+
+  ![](https://pub-1dc659a1195e42efadf87f55cd011bd9.r2.dev/img/20241116153541_503/1sy3y601000d5nfhwyg1gm45k0ezh2ub/1ff14b79-e04d-4509-9940-7f3f959e933c.png)
+>  **Prompt**: studio photograph closeup of a chameleon over a black background.
+    
+<u>(b) Stable Diffusion [8].</u>
+
+![](https://pub-1dc659a1195e42efadf87f55cd011bd9.r2.dev/img/20241116154550_503/1sy3y601000d5nfpoidlhuv5m0gqsr5n/a4576cc3-5958-4933-b204-bc808335dfac.png)
+
+> **Prompt**: This close-up shot of a Victoria crowned pigeon showcases its striking blue plumage and red chest. Its crest is made of 
+delicate, lacy feathers, while its eye is a striking red color. The bird’s head is tilted slightly to the side, giving the impression of it 
+looking regal and majestic. The background is blurred, drawing attention to the bird’s striking appearance.
+
+<u>(c) Sora [5].</u>
+
+Figure 1: AI instances 
+
 ---
 
 ## 1. Introduction
@@ -30,6 +55,9 @@ This paper introduces Bitmodel, an open-source platform designed to explore the 
 
 ## 2. Bitmodel Blockchain
 
+Bitmodel blockchain is based on the protocol of the original Bitcoin blockchain. We enable all the script opcodes for Bitcoin Virtual Machine, which is the core feature of Bitmodel blockchain.
+
+
 ### 2.1 Bitcoin Virtual Machine
 
 Virtual machines are the cores of blockchains, because nearly all the applications need smart contracts of virtual machines to be successful. The Bitcoin Virtual Machine (BVM) and Ethereum Virtual Machine (EVM) stand as seminal innovations within the blockchain domain, each embodying unique approaches to executing smart contracts and decentralized applications (dApps). BVM, renowned for its originality, leverages bitcoin protocol to provide a secure and decentralized environment for executing scripts directly on the blockchain. Unlike traditional virtual machines, BVM operates within the constraints of bitcoin consensus mechanism and scripting language, enabling trustless execution of code with a focus on simplicity and security. On the other hand, EVM, introduced by Ethereum, pioneered the concept of Turing completeness within blockchain smart contracts, allowing for greater flexibility and expressive power in executing decentralized applications. However, while EVM offers versatility, it also faces challenges regarding scalability due to its design, as Ethereum must process every computation from every smart contract in a certain order, leading to potential bottlenecks during periods of high demand. In contrast, BVM exhibits a unique advantage in scalability due to its UTXO-based architecture, where transactions are treated as discrete entities, allowing for parallel processing and efficient scaling. This scalability property of BVM positions it as a formidable platform for decentralized innovation, particularly in scenarios requiring high transaction throughput or complex computations. The spectrum of utilization for BVM spans diverse sectors, including decentralized finance (DeFi), supply chain management, digital identity, and voting systems, where its scalability ensures robust performance even under heavy usage. Furthermore, BVM’s compatibility with Bitcoin’s existing infrastructure offers additional benefits, leveraging the network effects and security of the world’s most resilient blockchain. As blockchain technology continues to evolve, the advantages of BVM in scalability and performance underscore its significance in driving forward the next wave of decentralized applications and transformative blockchain solutions.
@@ -41,6 +69,7 @@ To realize the vision of decentralized AI, we require a robust public blockchain
 ---
 
 ## 3. Rationalizing AI Contributions
+We present our overall pipeline of rationalizing AI contributions in this sec- tion, including on-chain models, monetization with smart contract, and specific instances in AI.
 
 ### 3.1 On-chain AI Workflows
 
@@ -48,6 +77,15 @@ To fully realize the potential of blockchain-driven AI workflows, it is essentia
 
 - **Seamless Interoperability:** By unifying diverse data types within a single blockchain environment, we break down silos and promote seamless interoperability between different databases, AI models, and related data assets. This lays the foundation for standardized data manipulation protocols, fostering greater efficiency and collaboration across the AI development lifecycle.
 - **Value Quantification and Monetization:** Storing data on-chain enables us to leverage the blockchain’s native token as a unified metric to quantify the value of data assets. This facilitates transparent monetization strategies within the AI ecosystem, rewarding data contributors and model creators in a fair and equitable manner.
+> On-chain interoperationality
+
+![](https://pub-1dc659a1195e42efadf87f55cd011bd9.r2.dev/img/20241116155046_503/1sy3y601000d5nftgj0qewy5n0htz2kc/a985caa8-8f28-46d6-ba86-2d7367211344.png)
+Scalable blockchain with smart contract (a)
+
+![](https://pub-1dc659a1195e42efadf87f55cd011bd9.r2.dev/img/20241116160429_503/1sy3y601000d5ng3ysymtqb5p062n974/6fc6662b-e741-4d53-97e1-902c4ed6e6ba.png)
+(b)
+Figure 2: Illustration of reward distribution with Bitmodel
+
 - **Automated Reward Distribution:** The power of blockchain-based smart contracts allows us to automate the distribution of rewards or interests throughout the entire model network. This ensures that all stakeholders – from data providers to model developers – are incentivized and compensated for their contributions, ultimately driving innovation and sustainability within the AI landscape.
 - **Enhanced Transparency and Accountability:** On-chain models and data introduce a new level of transparency and accountability to the AI community. Every transaction and model update leaves an immutable trail on the blockchain, providing verifiable checkpoints that aid in auditing, debugging, and establishing trust in AI-powered systems.
 
@@ -64,6 +102,10 @@ Moreover, the innate programmability of smart contracts allows for dynamic adjus
 ---
 
 ## 4. Model Network
+AI applications are heavily reliant on models, particularly foundation models such as GPT [7], Stable Diffusion (SD) [8], Sora [5], and others. These foun- dation models often build upon numerous preceding models and algorithms, creating intricate contribution flows that are central to the functioning of AI sys- tems. However, within the current commercial framework, only the foundation models or those offered as services tend to generate income, while the contribu- tions stemming from related algorithms remain largely unaccounted for. This commercialization model fails to accurately reflect the full spectrum of contributions required for an AI product’s development and deployment. To address this disparity, it becomes imperative to delve deeper into the construction of contribution flows associated with models, thereby ensuring that all contribu- tors are appropriately recognized and rewarded for their role in advancing AI technologies.
+![](https://pub-1dc659a1195e42efadf87f55cd011bd9.r2.dev/img/20241116160811_503/1sy3y601000d5ng6smjrfpi5q0u98l1i/ec329e4b-eb05-420b-8b75-ed169ce74f2b.png)
+Figure 3: Contribution flows for models.
+
 
 ### 4.1 Growing Model Network
 
