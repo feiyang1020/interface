@@ -39,7 +39,7 @@ export default () => {
 
   const handleLogin = async () => {
     if (!checkExtension()) return;
-    const isConnected:any = await window.metaidwallet.isConnected();
+    const isConnected: any = await window.metaidwallet.isConnected();
     if (isConnected.status === "no-wallets") {
       throw new Error("no wallets");
     }
@@ -51,6 +51,10 @@ export default () => {
       if (ret.status) {
         throw new Error(ret.status);
       }
+    }
+    const { network } = await window.metaidwallet.getNetwork();
+    if (network !== "testnet") {
+      await window.metaidwallet.switchNetwork("testnet");
     }
     const address = await window.metaidwallet.getAddress();
     const pubkey = await window.metaidwallet.getPublicKey();
@@ -86,9 +90,9 @@ export default () => {
     setUserInfo(user);
     await init();
   };
-  const connect = ()=>{
+  const connect = () => {
     setLoginModalShow(true);
-  }
+  };
 
   const disConnect = async () => {
     if (!checkExtension()) return;
@@ -103,12 +107,10 @@ export default () => {
   const getBal = useCallback(async () => {
     if (network && connected) {
       //btc
-     
+
       const tokens = await window.metaidwallet.token.getBalance();
-      const _bals: Record<string, any> = {
-        
-      };
-      console.log(tokens, "tokens")
+      const _bals: Record<string, any> = {};
+      console.log(tokens, "tokens");
       tokens.forEach((item: any) => {
         const balance =
           BigInt(item.confirmedString) + BigInt(item.unconfirmedString);
@@ -120,21 +122,19 @@ export default () => {
       setUserBal(_bals);
     }
   }, [network, connected]);
-  
 
   const init = useCallback(async () => {
-    
     if (walletName === "metalet" && window.metaidwallet) {
       const isConnected = await window.metaidwallet.isConnected();
       console.log("init", isConnected);
 
       if (isConnected === true) {
-        try{
+        try {
           const _mvc = await window.metaidwallet.getAddress();
           const { network } = await window.metaidwallet.getNetwork();
           const btcAddress = await window.metaidwallet.btc.getAddress();
-          const { data: user,code } = await getUserInfo();
-          if(code !== 0){
+          const { data: user, code } = await getUserInfo();
+          if (code !== 0) {
             throw new Error("get user info error");
           }
           await getBal();
@@ -143,11 +143,9 @@ export default () => {
           setMVCAddress(_mvc);
           setNetwork(network);
           setBTCAddress(btcAddress);
-        }catch(e){
+        } catch (e) {
           console.error(e);
-        } 
-        
-       
+        }
       }
     }
     setInitializing(false);
@@ -159,9 +157,9 @@ export default () => {
     }, 500);
   }, [init]);
 
-  useEffect(()=>{
+  useEffect(() => {
     getBal();
-  },[getBal])
+  }, [getBal]);
 
   useEffect(() => {
     const handleAccountChange = (newAccount: any) => {
@@ -223,6 +221,6 @@ export default () => {
     userInfo,
     init,
     handleLogin,
-    initializing
+    initializing,
   };
 };
