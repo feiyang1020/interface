@@ -1,6 +1,7 @@
 import { DownloadOutlined } from "@ant-design/icons"
 import { Button } from "antd"
 import { MdPreview } from "md-editor-rt";
+import 'md-editor-rt/lib/preview.css';
 
 const _html = `# Bitmodel: Tracing AI Contributions with Bitcoin Virtual Machine
 
